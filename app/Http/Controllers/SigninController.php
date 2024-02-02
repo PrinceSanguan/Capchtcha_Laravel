@@ -8,6 +8,12 @@ use App\Models\User;
 class SigninController extends Controller
 {
     public function index() {
+        // Check if the user is already authenticated
+        if (auth()->check()) {
+            // User is already logged in, redirect to the dashboard or another page
+            return redirect()->route('dashboard');
+        }
+        
         return view('signin');
     }
 
@@ -15,28 +21,47 @@ class SigninController extends Controller
 
         // Validate the request data with custom error messages
         $request->validate([
-            'name' => 'required|alpha_space',
             'username' => 'required|unique:users',
+            'name' => 'required|alpha_space',
+            'email' => 'required|email',
+            'work' => 'required',
+            'address' => 'required',
+            'gender' => 'required',
             'password' => [
                 'required',
                 'confirmed',
                 'regex:/^(?=.*[a-zA-Z])(?=.*\d).{6,}$/',
             ],
             'number' => 'required|numeric|digits:11',
+            'file' => 'required|image'
         ], [
             'password.regex' => 'The password must contain at least one letter, one number, and be at least 6 characters long.',
         ]);
 
+        // Check if a file is uploaded
+        if ($request->hasFile('file')) {
+            // Store the file and get the path
+            $path = $request->file('file')->store('/', ['disk' => 'my_disk']);
+        } else {
+            // Handle the case where no file is uploaded
+            return redirect()->route('register')->with('error', 'Please upload a profile image.');
+        }
+
         // Saving in the database
         $user = User::create([
-            'name' => $request->input('name'),
             'username' => $request->input('username'),
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'work' => $request->input('work'),
+            'address' => $request->input('address'),
+            'gender' => $request->input('gender'),
             'number' => $request->input('number'),
             'password' => bcrypt($request->input('password')),
+            'image' => $path,
         ]);
-        
+
         if (!$user) {
-            return redirect()->route('register');
+            return redirect()->route('register')->with('error', 'Failed to create user.');
         }
 
         // Redirect with success message

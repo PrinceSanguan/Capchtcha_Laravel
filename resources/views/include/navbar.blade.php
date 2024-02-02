@@ -21,8 +21,13 @@
   <div class="sidebar">
     <!-- Sidebar user panel (optional) -->
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+<!--------------------------------image---------------------------------------------------------------->
+      <div class="image">
+        <img src="{{asset('upload-profile/' . $users->image)}}" class="img-circle elevation-2" alt="User Image">
+      </div>
+<!----------------------------Image--------------------------------------------------------------------->
       <div class="info">
-        <a href="#" class="d-block">Welcome, Prince Sanguan</a>
+        <a href="#" class="d-block">{{ $users->name }}</a>
       </div>
     </div>
 

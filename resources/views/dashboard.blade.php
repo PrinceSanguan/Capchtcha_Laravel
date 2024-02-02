@@ -22,26 +22,34 @@
        <!-- Profile Image -->
        <div class="card card-primary card-outline">
         <div class="card-body box-profile">
+    <!------------------------------------Image--------------------------------------------------------------->
+      <div class="text-center">
+          <label for="profile-image">
+              <img class="profile-user-img img-fluid img-circle"
+                  src="{{asset('upload-profile/' . $users->image)}}"
+                  alt="User profile picture">
+          </label>
+      </div>
+    <!------------------------------------Image--------------------------------------------------------------->
+          <h3 class="profile-username text-center">{{ $users->name }}</h3>
 
-          <h3 class="profile-username text-center">Prince E. Sanguan</h3>
-
-          <p class="text-muted text-center">Welder</p>
+          <p class="text-muted text-center">{{ $users->work }}</p>
 
           <ul class="list-group list-group-unbordered">
             <li class="list-group-item">
-              <b>Username</b> <a class="float-right">princesanguan44</a>
+              <b>Username</b> <a class="float-right">{{ $users->username }}</a>
             </li>
             <li class="list-group-item">
-              <b>Email Address</b> <a class="float-right">princesanguan24</a>
+              <b>Email Address</b> <a class="float-right">{{ $users->email }}</a>
             </li>
             <li class="list-group-item">
-              <b>Gcash Number</b> <a class="float-right">09473808046</a>
+              <b>Gcash Number</b> <a class="float-right">{{ $users->number }}</a>
             </li>
             <li class="list-group-item">
-              <b>Address</b> <a class="float-right">Mandaluyong City</a>
+              <b>Address</b> <a class="float-right">{{ $users->address }}</a>
             </li>
             <li class="list-group-item">
-              <b>Gender</b> <a class="float-right">Male</a>
+              <b>Gender</b> <a class="float-right">{{ $users->gender }}</a>
             </li>
           </ul>
 
