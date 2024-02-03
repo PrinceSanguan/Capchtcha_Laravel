@@ -22,7 +22,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Open Graph meta tags -->
  <meta property="og:title" content="Captcha | Earn Money" />
  <meta property="og:image" content="{{ asset('images/captcha.jpg') }}" />
- <meta property="og:url" content="http://princecarolwedding.free.nf/" />
+ <meta property="og:url" content="http://captcha.free.nf/" />
  <meta property="og:site_name" content="Captcha | Earn Money" />
  <meta property="og:description" content="Captcha | Earn Money" />
 

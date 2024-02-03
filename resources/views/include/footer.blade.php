@@ -4,6 +4,24 @@
     <strong>Copyright &copy; 2023-2024</strong> All rights reserved.
   </footer>
 </div>
+
+<script>
+  var countdown = {{ Session::get('countdown', 20) }};
+  var redirectUrl = '{{ Session::get('redirect_url', route('dashboard')) }}';
+
+  function updateCountdown() {
+      countdown--;
+      document.getElementById('countdown').innerText = countdown;
+
+      if (countdown <= 0) {
+          window.location.href = redirectUrl;
+      } else {
+          setTimeout(updateCountdown, 1000);
+      }
+  }
+
+  updateCountdown();
+</script>
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->

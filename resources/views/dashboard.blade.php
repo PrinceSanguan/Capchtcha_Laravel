@@ -23,43 +23,50 @@
        <div class="card card-primary card-outline">
         <div class="card-body box-profile">
     <!------------------------------------Image--------------------------------------------------------------->
-      <div class="text-center">
-          <label for="profile-image">
-              <img class="profile-user-img img-fluid img-circle"
-                  src="{{asset('upload-profile/' . $users->image)}}"
-                  alt="User profile picture">
-          </label>
-      </div>
-    <!------------------------------------Image--------------------------------------------------------------->
-          <h3 class="profile-username text-center">{{ $users->name }}</h3>
-
-          <p class="text-muted text-center">{{ $users->work }}</p>
-
-          <ul class="list-group list-group-unbordered">
-            <li class="list-group-item">
-              <b>Username</b> <a class="float-right">{{ $users->username }}</a>
-            </li>
-            <li class="list-group-item">
-              <b>Email Address</b> <a class="float-right">{{ $users->email }}</a>
-            </li>
-            <li class="list-group-item">
-              <b>Gcash Number</b> <a class="float-right">{{ $users->number }}</a>
-            </li>
-            <li class="list-group-item">
-              <b>Address</b> <a class="float-right">{{ $users->address }}</a>
-            </li>
-            <li class="list-group-item">
-              <b>Gender</b> <a class="float-right">{{ $users->gender }}</a>
-            </li>
-          </ul>
-
-          {{-- <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a> --}}
+    <div class="card card-widget widget-user-2">
+      <!-- Add the bg color to the header using any of the bg-* classes -->
+      <div class="widget-user-header bg-primary">
+        <div class="widget-user-image">
+          <img class="img-circle elevation-2" src="{{asset('upload-profile/' . $users->image)}}" alt="User Avatar">
         </div>
-        <!-- /.card-body -->
+        <!-- /.widget-user-image -->
+        <h3 class="widget-user-username">{{$users->name}}</h3>
+        <h5 class="widget-user-desc">{{$users->work}}</h5>
       </div>
-
+      <div class="card-footer p-0">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link" style="font-size: 1.2em">
+              Username: <span class="float-right badge">{{$users->username}}</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" style="font-size: 1.2em">
+              Email: <span class="float-right badge">{{$users->email}}</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" style="font-size: 1.2em">
+              Address: <span class="float-right badge">{{$users->address}}</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" style="font-size: 1.2em">
+              Gender: <span class="float-right badge">{{$users->gender}}</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" style="font-size: 1.2em">
+              Gcash Number: <span class="float-right badge">{{$users->number}}</span>
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
     <!-------------------------------------------------------------------------------------- Main content -->
+        </div>
+      </div>
+    </div>
   </div>
   <!-- /.content-wrapper -->
 

@@ -26,4 +26,12 @@ Route::get('/logout', [DashboardController::class, 'logout'])->name('logout');
 
 Route::middleware(['auth'])->group(function () {
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/earnings', [DashboardController::class, 'earnings'])->name('earnings');
+Route::get('/topup', [DashboardController::class, 'topup'])->name('topup');
+Route::get('/withdraw', [DashboardController::class, 'withdraw'])->name('withdraw');
+Route::get('/solve_captcha', [DashboardController::class, 'solveCaptcha'])->name('solve.captcha');
+Route::get('/error', [DashboardController::class, 'error'])->name('error');
+Route::get('/success', [DashboardController::class, 'success'])->name('success');
+Route::post('/solve_captcha', [DashboardController::class, 'updateUserPoints'])->name('update.points');
+Route::get('/change_password', [DashboardController::class, 'changePassword'])->name('change.password');
 });

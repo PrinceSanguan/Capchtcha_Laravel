@@ -58,6 +58,7 @@ class SigninController extends Controller
             'number' => $request->input('number'),
             'password' => bcrypt($request->input('password')),
             'image' => $path,
+            'point' => 0.00,
         ]);
 
         if (!$user) {
