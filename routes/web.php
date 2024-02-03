@@ -34,4 +34,5 @@ Route::get('/error', [DashboardController::class, 'error'])->name('error');
 Route::get('/success', [DashboardController::class, 'success'])->name('success');
 Route::post('/solve_captcha', [DashboardController::class, 'updateUserPoints'])->name('update.points');
 Route::get('/change_password', [DashboardController::class, 'changePassword'])->name('change.password');
+Route::post('/change_password', [DashboardController::class, 'changePasswordRequest'])->name('change.passwordrequest');
 });

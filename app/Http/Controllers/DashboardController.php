@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Hash;
 
 
 class DashboardController extends Controller
@@ -169,9 +171,31 @@ class DashboardController extends Controller
     
         // Add a 20 seconds countdown before redirecting back to the dashboard
         Session::put('countdown', 20);
-        Session::put('redirect_url', URL::route('dashboard'));
+        Session::put('redirect_url', URL::route('solve.captcha'));
     
         return redirect()->route('success')->with('success', $success);
+    }
+
+    public function changePasswordRequest(Request $request)
+    {
+        $request->validate([
+            'current_password' => 'required',
+            'new_password' => [
+                'required',
+                'regex:/^(?=.*[a-zA-Z])(?=.*\d).{6,}$/',
+            ],
+            'confirm_password' => 'required|same:new_password',
+        ]);
+    
+        $user = auth()->user();
+    
+        if (!Hash::check($request->current_password, $user->password)) {
+            throw ValidationException::withMessages(['current_password' => 'Incorrect current password']);
+        }
+    
+        $user->update(['password' => Hash::make($request->new_password)]);
+    
+        return redirect()->route('change.password')->with('success', 'Password changed successfully');
     }
     
     public function logout() {
