@@ -49,7 +49,7 @@
 
   <div class="small-box bg-warning">
     <div class="inner">
-      <h3>PHP {{ $makeValue }}</h3>
+      <h3>{{ $makeValue }} Pesos</h3>
 
       <p style="font-size: 1.5em;">Total Income</p>
     </div>
