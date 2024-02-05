@@ -12,7 +12,7 @@ use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Hash;
 
 
-class DashboardController extends Controller
+class PlayerController extends Controller
 {
     private function getUserInfo()
     {
@@ -153,37 +153,28 @@ class DashboardController extends Controller
             'captcha' => 'required|captcha',
         ]);
     
-        if ($validator->fails()) {
-            // Assuming you have a user authenticated
-            $user = auth()->user();
-
+        // Assuming you have a user authenticated
+        $user = auth()->user();
+    
         // Check if points are 0 or negative
         if ($user->point <= 0) {
             $error = "Your points are insufficient. Please contact your agent to top up your points.";
             return redirect()->route('error')->with('error', $error);
         }
     
-        // Deduct 3 points for an invalid Captcha
-        $user->point = max(0, $user->point - 3.00); // Ensure points don't go below zero
-        $user->save();
+        if ($validator->fails()) {
+            // Deduct 3 points for an invalid Captcha
+            $user->point = max(0, $user->point - 3.00); // Ensure points don't go below zero
+            $user->save();
     
             $error = "You have entered an invalid Captcha. 3 points have been deducted.";
             Session::put('last_captcha_attempt', time()); // Update last attempt time
             return redirect()->route('error')->with('error', $error);
         }
     
-        // Assuming you have a user authenticated
-        $user = auth()->user();
-    
         // Update user points for a correct Captcha
         $user->point += 1.00;
         $user->save();
-    
-        // Check if points are 0 or negative
-        if ($user->point <= 0) {
-            $error = "Your points are insufficient. Please contact yourt agent to top up your points.";
-            return redirect()->route('error')->with('error', $error);
-        }
     
         $success = "You have entered the correct Captcha. You earned 1 point.";
         Session::put('last_captcha_attempt', time()); // Update last attempt time

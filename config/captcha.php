@@ -42,7 +42,7 @@ return [
         'height' => 90,
         'quality' => 20,
         'sensitive' => true,
-        'angle' => 70,
+        'angle' =>  0, //70,
         'lines' => 20,
         'sharpen' => 0,
         'blur' => 0,
