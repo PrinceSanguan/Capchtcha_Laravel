@@ -23,7 +23,9 @@ return new class extends Migration
             $table->string('number');
             $table->string('image');
             $table->rememberToken();
-            $table->decimal('point', 8, 2)->default(0.00); // Add the points column
+            $table->decimal('point', 8, 2); 
+            $table->tinyInteger('status');
+            $table->enum('type', ['programmer', 'operator', 'agent', 'player'])->default('player');
             $table->timestamps();
         });
     }

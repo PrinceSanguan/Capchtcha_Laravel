@@ -19,24 +19,32 @@ class LoginController extends Controller
         return view('login');
     }
 
-    public function login(Request $request) {
+    public function login(Request $request)
+    {
         $request->validate([
             'username' => 'required',
             'password' => 'required'
         ]);
-
+    
         // Authentication
         if (Auth::attempt($request->only('username', 'password'))) {
             $user = Auth::user();
-
-            // Redirect to dashboard with the user name
-            return redirect()->route('dashboard');
+    
+            // Check user status
+            if ($user->status == 1) {
+                // Check user type
+                if ($user->type == 'player') {
+                    // Redirect player to their dashboard
+                    return redirect()->route('dashboard');
+                }
+            } else {
+                // User is not activated, inform the user and log them out
+                Auth::logout();
+                return redirect()->route('login')->with(['error' => 'Your account is not yet activated. Please wait for activation by your agent.']);
+            }
         } else {
             // Authentication failed, redirect back with errors
-            return redirect()->route('login')->withErrors(['error' => 'Invalid email or password']);
+            return redirect()->route('login')->with(['error' => 'Invalid email or password']);
         }
-
     }
-
 }
-

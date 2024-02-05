@@ -59,6 +59,8 @@ class SigninController extends Controller
             'password' => bcrypt($request->input('password')),
             'image' => $path,
             'point' => 0.00,
+            'status' => 0,
+            'type' => 'player',
         ]);
 
         if (!$user) {
