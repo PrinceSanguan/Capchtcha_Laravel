@@ -25,7 +25,7 @@ class PlayerController extends Controller
         }
 
         // Fetch user information based on the authenticated user's username
-        return User::where('name', $authenticatedUser->name)->first();
+        return User::where('username', $authenticatedUser->username)->first();
     }
 
     public function index()
@@ -35,6 +35,12 @@ class PlayerController extends Controller
         // Check if the user is found
         if (!$users) {
             return redirect()->route('login')->withErrors(['error' => 'User not found.']);
+        }
+
+        // Check if the user's type is "player"
+        if ($users->type !== 'player') {
+            // Redirect to the previous page or any specific page you want
+            return redirect()->back()->withErrors(['error' => 'Access denied.']);
         }
 
         // Pass the information to the view
@@ -50,7 +56,13 @@ class PlayerController extends Controller
         if (!$users) {
             return redirect()->route('login')->withErrors(['error' => 'User not found.']);
         }
-    
+
+        // Check if the user's type is "player"
+        if ($users->type !== 'player') {
+            // Redirect to the previous page or any specific page you want
+            return redirect()->back()->withErrors(['error' => 'Access denied.']);
+        }
+
         // Define the conversion rate
         $pointsToMakeRatio = 3;
     
@@ -70,6 +82,12 @@ class PlayerController extends Controller
             return redirect()->route('login')->withErrors(['error' => 'User not found.']);
         }
 
+        // Check if the user's type is "player"
+        if ($users->type !== 'player') {
+            // Redirect to the previous page or any specific page you want
+            return redirect()->back()->withErrors(['error' => 'Access denied.']);
+        }
+
         // Pass the information to the view
         return view('topup', ['users' => $users]);
     }
@@ -83,6 +101,12 @@ class PlayerController extends Controller
             return redirect()->route('login')->withErrors(['error' => 'User not found.']);
         }
 
+        // Check if the user's type is "player"
+        if ($users->type !== 'player') {
+            // Redirect to the previous page or any specific page you want
+            return redirect()->back()->withErrors(['error' => 'Access denied.']);
+        }
+
         // Pass the information to the view
         return view('withdraw', ['users' => $users]);
     }
@@ -94,6 +118,12 @@ class PlayerController extends Controller
         // Check if the user is found
         if (!$users) {
             return redirect()->route('login')->withErrors(['error' => 'User not found.']);
+        }
+
+        // Check if the user's type is "player"
+        if ($users->type !== 'player') {
+            // Redirect to the previous page or any specific page you want
+            return redirect()->back()->withErrors(['error' => 'Access denied.']);
         }
 
         // Pass the information to the view
@@ -133,6 +163,12 @@ class PlayerController extends Controller
         // Check if the user is found
         if (!$users) {
             return redirect()->route('login')->withErrors(['error' => 'User not found.']);
+        }
+
+        // Check if the user's type is "player"
+        if ($users->type !== 'player') {
+            // Redirect to the previous page or any specific page you want
+            return redirect()->back()->withErrors(['error' => 'Access denied.']);
         }
 
         // Pass the information to the view

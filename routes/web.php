@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SigninController;
 use App\Http\Controllers\PlayerController;
+use App\Http\Controllers\ProgrammerController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -37,5 +38,8 @@ Route::post('/solve_captcha', [PlayerController::class, 'updateUserPoints'])->na
 Route::get('/change_password', [PlayerController::class, 'changePassword'])->name('change.password');
 Route::post('/change_password', [PlayerController::class, 'changePasswordRequest'])->name('change.passwordrequest');
 /********************************************This Route is For Player!! *****************************/
+
+Route::get('/programmer/dashboard', [ProgrammerController::class, 'index'])->name('programmer.dashboard');
+Route::get('/programmer/active_player', [ProgrammerController::class, 'ActivePlayer'])->name('programmer.active_player');
 
 });
