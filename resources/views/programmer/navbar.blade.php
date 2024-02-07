@@ -67,7 +67,7 @@
         </li>
 
         <li class="nav-item menu-open" style="margin-bottom: 10px;">
-          <a href="" class="nav-link">
+          <a href="{{route('programmer.operator')}}" class="nav-link">
             <i class="nav-icon fas fa-user-secret fa-spin"></i>
             <p>
               OPERATOR

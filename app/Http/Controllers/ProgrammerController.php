@@ -112,6 +112,28 @@ class ProgrammerController extends Controller
         return view('programmer.agent', ['users' => $users, 'data' => $data]);
     }
 
+    public function Operator()
+    {
+        $users = $this->getUserInfo();
+
+        // Check if the user is found
+        if (!$users) {
+            return redirect()->route('login')->withErrors(['error' => 'User not found.']);
+        }
+
+        // Check if the user type is 'programmer'
+        if ($users->type !== 'programmer') {
+            // Redirect to the same page with an error message
+            return redirect()->route('login')->withErrors(['error' => 'Access denied.']);
+        }
+
+        // Fetch all jobs from the database
+        $data = User::where('type', 'operator')->get();
+
+        // Pass the information to the view
+        return view('programmer.agent', ['users' => $users, 'data' => $data]);
+    }
+
     //////////////////////////// Deleting Player only on Programmer Exist ///////////////////////////////////////
     public function DeleteAccount($id)
     {

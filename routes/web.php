@@ -43,6 +43,7 @@ Route::get('/programmer/dashboard', [ProgrammerController::class, 'index'])->nam
 Route::get('/programmer/player', [ProgrammerController::class, 'Player'])->name('programmer.player');
 Route::get('/programmer/all_account', [ProgrammerController::class, 'AllAccount'])->name('programmer.all_account');
 Route::get('/programmer/agent', [ProgrammerController::class, 'Agent'])->name('programmer.agent');
+Route::get('/programmer/operator', [ProgrammerController::class, 'Operator'])->name('programmer.operator');
 // Add the new route for deleting a player
 Route::get('/programmer/delete_account/{id}', [ProgrammerController::class, 'DeleteAccount'])->name('programmer.delete_account');
 
