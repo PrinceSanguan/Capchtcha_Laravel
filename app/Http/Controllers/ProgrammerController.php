@@ -61,6 +61,9 @@ class ProgrammerController extends Controller
             return redirect()->route('login')->withErrors(['error' => 'Access denied.']);
         }
 
+        // Fetch all jobs from the database
+        $users = User::all();
+
         // Pass the information to the view
         return view('programmer.active_player', ['users' => $users]);
     }
