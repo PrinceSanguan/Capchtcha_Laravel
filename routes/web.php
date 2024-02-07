@@ -40,6 +40,10 @@ Route::post('/change_password', [PlayerController::class, 'changePasswordRequest
 /********************************************This Route is For Player!! *****************************/
 
 Route::get('/programmer/dashboard', [ProgrammerController::class, 'index'])->name('programmer.dashboard');
-Route::get('/programmer/active_player', [ProgrammerController::class, 'ActivePlayer'])->name('programmer.active_player');
+Route::get('/programmer/player', [ProgrammerController::class, 'Player'])->name('programmer.player');
+Route::get('/programmer/all_account', [ProgrammerController::class, 'AllAccount'])->name('programmer.all_account');
+Route::get('/programmer/agent', [ProgrammerController::class, 'Agent'])->name('programmer.agent');
+// Add the new route for deleting a player
+Route::get('/programmer/delete_account/{id}', [ProgrammerController::class, 'DeleteAccount'])->name('programmer.delete_account');
 
 });

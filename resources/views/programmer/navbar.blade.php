@@ -39,8 +39,17 @@
 
       <li class="nav-header" style="font-size: 1.2em; color: yellow;">ACTIVE USER</li>
 
+      <li class="nav-item menu-open" style="margin-bottom: 10px;">
+        <a href="{{route('programmer.all_account')}}" class="nav-link">
+          <i class="nav-icon fas fa-users fa-spin"></i>
+          <p>
+            ALL ACCOUNT
+          </p>
+        </a>
+      </li>
+
         <li class="nav-item menu-open" style="margin-bottom: 10px;">
-          <a href="{{route('programmer.active_player')}}" class="nav-link">
+          <a href="{{route('programmer.player')}}" class="nav-link">
             <i class="nav-icon fas fa-user fa-spin"></i>
             <p>
               PLAYERS
@@ -49,7 +58,7 @@
         </li>
 
         <li class="nav-item menu-open" style="margin-bottom: 10px;">
-          <a href="" class="nav-link">
+          <a href="{{route('programmer.agent')}}" class="nav-link">
             <i class="nav-icon fas fa-user-nurse fa-spin"></i>
             <p>
               AGENT

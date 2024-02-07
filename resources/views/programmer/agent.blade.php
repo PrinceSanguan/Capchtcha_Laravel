@@ -9,14 +9,23 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Active Player</h1>
+            <h1 class="m-0">Agent</h1>
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
     <!----------------------------------------------- Main content -------------------------------------->
-      
+    @if(session('success'))
+    <div id="success-alert" class="alert alert-success" style="font-size: 18px; padding: 20px;">
+        {{ session('success') }}
+    </div>
+    <script>
+        setTimeout(function() {
+            document.getElementById('success-alert').style.display = 'none';
+        }, 5000);
+    </script>
+    @endif
     <div class="card-body table-responsive p-0">
       <table class="table table-hover text-nowrap">
           <thead>
@@ -29,24 +38,28 @@
                   <th>Points</th>
                   <th>Type</th>
                   <th>Created at</th>
+                  <th>Action</th>
               </tr>
           </thead>
           <tbody>
-            @if ($users)
-              @foreach ($users as $user)
-                <tr>
-                  <td>{{ $user->id }}</td>
-                  <td>{{ $user->username }}</td>
-                  <td>{{ $user->email }}</td>
-                  <td>{{ $user->work }}</td>
-                  <td>{{ $user->gender }}</td>
-                  <td>{{ $user->points }}</td>
-                  <td>{{ $user->type }}</td>
-                  <td>{{ $user->created_at }}</td>
-                </tr>
-              @endforeach
+            @if ($data)
+                @foreach ($data as $datas)
+                    <tr>
+                        <td>{{ $datas->id }}</td>
+                        <td>{{ $datas->username }}</td>
+                        <td>{{ $datas->email }}</td>
+                        <td>{{ $datas->work }}</td>
+                        <td>{{ $datas->gender }}</td>
+                        <td>{{ $datas->point }}</td>
+                        <td>{{ $datas->type }}</td>
+                        <td>{{ $datas->created_at->format('F j, Y g:ia') }}</td>
+                        <td>
+                            <a href=" {{ route('programmer.delete_account', ['id' => $datas->id]) }} " class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                @endforeach
             @endif
-          </tbody>
+        </tbody>
       </table>
   </div>
     
