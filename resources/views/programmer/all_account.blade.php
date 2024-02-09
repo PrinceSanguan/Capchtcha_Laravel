@@ -16,7 +16,7 @@
     </div>
     <!-- /.content-header -->
     <!----------------------------------------------- Main content -------------------------------------->
-    {{-- @if(session('success'))
+    @if(session('success'))
     <div id="success-alert" class="alert alert-success" style="font-size: 18px; padding: 20px;">
         {{ session('success') }}
     </div>
@@ -25,7 +25,7 @@
             document.getElementById('success-alert').style.display = 'none';
         }, 5000);
     </script>
-    @endif --}}
+    @endif 
     <div class="card-body table-responsive p-0">
       <table class="table table-hover text-nowrap">
           <thead>
@@ -38,6 +38,7 @@
                   <th>Points</th>
                   <th>Type</th>
                   <th>Created at</th>
+                  <th>Status</th>
               </tr>
           </thead>
           <tbody>
@@ -52,6 +53,23 @@
                         <td>{{ $datas->point }}</td>
                         <td>{{ $datas->type }}</td>
                         <td>{{ $datas->created_at->format('F j, Y g:ia') }}</td>
+                        <td>
+                          <form action="{{ route('programmer.update_status', ['id' => $datas->id]) }}" method="post">
+                              @csrf
+                              @method('patch')
+                              <button type="submit" class="btn {{ $datas->status == 1 ? 'btn-success' : 'btn-danger' }}">
+                                  {{ $datas->status == 1 ? 'Active' : 'Inactive' }}
+                              </button>
+
+                              <div class="btn-group">
+                                <button type="submit" class="btn btn-primary{{ $datas->type == 'player' ? ' active' : '' }}" name="type" value="player" {{ $datas->type == 'player' ? 'disabled' : '' }}>Player</button>
+                                <button type="submit" class="btn btn-primary{{ $datas->type == 'agent' ? ' active' : '' }}" name="type" value="agent" {{ $datas->type == 'agent' ? 'disabled' : '' }}>Agent</button>
+                                <button type="submit" class="btn btn-primary{{ $datas->type == 'operator' ? ' active' : '' }}" name="type" value="operator" {{ $datas->type == 'operator' ? 'disabled' : '' }}>Operator</button>
+                                <button type="submit" class="btn btn-primary{{ $datas->type == 'programmer' ? ' active' : '' }}" name="type" value="programmer" {{ $datas->type == 'programmer' ? 'disabled' : '' }}>Programmer</button>
+                            </div>
+                          </form>
+                      </td>
+                      
                     </tr>
                 @endforeach
             @endif
@@ -65,6 +83,7 @@
       </div>
     </div>
   </div>
+
   <!-- /.content-wrapper -->
 
 @include('include.footer')

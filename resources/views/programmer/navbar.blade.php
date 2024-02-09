@@ -34,70 +34,71 @@
     <!-- Sidebar Menu -->
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-        <!-- Add icons to the links using the .nav-icon class
-             with font-awesome or any other icon font library -->
-
-      <li class="nav-header" style="font-size: 1.2em; color: yellow;">ACTIVE USER</li>
-
-      <li class="nav-item menu-open" style="margin-bottom: 10px;">
-        <a href="{{route('programmer.all_account')}}" class="nav-link">
-          <i class="nav-icon fas fa-users fa-spin"></i>
-          <p>
-            ALL ACCOUNT
-          </p>
-        </a>
-      </li>
-
-        <li class="nav-item menu-open" style="margin-bottom: 10px;">
-          <a href="{{route('programmer.player')}}" class="nav-link">
-            <i class="nav-icon fas fa-user fa-spin"></i>
-            <p>
-              PLAYERS
-            </p>
-          </a>
-        </li>
-
-        <li class="nav-item menu-open" style="margin-bottom: 10px;">
-          <a href="{{route('programmer.agent')}}" class="nav-link">
-            <i class="nav-icon fas fa-user-nurse fa-spin"></i>
-            <p>
-              AGENT
-            </p>
-          </a>
-        </li>
-
-        <li class="nav-item menu-open" style="margin-bottom: 10px;">
-          <a href="{{route('programmer.operator')}}" class="nav-link">
-            <i class="nav-icon fas fa-user-secret fa-spin"></i>
-            <p>
-              OPERATOR
-            </p>
-          </a>
-        </li>
-
-        <li class="nav-header" style="font-size: 1.2em; color: yellow;">MONEY</li>
-
-        <li class="nav-item menu-open" style="margin-bottom: 10px;">
-          <a href="" class="nav-link">
-            <i class="nav-icon fas fa-wallet fa-spin"></i>
-            <p>
-              WALLET
-            </p>
-          </a>
-        </li>
-
-        <li class="nav-item menu-open" style="margin-bottom: 10px;">
-          <a href="{{route('logout')}}" class="nav-link">
-            <i class="nav-icon fas fa-sign-out-alt fa-spin"></i>
-            <p>
-              LOGOUT
-            </p>
-          </a>
-        </li>
-
+          <!-- Add icons to the links using the .nav-icon class
+              with font-awesome or any other icon font library -->
+  
+          <li class="nav-header" style="font-size: 1.2em; color: yellow;">ACTIVE USER</li>
+  
+          <li class="nav-item menu-open" style="margin-bottom: 10px;">
+              <a href="{{ route('programmer.all_account') }}" class="nav-link {{ Route::is('programmer.all_account') ? 'active' : '' }}">
+                  <i class="nav-icon fas fa-users fa-spin"></i>
+                  <p>
+                      ALL ACCOUNT
+                  </p>
+              </a>
+          </li>
+  
+          <li class="nav-item menu-open" style="margin-bottom: 10px;">
+              <a href="{{ route('programmer.player') }}" class="nav-link {{ Route::is('programmer.player') ? 'active' : '' }}">
+                  <i class="nav-icon fas fa-user fa-spin"></i>
+                  <p>
+                      PLAYERS
+                  </p>
+              </a>
+          </li>
+  
+          <li class="nav-item menu-open" style="margin-bottom: 10px;">
+              <a href="{{ route('programmer.agent') }}" class="nav-link {{ Route::is('programmer.agent') ? 'active' : '' }}">
+                  <i class="nav-icon fas fa-user-nurse fa-spin"></i>
+                  <p>
+                      AGENT
+                  </p>
+              </a>
+          </li>
+  
+          <li class="nav-item menu-open" style="margin-bottom: 10px;">
+              <a href="{{ route('programmer.operator') }}" class="nav-link {{ Route::is('programmer.operator') ? 'active' : '' }}">
+                  <i class="nav-icon fas fa-user-secret fa-spin"></i>
+                  <p>
+                      OPERATOR
+                  </p>
+              </a>
+          </li>
+  
+          <li class="nav-header" style="font-size: 1.2em; color: yellow;">MONEY</li>
+  
+          <li class="nav-item menu-open" style="margin-bottom: 10px;">
+              <a href="{{ route('programmer.wallet') }}" class="nav-link {{ Route::is('programmer.wallet') ? 'active' : '' }}">
+                  <i class="nav-icon fas fa-wallet fa-spin"></i>
+                  <p>
+                      WALLET
+                  </p>
+              </a>
+          </li>
+  
+          <li class="nav-item menu-open" style="margin-bottom: 10px;">
+              <a href="{{ route('logout') }}" class="nav-link">
+                  <i class="nav-icon fas fa-sign-out-alt fa-spin"></i>
+                  <p>
+                      LOGOUT
+                  </p>
+              </a>
+          </li>
+  
       </ul>
-      
-    </nav>
+  
+  </nav>
+  
     <!-- /.sidebar-menu -->
   </div>
   <!-- /.sidebar -->

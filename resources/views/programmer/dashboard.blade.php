@@ -17,12 +17,31 @@
     <!-- /.content-header -->
       
 <div class="row">
-<!--------------------------------Total User---------------------------------------------->
+<!--------------------------------Total Account---------------------------------------------->
 <div class="col-lg-3 col-6">
   <!-- small card -->
   <div class="small-box bg-warning">
     <div class="inner">
-      <h3>1</h3>
+      <h3>{{ $totalAccounts }}</h3>
+
+      <p>Total Account</p>
+    </div>
+    <div class="icon">
+      <i class="fas fa-users"></i>
+    </div>
+    <a href="#" class="small-box-footer">
+      More info <i class="fas fa-arrow-circle-right"></i>
+    </a>
+  </div>
+</div>
+<!--------------------------------Total Account---------------------------------------------->
+
+<!--------------------------------Total Players---------------------------------------------->
+<div class="col-lg-3 col-6">
+  <!-- small card -->
+  <div class="small-box bg-success">
+    <div class="inner">
+      <h3>{{ $totalPlayers }}</h3>
 
       <p>Total Players</p>
     </div>
@@ -34,14 +53,14 @@
     </a>
   </div>
 </div>
-<!--------------------------------Total User---------------------------------------------->
+<!--------------------------------Total Players---------------------------------------------->
 
 <!--------------------------------Total Agent---------------------------------------------->
 <div class="col-lg-3 col-6">
   <!-- small card -->
-  <div class="small-box bg-success">
+  <div class="small-box bg-info">
     <div class="inner">
-      <h3>2</h3>
+      <h3>{{ $totalAgents }}</h3>
 
       <p>Total Agent</p>
     </div>
@@ -58,9 +77,9 @@
 <!--------------------------------Total Operator---------------------------------------------->
 <div class="col-lg-3 col-6">
   <!-- small card -->
-  <div class="small-box bg-info">
+  <div class="small-box bg-warning">
     <div class="inner">
-      <h3>3</h3>
+      <h3>{{ $totalOperators }}</h3>
 
       <p>Total Operator</p>
     </div>
@@ -74,14 +93,14 @@
 </div>
 <!--------------------------------Total Operator---------------------------------------------->
 
-<!--------------------------------Wallet---------------------------------------------->
+<!--------------------------------Points---------------------------------------------->
 <div class="col-lg-3 col-6">
   <!-- small card -->
-  <div class="small-box bg-danger">
+  <div class="small-box bg-success">
     <div class="inner">
-      <h3>1</h3>
+      <h3>{{ $totalPoints }}</h3>
 
-      <p>Wallet</p>
+      <p>Total Points</p>
     </div>
     <div class="icon">
       <i class="fas fa-wallet"></i>
@@ -91,7 +110,7 @@
     </a>
   </div>
 </div>
-<!--------------------------------Wallet---------------------------------------------->
+<!--------------------------------Points---------------------------------------------->
 </div>
     </div>
     <!-------------------------------------------------------------------------------------- Main content -->

@@ -16,16 +16,6 @@
     </div>
     <!-- /.content-header -->
     <!----------------------------------------------- Main content -------------------------------------->
-    @if(session('success'))
-    <div id="success-alert" class="alert alert-success" style="font-size: 18px; padding: 20px;">
-        {{ session('success') }}
-    </div>
-    <script>
-        setTimeout(function() {
-            document.getElementById('success-alert').style.display = 'none';
-        }, 5000);
-    </script>
-    @endif
     <div class="card-body table-responsive p-0">
       <table class="table table-hover text-nowrap">
           <thead>

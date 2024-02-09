@@ -39,6 +39,7 @@ Route::get('/change_password', [PlayerController::class, 'changePassword'])->nam
 Route::post('/change_password', [PlayerController::class, 'changePasswordRequest'])->name('change.passwordrequest');
 /********************************************This Route is For Player!! *****************************/
 
+/********************************************This Route is For Programmer!! *****************************/
 Route::get('/programmer/dashboard', [ProgrammerController::class, 'index'])->name('programmer.dashboard');
 Route::get('/programmer/player', [ProgrammerController::class, 'Player'])->name('programmer.player');
 Route::get('/programmer/all_account', [ProgrammerController::class, 'AllAccount'])->name('programmer.all_account');
@@ -46,5 +47,9 @@ Route::get('/programmer/agent', [ProgrammerController::class, 'Agent'])->name('p
 Route::get('/programmer/operator', [ProgrammerController::class, 'Operator'])->name('programmer.operator');
 // Add the new route for deleting a player
 Route::get('/programmer/delete_account/{id}', [ProgrammerController::class, 'DeleteAccount'])->name('programmer.delete_account');
-
+//Route for activate and deactivate User
+Route::patch('/programmer/update-user-status/{id}', [ProgrammerController::class, 'updateUserStatus'])->name('programmer.update_status');
+Route::get('/programmer/wallet', [ProgrammerController::class, 'wallet'])->name('programmer.wallet');
+Route::post('/programmer/wallet/{id}', [ProgrammerController::class, 'SendPoint'])->name('programmer.send_point');
+/********************************************This Route is For Programmer!! *****************************/
 });

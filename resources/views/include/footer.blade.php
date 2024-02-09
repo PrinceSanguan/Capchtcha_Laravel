@@ -21,6 +21,7 @@
   }
 
   updateCountdown();
+
 </script>
 <!-- ./wrapper -->
 

@@ -9,7 +9,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Agent</h1>
+            <h1 class="m-0">Send Money</h1>
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -25,20 +25,17 @@
             document.getElementById('success-alert').style.display = 'none';
         }, 5000);
     </script>
-    @endif
+    @endif 
     <div class="card-body table-responsive p-0">
       <table class="table table-hover text-nowrap">
           <thead>
               <tr>
                   <th>ID</th>
                   <th>Username</th>
-                  <th>Email</th>
-                  <th>Work</th>
-                  <th>Gender</th>
-                  <th>Points</th>
                   <th>Type</th>
-                  <th>Created at</th>
-                  <th>Action</th>
+                  <th>Points</th>
+                  <th>Send Money</th>
+
               </tr>
           </thead>
           <tbody>
@@ -47,15 +44,25 @@
                     <tr>
                         <td>{{ $datas->id }}</td>
                         <td>{{ $datas->username }}</td>
-                        <td>{{ $datas->email }}</td>
-                        <td>{{ $datas->work }}</td>
-                        <td>{{ $datas->gender }}</td>
-                        <td>{{ $datas->point }}</td>
                         <td>{{ $datas->type }}</td>
-                        <td>{{ $datas->created_at->format('F j, Y g:ia') }}</td>
+                        <td>{{ $datas->point }}</td>
                         <td>
-                          <a href=" {{ route('programmer.delete_account', ['id' => $datas->id]) }} " class="btn btn-danger">Delete</a>
-                        </td>                  
+                          <div class="card card-primary">
+                            <div class="card-header text-center">
+                                <h3 class="card-title">Send Points</h3><br>
+                            </div>
+                            <!-- /.card-header -->
+                            <!-- form start -->
+                            <form method="post" action="{{ route('programmer.send_point', ['id' => $datas->id]) }}">
+                              @csrf
+                              <div class="form-group text-center"><br>
+                                <input type="text" name="point" class="form-control" placeholder="Enter Points">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                            </form>
+                        </div>
+                        
+                        </td>         
                     </tr>
                 @endforeach
             @endif
@@ -69,6 +76,7 @@
       </div>
     </div>
   </div>
+
   <!-- /.content-wrapper -->
 
 @include('include.footer')
