@@ -52,7 +52,16 @@ Route::get('/programmer/delete_account/{id}', [ProgrammerController::class, 'Del
 Route::patch('/programmer/update-user-status/{id}', [ProgrammerController::class, 'updateUserStatus'])->name('programmer.update_status');
 Route::get('/programmer/wallet', [ProgrammerController::class, 'wallet'])->name('programmer.wallet');
 Route::post('/programmer/wallet/{id}', [ProgrammerController::class, 'SendPoint'])->name('programmer.send_point');
+Route::post('/programmer/wallet/deduct/{id}', [ProgrammerController::class, 'DeductPoint'])->name('programmer.deduct_point');
 /********************************************This Route is For Programmer!! *****************************/
 
+/********************************************This Route is For Operator!! *****************************/
 Route::get('/operator/dashboard', [OperatorController::class, 'index'])->name('operator.dashboard');
+Route::get('/operator/all_account', [OperatorController::class, 'AllAccount'])->name('operator.all_account');
+Route::get('/operator/player', [OperatorController::class, 'Player'])->name('operator.player');
+Route::get('/operator/my_agent', [OperatorController::class, 'Agent'])->name('operator.agent');
+Route::patch('/operator/update-user-status/{id}', [OperatorController::class, 'updateUserStatus'])->name('operator.update_status');
+Route::get('/operator/wallet', [OperatorController::class, 'Wallet'])->name('operator.wallet');
+Route::post('/operator/wallet/{id}', [OperatorController::class, 'SendPoint'])->name('operator.send_point');
+/********************************************This Route is For Operator!! *****************************/
 });

@@ -1,5 +1,5 @@
-@include('programmer.header')
-@include('programmer.navbar')
+@include('operator.header')
+@include('operator.navbar')
 
 
   <!-- Content Wrapper. Contains page content -->
@@ -25,9 +25,9 @@
             document.getElementById('success-alert').style.display = 'none';
         }, 5000);
     </script>
-  @endif
+    @endif 
 
-  @if(session('error'))
+    @if(session('error'))
     <div id="error-alert" class="alert alert-danger" style="font-size: 18px; padding: 20px;">
         {{ session('error') }}
     </div>
@@ -38,6 +38,25 @@
     </script>
   @endif
 
+<!--------------------------------Points---------------------------------------------->
+<div class="col-lg-3 col-6">
+  <!-- small card -->
+  <div class="small-box bg-success">
+    <div class="inner">
+      <h3> {{ $userPoints }} </h3>
+
+      <p>Current Points</p>
+    </div>
+    <div class="icon">
+      <i class="fas fa-wallet"></i>
+    </div>
+    <a href="#" class="small-box-footer">
+      More info <i class="fas fa-arrow-circle-right"></i>
+    </a>
+  </div>
+</div>
+<!--------------------------------Points---------------------------------------------->
+
     <div class="card-body table-responsive p-0">
       <table class="table table-hover text-nowrap">
           <thead>
@@ -47,7 +66,6 @@
                   <th>Type</th>
                   <th>Points</th>
                   <th>Send Money</th>
-                  <th>Deduct points</th>
 
               </tr>
           </thead>
@@ -66,7 +84,7 @@
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            <form method="post" action="{{ route('programmer.send_point', ['id' => $datas->id]) }}">
+                            <form method="post" action="{{ route('operator.send_point', ['id' => $datas->id]) }}">
                               @csrf
                               <div class="form-group text-center"><br>
                                 <input type="text" name="point" class="form-control" placeholder="Enter Points">
@@ -74,23 +92,8 @@
                             </div>
                             </form>
                         </div>
-                        </td>
-                        <td>
-                          <div class="card card-danger">
-                            <div class="card-header text-center">
-                                <h3 class="card-title">Deduct Points</h3><br>
-                            </div>
-                            <!-- /.card-header -->
-                            <!-- form start -->
-                            <form method="post" action="{{ route('programmer.deduct_point', ['id' => $datas->id]) }}">
-                              @csrf
-                              <div class="form-group text-center"><br>
-                                <input type="text" name="point" class="form-control" placeholder="Enter Points">
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </div>
-                            </form>
-                        </div>
-                        </td>
+                        
+                        </td>         
                     </tr>
                 @endforeach
             @endif

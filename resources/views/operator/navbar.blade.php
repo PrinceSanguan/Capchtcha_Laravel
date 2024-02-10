@@ -27,7 +27,7 @@
       </div>
 <!----------------------------Image--------------------------------------------------------------------->
       <div class="info">
-        <a href="{{route('programmer.dashboard')}}" class="d-block"> {{ $users->name }} </a>
+        <a href="{{route('operator.dashboard')}}" class="d-block"> {{ $users->name }} </a>
       </div>
     </div>
 
@@ -40,27 +40,36 @@
           <li class="nav-header" style="font-size: 1.2em; color: yellow;">ACTIVE USER</li>
   
           <li class="nav-item menu-open" style="margin-bottom: 10px;">
-              <a href="{{ route('programmer.player') }}" class="nav-link {{ Route::is('programmer.player') ? 'active' : '' }}">
-                  <i class="nav-icon fas fa-user fa-spin"></i>
+              <a href="{{ route('operator.all_account') }}" class="nav-link {{ Route::is('operator.all_account') ? 'active' : '' }}">
+                  <i class="nav-icon fas fa-users fa-spin"></i>
                   <p>
-                      REFERRAL
+                      ALL ACCOUNT
                   </p>
               </a>
           </li>
   
           <li class="nav-item menu-open" style="margin-bottom: 10px;">
-              <a href="{{ route('programmer.agent') }}" class="nav-link {{ Route::is('programmer.agent') ? 'active' : '' }}">
+              <a href="{{ route('operator.player') }}" class="nav-link {{ Route::is('operator.player') ? 'active' : '' }}">
                   <i class="nav-icon fas fa-user-nurse fa-spin"></i>
                   <p>
-                      AGENT
+                      MY PLAYER
                   </p>
               </a>
           </li>
+
+          <li class="nav-item menu-open" style="margin-bottom: 10px;">
+            <a href="{{ route('operator.agent') }}" class="nav-link {{ Route::is('operator.agent') ? 'active' : '' }}">
+                <i class="nav-icon fas fa-user-nurse fa-spin"></i>
+                <p>
+                    MY AGENT
+                </p>
+            </a>
+        </li>
   
           <li class="nav-header" style="font-size: 1.2em; color: yellow;">MONEY</li>
   
           <li class="nav-item menu-open" style="margin-bottom: 10px;">
-              <a href="{{ route('programmer.wallet') }}" class="nav-link {{ Route::is('programmer.wallet') ? 'active' : '' }}">
+              <a href="{{ route('operator.wallet') }}" class="nav-link {{ Route::is('operator.wallet') ? 'active' : '' }}">
                   <i class="nav-icon fas fa-wallet fa-spin"></i>
                   <p>
                       WALLET

@@ -25,7 +25,7 @@
     <div class="inner">
       <h3>{{ $totalPlayers }}</h3>
 
-      <p>Pending Referral</p>
+      <p>My Player</p>
     </div>
     <div class="icon">
       <i class="fas fa-user"></i>
@@ -44,7 +44,7 @@
     <div class="inner">
       <h3>{{ $totalAgents }}</h3>
 
-      <p>Total Agent</p>
+      <p>My Agent</p>
     </div>
     <div class="icon">
       <i class="fas fa-user-nurse"></i>
@@ -56,24 +56,6 @@
 </div>
 <!--------------------------------Total Agent---------------------------------------------->
 
-<!--------------------------------Points---------------------------------------------->
-<div class="col-lg-3 col-6">
-  <!-- small card -->
-  <div class="small-box bg-success">
-    <div class="inner">
-      <h3>{{ $currentPoints }}</h3>
-
-      <p>Total Points</p>
-    </div>
-    <div class="icon">
-      <i class="fas fa-wallet"></i>
-    </div>
-    <a href="#" class="small-box-footer">
-      More info <i class="fas fa-arrow-circle-right"></i>
-    </a>
-  </div>
-</div>
-<!--------------------------------Points---------------------------------------------->
 </div>
     </div>
     <!-------------------------------------------------------------------------------------- Main content -->

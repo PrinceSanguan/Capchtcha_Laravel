@@ -72,7 +72,7 @@ class ProgrammerController extends Controller
             return redirect()->route('login')->withErrors(['error' => 'Access denied.']);
         }
 
-        // Fetch all jobs from the database
+        // Fetch all Players from the database
         $data = User::where('type', 'player')->get();
 
         // Pass the information to the view
@@ -187,6 +187,31 @@ class ProgrammerController extends Controller
         return redirect()->back()->with('success', 'Points successfully updated!');
     }
 
+    public function DeductPoint(Request $request, $id) {
+        // Find the user by ID
+        $user = User::findOrFail($id);
+    
+        $request->validate([
+            'point' => 'required|numeric|integer|min:0',
+        ]);
+    
+        // Get the points from the request
+        $deductPoints = $request->input('point');
+    
+        // Check if the deduction would result in a negative value
+        if ($user->point - $deductPoints < 0) {
+            return redirect()->back()->with('error', 'The user point is already zero. Please have mercy!');
+        }
+    
+        // Update the user's points
+        $user->update([
+            'point' => $user->point - $deductPoints,
+        ]);
+    
+        // You can add a success message or redirect the user to a specific page
+        return redirect()->back()->with('success', 'Points successfully Deducted!');
+    }
+
 
     //////////////////////////// Deleting Player only on Programmer Exist ///////////////////////////////////////
     public function DeleteAccount($id)
@@ -219,7 +244,6 @@ class ProgrammerController extends Controller
             $user->type = $newType;
         }
     }
-    
         $user->save();
     
         // Redirect back with success message
