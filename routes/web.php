@@ -5,6 +5,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SigninController;
 use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\ProgrammerController;
+use App\Http\Controllers\OperatorController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,7 +21,7 @@ use App\Http\Controllers\ProgrammerController;
 Route::get('/', [LoginController::class, 'index'])->name('login');
 Route::post('/', [LoginController::class, 'login'])->name('login');
 
-Route::get('/signin', [SigninController::class, 'index'])->name('signin');
+Route::get('/signin/{referral_id?}', [SigninController::class, 'index'])->name('signin');
 Route::post('/signin', [SigninController::class, 'signinForm'])->name('signin.form');
 
 Route::get('/logout', [PlayerController::class, 'logout'])->name('logout');
@@ -52,4 +53,6 @@ Route::patch('/programmer/update-user-status/{id}', [ProgrammerController::class
 Route::get('/programmer/wallet', [ProgrammerController::class, 'wallet'])->name('programmer.wallet');
 Route::post('/programmer/wallet/{id}', [ProgrammerController::class, 'SendPoint'])->name('programmer.send_point');
 /********************************************This Route is For Programmer!! *****************************/
+
+Route::get('/operator/dashboard', [OperatorController::class, 'index'])->name('operator.dashboard');
 });

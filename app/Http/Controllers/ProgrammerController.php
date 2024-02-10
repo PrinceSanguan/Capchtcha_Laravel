@@ -55,8 +55,6 @@ class ProgrammerController extends Controller
 
         // Pass the information to the view
         return view('programmer.dashboard', compact('users', 'totalAccounts', 'totalPlayers', 'totalAgents', 'totalOperators', 'totalPoints'));
-
-        //return view('programmer.dashboard', ['users' => $users]);
     }
 
     public function Player()

@@ -39,8 +39,19 @@
               <p class="mb-4">You need to <strong class="text-dark">Approved</strong> to access this website. If you successfully approved <a href="{{route('login')}}"><strong>Log in </strong></a>Here.</p>
             </div>
 
-            <form action="{{route('signin.form')}}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('signin.form') }}" method="post" enctype="multipart/form-data">
               @csrf
+
+              @error('referral_id')
+                    <div class="text-danger">{{ $message }}</div>
+              @enderror
+
+            @if($referralCode)
+              <div class="form-group">
+                  <label for="referral_id" style="display: none;">Referral ID</label>
+                  <input type="hidden" class="form-control" name="referral_id" value="{{ $referralCode }}">
+              </div>
+            @endif
 
               <div class="form-group">
                 <label for="username">Unique Username</label>

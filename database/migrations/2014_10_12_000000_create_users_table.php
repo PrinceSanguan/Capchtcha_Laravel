@@ -25,7 +25,11 @@ return new class extends Migration
             $table->integer('point')->default(0);
             $table->enum('status', [0, 1])->default(0);
             $table->enum('type', ['programmer', 'operator', 'agent', 'player'])->default('player');
+            $table->unsignedBigInteger('referral_id')->nullable();
             $table->timestamps();
+
+            // Add foreign key constraint for referral_id
+            $table->foreign('referral_id')->references('id')->on('users')->onDelete('set null');
         });
     }
 

@@ -30,6 +30,7 @@ class User extends Authenticatable
         'point',
         'status',
         'type',
+        'referral_id',
     ];
 
     /**

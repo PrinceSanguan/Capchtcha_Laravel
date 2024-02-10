@@ -7,18 +7,25 @@ use App\Models\User;
 
 class SigninController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         // Check if the user is already authenticated
         if (auth()->check()) {
             // User is already logged in, redirect to the dashboard or another page
             return redirect()->route('dashboard');
         }
-        
-        return view('signin');
+
+        // Get the referral code from the URL query parameter
+        $referralCode = request('ref');
+
+        // This is referral example = http://127.0.0.1:8000/signin?ref=1
+
+        // Pass the referral code to the view
+        return view('signin', ['referralCode' => $referralCode]);
     }
 
-    public function signinForm(Request $request) {
-
+    public function signinForm(Request $request)
+    {
         // Validate the request data with custom error messages
         $request->validate([
             'username' => 'required|unique:users',
@@ -33,11 +40,13 @@ class SigninController extends Controller
                 'regex:/^(?=.*[a-zA-Z])(?=.*\d).{6,}$/',
             ],
             'number' => 'required|numeric|digits:11',
-            'file' => 'required|image'
+            'file' => 'required|image',
+            'referral_id' => 'nullable|exists:users,id', // Add validation for referral code
         ], [
             'password.regex' => 'The password must contain at least one letter, one number, and be at least 6 characters long.',
+            'referral_id.exists' => 'The referral code is not valid.',
         ]);
-
+    
         // Check if a file is uploaded
         if ($request->hasFile('file')) {
             // Store the file and get the path
@@ -46,7 +55,7 @@ class SigninController extends Controller
             // Handle the case where no file is uploaded
             return redirect()->route('register')->with('error', 'Please upload a profile image.');
         }
-
+    
         // Saving in the database
         $user = User::create([
             'username' => $request->input('username'),
@@ -61,14 +70,17 @@ class SigninController extends Controller
             'point' => 0,
             'status' => '0',
             'type' => 'player',
+            'referral_id' => $request->input('referral_id'),
         ]);
-
+    
         if (!$user) {
             return redirect()->route('register')->with('error', 'Failed to create user.');
         }
-
+    
         // Redirect with success message
         return redirect()->route('login')->with('success', 'You have successfully signed in! Wait for the Approval of the agent to activate your account.');
-    }
+    }    
 
 }
+
+
