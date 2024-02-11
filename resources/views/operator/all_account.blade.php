@@ -32,12 +32,10 @@
               <tr>
                   <th>Username</th>
                   <th>Email</th>
-                  <th>Work</th>
-                  <th>Gender</th>
-                  <th>Points</th>
-                  <th>Type</th>
                   <th>Created at</th>
                   <th>Status</th>
+                  <th>Referred By</th>
+                  <th>Type</th>
               </tr>
           </thead>
           <tbody>
@@ -46,11 +44,14 @@
                     <tr>
                         <td>{{ $datas->username }}</td>
                         <td>{{ $datas->email }}</td>
-                        <td>{{ $datas->work }}</td>
-                        <td>{{ $datas->gender }}</td>
-                        <td>{{ $datas->point }}</td>
-                        <td>{{ $datas->type }}</td>
                         <td>{{ $datas->created_at->format('F j, Y g:ia') }}</td>
+                        <td>
+                          @if ($datas->referredBy)
+                              {{ $datas->referredBy->name }}
+                          @else
+                              N/A
+                          @endif
+                      </td>
                          <td>
                           <form action="{{ route('operator.update_status', ['id' => $datas->id]) }}" method="post">
                               @csrf
@@ -58,14 +59,15 @@
                               <button type="submit" class="btn {{ $datas->status == 1 ? 'btn-success' : 'btn-danger' }}">
                                   {{ $datas->status == 1 ? 'Active' : 'Inactive' }}
                               </button>
-
+                        </td>
+                        <td>
                               <div class="btn-group">
                                 <button type="submit" class="btn btn-primary{{ $datas->type == 'player' ? ' active' : '' }}" name="type" value="player" {{ $datas->type == 'player' ? 'disabled' : '' }}>Player</button>
                                 <button type="submit" class="btn btn-primary{{ $datas->type == 'agent' ? ' active' : '' }}" name="type" value="agent" {{ $datas->type == 'agent' ? 'disabled' : '' }}>Agent</button>
                             </div>
                           </form>
-                      </td>
-                      
+                        </td>
+                
                     </tr>
                 @endforeach
             @endif

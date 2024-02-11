@@ -61,7 +61,6 @@
       <table class="table table-hover text-nowrap">
           <thead>
               <tr>
-                  <th>ID</th>
                   <th>Username</th>
                   <th>Type</th>
                   <th>Points</th>
@@ -73,7 +72,6 @@
             @if ($data)
                 @foreach ($data as $datas)
                     <tr>
-                        <td>{{ $datas->id }}</td>
                         <td>{{ $datas->username }}</td>
                         <td>{{ $datas->type }}</td>
                         <td>{{ $datas->point }}</td>

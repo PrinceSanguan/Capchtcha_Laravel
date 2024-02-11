@@ -31,7 +31,7 @@ class OperatorController extends Controller
             return redirect()->route('login')->withErrors(['error' => 'User not found.']);
         }
 
-        // Check if the user type is 'programmer'
+        // Check if the user type is 'Operator'
         if ($users->type !== 'operator') {
             // Redirect to the same page with an error message
             return redirect()->route('login')->withErrors(['error' => 'Access denied.']);
@@ -60,7 +60,7 @@ class OperatorController extends Controller
             return redirect()->route('login')->withErrors(['error' => 'User not found.']);
         }
 
-        // Check if the user type is 'programmer'
+        // Check if the user type is 'Operator'
         if ($users->type !== 'operator') {
             // Redirect to the same page with an error message
             return redirect()->route('login')->withErrors(['error' => 'Access denied.']);
@@ -160,6 +160,25 @@ class OperatorController extends Controller
 
         // Pass the information to the view
         return view('operator.wallet', ['users' => $users, 'data' => $data, 'userPoints' => $userPoints]);
+    }
+
+    public function Link()
+    {
+        $users = $this->getUserInfo();
+
+        // Check if the user is found
+        if (!$users) {
+            return redirect()->route('login')->withErrors(['error' => 'User not found.']);
+        }
+
+        // Check if the user type is 'Operator'
+        if ($users->type !== 'operator') {
+            // Redirect to the same page with an error message
+            return redirect()->route('login')->withErrors(['error' => 'Access denied.']);
+        }
+
+        // Pass the information to the view
+        return view('operator.link', ['users' => $users]);
     }
 
     public function SendPoint(Request $request, $id) {

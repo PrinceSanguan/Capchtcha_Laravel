@@ -6,6 +6,11 @@
       <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
     </li>
   </ul>
+  <ul class="navbar-nav ml-auto">
+    <!-- Navbar Search -->
+    <li class="nav-item d-sm-inline">
+      <a href="{{route('operator.dashboard')}}" class="nav-link">{{ $users->name }}</a>
+    </li>
 </nav>
 <!-- /.navbar -->
 

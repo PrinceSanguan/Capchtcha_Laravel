@@ -22,6 +22,14 @@
 
   updateCountdown();
 
+  function copyReferralLink() {
+        /* Logic to copy the referral link to the clipboard goes here */
+        var referralLink = document.getElementById('referralLink');
+        referralLink.select();
+        document.execCommand('copy');
+        alert('Referral link copied to clipboard!');
+  }
+
 </script>
 <!-- ./wrapper -->
 
