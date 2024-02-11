@@ -38,20 +38,22 @@ class OperatorController extends Controller
         }
 
         // Get the total number of players
-        $totalPlayers = User::where('type', 'player')->count();
+        $totalPlayers = User::where('type', 'player')->where('referral_id', $users->id)->count();
 
         // Get the total number of agents
-        $totalAgents = User::where('type', 'agent')->count();
+        $totalAgents = User::where('type', 'agent')->where('referral_id', $users->id)->count();
 
         // Get the current user's points
         $currentPoints = $users->point;
 
-        // Pass the information to the view
-        return view('operator.dashboard', compact('users', 'totalPlayers', 'totalAgents', 'currentPoints'));
+        // Build the referral link
+        $referralLink = 'http://captcha.free.nf/signin?ref=' . $users->id;
 
+        // Pass the information to the view
+        return view('operator.dashboard', compact('users', 'totalPlayers', 'totalAgents', 'currentPoints', 'referralLink'));
     }
 
-    public function AllAccount()
+    public function PendingAccount()
     {
         $users = $this->getUserInfo();
 
@@ -67,22 +69,10 @@ class OperatorController extends Controller
         }
 
         // Fetch all agents referred by the operator
-        $referredAgents = User::where('type', 'agent')->where('referral_id', $users->id)->get();
-
-        // Fetch all players referred by the agents, including those referred by agents referred by the operator
-        $data = User::where(function ($query) use ($users, $referredAgents) {
-            $query->whereIn('referral_id', $referredAgents->pluck('id'))
-                ->orWhere('referral_id', $users->id);
-        })
-        ->orWhere(function ($query) use ($users) {
-            $query->where('type', 'agent')
-                ->where('referral_id', $users->id);
-        })
-        ->where('type', 'player')
-        ->get();
+        $data = User::where('type', 'player')->where('referral_id', $users->id)->get();
 
         // Pass the information to the view
-        return view('operator.all_account', ['users' => $users, 'data' => $data]);
+        return view('operator.pending_account', ['users' => $users, 'data' => $data]);
     }
 
     public function Player()
@@ -100,20 +90,17 @@ class OperatorController extends Controller
             return redirect()->route('login')->withErrors(['error' => 'Access denied.']);
         }
 
-        // Fetch all agents referred by the operator
+         // Fetch all agents referred by the operator
         $agents = User::where('type', 'agent')->where('referral_id', $users->id)->get();
 
-        // Fetch all players referred by the agents and directly by the operator
-        $data = User::where(function ($query) use ($users, $agents) {
-                     $query->whereIn('referral_id', $agents->pluck('id'))
-                           ->orWhere('referral_id', $users->id);
-                 })
-                 ->where('type', 'player')
-                 ->get();
+        // Fetch all players directly referred by agents referred by the operator
+        $data = User::whereIn('referral_id', $agents->pluck('id'))
+            ->where('type', 'player')
+            ->get();
 
         // Pass the information to the view
         return view('operator.player', ['users' => $users, 'data' => $data]);
-    }
+        }
 
     public function Agent()
     {
@@ -212,7 +199,8 @@ class OperatorController extends Controller
         return redirect()->back()->with('success', 'Points successfully updated!');
     }
 
-    public function updateUserStatus($id)
+
+    public function updateUserStatus(Request $request, $id)
     {
         // Find the user by ID
         $user = User::findOrFail($id);
@@ -220,19 +208,15 @@ class OperatorController extends Controller
         // Toggle the status (1 to 0 or 0 to 1)
         $user->status = $user->status == '1' ? '0' : '1';
     
-        // Handle user type update logic based on the button clicked
-    $request = request();
-    if ($request->has('type')) {
-        $newType = $request->input('type');
-
-        // Ensure the newType is a valid user type
-        if (in_array($newType, ['player', 'agent'])) {
-            $user->type = $newType;
+        // Set the user type to 'agent' when the operator activates the account or when the user status becomes 1
+        if ($request->has('active') || $user->status == '1') {
+            $user->type = 'agent';
         }
-    }
+    
         $user->save();
     
         // Redirect back with success message
         return redirect()->back()->with('success', 'User status updated successfully');
     }
+
 }

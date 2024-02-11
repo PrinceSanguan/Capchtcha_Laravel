@@ -45,19 +45,10 @@
           <li class="nav-header" style="font-size: 1.2em; color: yellow;">ACTIVE USER</li>
   
           <li class="nav-item menu-open" style="margin-bottom: 10px;">
-              <a href="{{ route('operator.all_account') }}" class="nav-link {{ Route::is('operator.all_account') ? 'active' : '' }}">
-                  <i class="nav-icon fas fa-users fa-spin"></i>
+              <a href="{{ route('operator.pending_account') }}" class="nav-link {{ Route::is('operator.pending_account') ? 'active' : '' }}">
+                  <i class="nav-icon fas fa-hourglass-half fa-spin"></i>
                   <p>
-                      ALL ACCOUNT
-                  </p>
-              </a>
-          </li>
-  
-          <li class="nav-item menu-open" style="margin-bottom: 10px;">
-              <a href="{{ route('operator.player') }}" class="nav-link {{ Route::is('operator.player') ? 'active' : '' }}">
-                  <i class="nav-icon fas fa-user-nurse fa-spin"></i>
-                  <p>
-                      MY PLAYER
+                      PENDING ACCOUNT
                   </p>
               </a>
           </li>
@@ -70,6 +61,17 @@
                 </p>
             </a>
         </li>
+
+        <li class="nav-header" style="font-size: 1.2em; color: yellow;">AGENT REFERRED PLAYER</li>
+  
+          <li class="nav-item menu-open" style="margin-bottom: 10px;">
+              <a href="{{ route('operator.player') }}" class="nav-link {{ Route::is('operator.player') ? 'active' : '' }}">
+                  <i class="nav-icon fas fa-user-nurse fa-spin"></i>
+                  <p>
+                      MY PLAYER
+                  </p>
+              </a>
+          </li>
   
           <li class="nav-header" style="font-size: 1.2em; color: yellow;">MONEY</li>
   

@@ -9,7 +9,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">All Account</h1>
+            <h1 class="m-0">Pending Account</h1>
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -34,8 +34,6 @@
                   <th>Email</th>
                   <th>Created at</th>
                   <th>Status</th>
-                  <th>Referred By</th>
-                  <th>Type</th>
               </tr>
           </thead>
           <tbody>
@@ -45,13 +43,6 @@
                         <td>{{ $datas->username }}</td>
                         <td>{{ $datas->email }}</td>
                         <td>{{ $datas->created_at->format('F j, Y g:ia') }}</td>
-                        <td>
-                          @if ($datas->referredBy)
-                              {{ $datas->referredBy->name }}
-                          @else
-                              N/A
-                          @endif
-                      </td>
                          <td>
                           <form action="{{ route('operator.update_status', ['id' => $datas->id]) }}" method="post">
                               @csrf
@@ -59,12 +50,6 @@
                               <button type="submit" class="btn {{ $datas->status == 1 ? 'btn-success' : 'btn-danger' }}">
                                   {{ $datas->status == 1 ? 'Active' : 'Inactive' }}
                               </button>
-                        </td>
-                        <td>
-                              <div class="btn-group">
-                                <button type="submit" class="btn btn-primary{{ $datas->type == 'player' ? ' active' : '' }}" name="type" value="player" {{ $datas->type == 'player' ? 'disabled' : '' }}>Player</button>
-                                <button type="submit" class="btn btn-primary{{ $datas->type == 'agent' ? ' active' : '' }}" name="type" value="agent" {{ $datas->type == 'agent' ? 'disabled' : '' }}>Agent</button>
-                            </div>
                           </form>
                         </td>
                 

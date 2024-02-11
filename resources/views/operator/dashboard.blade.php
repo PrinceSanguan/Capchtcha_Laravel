@@ -27,7 +27,7 @@
                     <div class="card-body">
                         <p>Share your unique referral link to earn more!</p>
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" id="referralLink" value="https://yourwebsite.com/referral/user123" readonly>
+                            <input type="text" class="form-control" id="referralLink" value="{{ $referralLink }}" readonly>
                             <div class="input-group-append">
                                 <button class="btn btn-outline-secondary" onclick="copyReferralLink()">Copy</button>
                             </div>
@@ -40,11 +40,11 @@
             <div class="col-md-3">
                 <div class="card bg-success">
                     <div class="card-body">
-                        <h3 class="card-title">{{ $totalPlayers }}</h3>
-                        <p class="card-text">My Players</p>
+                        <h2 class="card-title">My Referred Players</h2>
+                        <h3 class="card-text">{{ $totalPlayers }}</h3>  
                     </div>
                     <div class="card-footer">
-                        <a href="#" class="btn btn-primary">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="{{route('operator.player')}}" class="btn btn-primary">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -53,11 +53,11 @@
             <div class="col-md-3">
                 <div class="card bg-info">
                     <div class="card-body">
-                        <h3 class="card-title">{{ $totalAgents }}</h3>
-                        <p class="card-text">My Agents</p>
+                        <h3 class="card-title">My Referred Agents</h3>
+                        <h3 class="card-text">{{ $totalAgents }}</h3>
                     </div>
                     <div class="card-footer">
-                        <a href="#" class="btn btn-primary">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="{{route('operator.agent')}}" class="btn btn-primary">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
             </div>

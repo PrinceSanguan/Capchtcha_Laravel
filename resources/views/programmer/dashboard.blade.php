@@ -17,6 +17,24 @@
     <!-- /.content-header -->
       
 <div class="row">
+
+  <!-- Referral Link Card -->
+  <div class="col-md-6">
+    <div class="card card-warning">
+        <div class="card-header">
+            <h3 class="card-title">Referral Link</h3>
+        </div>
+        <div class="card-body">
+            <p>Share your unique referral link to earn more!</p>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" id="referralLink" value="{{ $referralLink }}" readonly>
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" onclick="copyReferralLink()">Copy</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <!--------------------------------Total Account---------------------------------------------->
 <div class="col-lg-3 col-6">
   <!-- small card -->

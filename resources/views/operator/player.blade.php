@@ -9,7 +9,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Player</h1>
+            <h1 class="m-0">Player that referred by your agent</h1>
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -35,6 +35,7 @@
                 <th>Address</th>
                 <th>Gender</th>
                 <th>Gcash Number</th>
+                <th>Referred By</th>
             </tr>
         </thead>
         <tbody>
@@ -46,6 +47,13 @@
                         <td>{{ $datas->address }}</td>
                         <td>{{ $datas->gender }}</td>
                         <td>{{ $datas->number }}</td>
+                        <td>
+                          @if ($datas->referredBy)
+                              {{ $datas->referredBy->name }}
+                          @else
+                              N/A
+                          @endif
+                      </td>
                     </tr>
                 @endforeach
             @endif

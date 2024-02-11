@@ -57,7 +57,7 @@ Route::post('/programmer/wallet/deduct/{id}', [ProgrammerController::class, 'Ded
 
 /********************************************This Route is For Operator!! *****************************/
 Route::get('/operator/dashboard', [OperatorController::class, 'index'])->name('operator.dashboard');
-Route::get('/operator/all_account', [OperatorController::class, 'AllAccount'])->name('operator.all_account');
+Route::get('/operator/pending_account', [OperatorController::class, 'PendingAccount'])->name('operator.pending_account');
 Route::get('/operator/player', [OperatorController::class, 'Player'])->name('operator.player');
 Route::get('/operator/my_agent', [OperatorController::class, 'Agent'])->name('operator.agent');
 Route::patch('/operator/update-user-status/{id}', [OperatorController::class, 'updateUserStatus'])->name('operator.update_status');
