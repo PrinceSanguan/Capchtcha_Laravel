@@ -18,8 +18,8 @@
 
   <!-- Open Graph meta tags -->
  <meta property="og:title" content="Captcha | Earn Money" />
- <meta property="og:image" content="{{ asset('images/captcha.jpg') }}" />
- <meta property="og:url" content="https://captcha.free.nf/" />
+ <meta property="og:image" content="{{ asset('images/cap.png') }}" />
+ <meta property="og:url" content="http://captcha.free.nf/" />
  <meta property="og:site_name" content="Captcha | Earn Money" />
  <meta property="og:description" content="Captcha | Earn Money" />
 

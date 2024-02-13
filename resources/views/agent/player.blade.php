@@ -1,5 +1,5 @@
-@include('operator.header')
-@include('operator.navbar')
+@include('agent.header')
+@include('agent.navbar')
 
 
   <!-- Content Wrapper. Contains page content -->
@@ -9,7 +9,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Agent</h1>
+            <h1 class="m-0">My Player</h1>
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -30,7 +30,6 @@
       <table class="table table-hover text-nowrap">
         <thead>
             <tr>
-                <th>Username</th>
                 <th>Name</th>
                 <th>Work</th>
                 <th>Address</th>
@@ -42,7 +41,6 @@
             @if ($data)
                 @foreach ($data as $datas)
                     <tr>
-                        <td>{{ $datas->username }}</td>
                         <td>{{ $datas->name }}</td>
                         <td>{{ $datas->work }}</td>
                         <td>{{ $datas->address }}</td>

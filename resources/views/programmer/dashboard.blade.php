@@ -118,7 +118,7 @@
     <div class="inner">
       <h3>{{ $totalPoints }}</h3>
 
-      <p>Total Points</p>
+      <p>Total Points Circulated</p>
     </div>
     <div class="icon">
       <i class="fas fa-wallet"></i>

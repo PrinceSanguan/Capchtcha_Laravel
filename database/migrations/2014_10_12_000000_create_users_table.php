@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('image');
             $table->integer('point')->default(0);
             $table->enum('status', [0, 1])->default(0);
-            $table->enum('type', ['programmer', 'operator', 'agent', 'player'])->default('player');
+            $table->enum('type', ['programmer', 'operator', 'agent', 'player'])->nullable();
             $table->unsignedBigInteger('referral_id')->nullable();
             $table->timestamps();
 

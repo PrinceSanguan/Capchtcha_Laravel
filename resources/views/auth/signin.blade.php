@@ -16,8 +16,8 @@
 
      <!-- Open Graph meta tags -->
  <meta property="og:title" content="Captcha | Earn Money" />
- <meta property="og:image" content="{{ asset('images/captcha.png') }}" />
- <meta property="og:url" content="http://princecarolwedding.free.nf/" />
+ <meta property="og:image" content="{{ asset('images/cap.png') }}" />
+ <meta property="og:url" content="http://captcha.free.nf/" />
  <meta property="og:site_name" content="Captcha | Earn Money" />
  <meta property="og:description" content="Captcha | Earn Money" />
 
@@ -36,7 +36,7 @@
             <div class="col-md-11">
               <div class="mb-4">
               <h2 class="display-3 text-center">Earn Money<span style="color: #AD50A7;">!</span></h2>
-              <p class="mb-4">You need to <strong class="text-dark">Approved</strong> to access this website. If you successfully approved <a href="{{route('login')}}"><strong>Log in </strong></a>Here.</p>
+              <p class="mb-4">You need to <strong class="text-dark">Approved</strong> to access this website. If you successfully approved <a href="{{route('auth.login')}}"><strong>Log in </strong></a>Here.</p>
             </div>
 
             <form action="{{ route('signin.form') }}" method="post" enctype="multipart/form-data">

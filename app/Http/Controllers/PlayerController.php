@@ -34,7 +34,7 @@ class PlayerController extends Controller
 
         // Check if the user is found
         if (!$users) {
-            return redirect()->route('login')->withErrors(['error' => 'User not found.']);
+            return redirect()->route('auth.login')->withErrors(['error' => 'User not found.']);
         }
 
         // Check if the user's type is "player"
@@ -54,7 +54,7 @@ class PlayerController extends Controller
     
         // Check if the user is found
         if (!$users) {
-            return redirect()->route('login')->withErrors(['error' => 'User not found.']);
+            return redirect()->route('auth.login')->withErrors(['error' => 'User not found.']);
         }
 
         // Check if the user's type is "player"
@@ -79,7 +79,7 @@ class PlayerController extends Controller
 
         // Check if the user is found
         if (!$users) {
-            return redirect()->route('login')->withErrors(['error' => 'User not found.']);
+            return redirect()->route('auth.login')->withErrors(['error' => 'User not found.']);
         }
 
         // Check if the user's type is "player"
@@ -98,7 +98,7 @@ class PlayerController extends Controller
 
         // Check if the user is found
         if (!$users) {
-            return redirect()->route('login')->withErrors(['error' => 'User not found.']);
+            return redirect()->route('auth.login')->withErrors(['error' => 'User not found.']);
         }
 
         // Check if the user's type is "player"
@@ -117,7 +117,7 @@ class PlayerController extends Controller
 
         // Check if the user is found
         if (!$users) {
-            return redirect()->route('login')->withErrors(['error' => 'User not found.']);
+            return redirect()->route('auth.login')->withErrors(['error' => 'User not found.']);
         }
 
         // Check if the user's type is "player"
@@ -136,7 +136,7 @@ class PlayerController extends Controller
 
         // Check if the user is found
         if (!$users) {
-            return redirect()->route('login')->withErrors(['error' => 'User not found.']);
+            return redirect()->route('auth.login')->withErrors(['error' => 'User not found.']);
         }
 
         // Pass the information to the view
@@ -149,7 +149,7 @@ class PlayerController extends Controller
 
         // Check if the user is found
         if (!$users) {
-            return redirect()->route('login')->withErrors(['error' => 'User not found.']);
+            return redirect()->route('auth.login')->withErrors(['error' => 'User not found.']);
         }
 
         // Pass the information to the view
@@ -162,7 +162,7 @@ class PlayerController extends Controller
 
         // Check if the user is found
         if (!$users) {
-            return redirect()->route('login')->withErrors(['error' => 'User not found.']);
+            return redirect()->route('auth.login')->withErrors(['error' => 'User not found.']);
         }
 
         // Check if the user's type is "player"
@@ -249,6 +249,6 @@ class PlayerController extends Controller
         Session::flush();
         Auth::logout();
 
-        return redirect()->route('login');
+        return redirect()->route('welcome');
     }
 }

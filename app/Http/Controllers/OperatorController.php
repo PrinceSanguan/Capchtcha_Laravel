@@ -28,13 +28,13 @@ class OperatorController extends Controller
 
         // Check if the user is found
         if (!$users) {
-            return redirect()->route('login')->withErrors(['error' => 'User not found.']);
+            return redirect()->route('auth.login')->withErrors(['error' => 'User not found.']);
         }
 
         // Check if the user type is 'Operator'
         if ($users->type !== 'operator') {
             // Redirect to the same page with an error message
-            return redirect()->route('login')->withErrors(['error' => 'Access denied.']);
+            return redirect()->route('auth.login')->withErrors(['error' => 'Access denied.']);
         }
 
         // Get the total number of players
@@ -43,14 +43,17 @@ class OperatorController extends Controller
         // Get the total number of agents
         $totalAgents = User::where('type', 'agent')->where('referral_id', $users->id)->count();
 
+        // Get the total number of pending account
+        $pendingAccount = User::whereNull('type')->where('referral_id', $users->id)->count();
+
         // Get the current user's points
         $currentPoints = $users->point;
 
         // Build the referral link
-        $referralLink = 'http://captcha.free.nf/signin?ref=' . $users->id;
+        $referralLink = 'http://captcha.free.nf/auth/signin?ref=' . $users->id;
 
         // Pass the information to the view
-        return view('operator.dashboard', compact('users', 'totalPlayers', 'totalAgents', 'currentPoints', 'referralLink'));
+        return view('operator.dashboard', compact('users', 'totalPlayers', 'totalAgents', 'currentPoints', 'referralLink', 'pendingAccount'));
     }
 
     public function PendingAccount()
@@ -59,17 +62,17 @@ class OperatorController extends Controller
 
         // Check if the user is found
         if (!$users) {
-            return redirect()->route('login')->withErrors(['error' => 'User not found.']);
+            return redirect()->route('auth.login')->withErrors(['error' => 'User not found.']);
         }
 
         // Check if the user type is 'Operator'
         if ($users->type !== 'operator') {
             // Redirect to the same page with an error message
-            return redirect()->route('login')->withErrors(['error' => 'Access denied.']);
+            return redirect()->route('auth.login')->withErrors(['error' => 'Access denied.']);
         }
 
         // Fetch all agents referred by the operator
-        $data = User::where('type', 'player')->where('referral_id', $users->id)->get();
+        $data = User::whereNull('type')->where('referral_id', $users->id)->get();
 
         // Pass the information to the view
         return view('operator.pending_account', ['users' => $users, 'data' => $data]);
@@ -81,13 +84,13 @@ class OperatorController extends Controller
 
         // Check if the user is found
         if (!$users) {
-            return redirect()->route('login')->withErrors(['error' => 'User not found.']);
+            return redirect()->route('auth.login')->withErrors(['error' => 'User not found.']);
         }
 
         // Check if the user type is 'programmer'
         if ($users->type !== 'operator') {
             // Redirect to the same page with an error message
-            return redirect()->route('login')->withErrors(['error' => 'Access denied.']);
+            return redirect()->route('auth.login')->withErrors(['error' => 'Access denied.']);
         }
 
          // Fetch all agents referred by the operator
@@ -108,13 +111,13 @@ class OperatorController extends Controller
 
         // Check if the user is found
         if (!$users) {
-            return redirect()->route('login')->withErrors(['error' => 'User not found.']);
+            return redirect()->route('auth.login')->withErrors(['error' => 'User not found.']);
         }
 
         // Check if the user type is 'operator'
         if ($users->type !== 'operator') {
             // Redirect to the same page with an error message
-            return redirect()->route('login')->withErrors(['error' => 'Access denied.']);
+            return redirect()->route('auth.login')->withErrors(['error' => 'Access denied.']);
         }
 
         // Fetch all agents referred by the operator
@@ -130,13 +133,13 @@ class OperatorController extends Controller
 
         // Check if the user is found
         if (!$users) {
-            return redirect()->route('login')->withErrors(['error' => 'User not found.']);
+            return redirect()->route('auth.login')->withErrors(['error' => 'User not found.']);
         }
 
         // Check if the user type is 'operator'
         if ($users->type !== 'operator') {
             // Redirect to the same page with an error message
-            return redirect()->route('login')->withErrors(['error' => 'Access denied.']);
+            return redirect()->route('auth.login')->withErrors(['error' => 'Access denied.']);
         }
 
         // Fetch only agents that were referred by the current operator
@@ -155,13 +158,13 @@ class OperatorController extends Controller
 
         // Check if the user is found
         if (!$users) {
-            return redirect()->route('login')->withErrors(['error' => 'User not found.']);
+            return redirect()->route('auth.login')->withErrors(['error' => 'User not found.']);
         }
 
         // Check if the user type is 'Operator'
         if ($users->type !== 'operator') {
             // Redirect to the same page with an error message
-            return redirect()->route('login')->withErrors(['error' => 'Access denied.']);
+            return redirect()->route('auth.login')->withErrors(['error' => 'Access denied.']);
         }
 
         // Pass the information to the view
@@ -202,6 +205,9 @@ class OperatorController extends Controller
 
     public function updateUserStatus(Request $request, $id)
     {
+
+        $user = $this->getUserInfo();
+        
         // Find the user by ID
         $user = User::findOrFail($id);
     

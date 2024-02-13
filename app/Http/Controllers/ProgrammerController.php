@@ -29,13 +29,13 @@ class ProgrammerController extends Controller
 
         // Check if the user is found
         if (!$users) {
-            return redirect()->route('login')->withErrors(['error' => 'User not found.']);
+            return redirect()->route('auth.login')->withErrors(['error' => 'User not found.']);
         }
 
         // Check if the user type is 'programmer'
         if ($users->type !== 'programmer') {
             // Redirect to the same page with an error message
-            return redirect()->route('login')->withErrors(['error' => 'Access denied.']);
+            return redirect()->route('auth.login')->withErrors(['error' => 'Access denied.']);
         }
 
             // Get the total number of accounts
@@ -54,7 +54,7 @@ class ProgrammerController extends Controller
         $totalPoints = User::sum('point');
 
         // Build the referral link
-        $referralLink = 'http://captcha.free.nf/signin?ref=' . $users->id;
+        $referralLink = 'http://captcha.free.nf/auth/signin?ref=' . $users->id;
 
         // Pass the information to the view
         return view('programmer.dashboard', compact('users', 'totalAccounts', 'totalPlayers', 'totalAgents', 'totalOperators', 'totalPoints', 'referralLink'));
@@ -66,13 +66,13 @@ class ProgrammerController extends Controller
 
         // Check if the user is found
         if (!$users) {
-            return redirect()->route('login')->withErrors(['error' => 'User not found.']);
+            return redirect()->route('auth.login')->withErrors(['error' => 'User not found.']);
         }
 
         // Check if the user type is 'programmer'
         if ($users->type !== 'programmer') {
             // Redirect to the same page with an error message
-            return redirect()->route('login')->withErrors(['error' => 'Access denied.']);
+            return redirect()->route('auth.login')->withErrors(['error' => 'Access denied.']);
         }
 
         // Fetch all Players from the database
@@ -82,26 +82,26 @@ class ProgrammerController extends Controller
         return view('programmer.player', ['users' => $users, 'data' => $data]);
     }
 
-    public function AllAccount()
+    public function PendingAccount()
     {
         $users = $this->getUserInfo();
 
         // Check if the user is found
         if (!$users) {
-            return redirect()->route('login')->withErrors(['error' => 'User not found.']);
+            return redirect()->route('auth.login')->withErrors(['error' => 'User not found.']);
         }
 
         // Check if the user type is 'programmer'
         if ($users->type !== 'programmer') {
             // Redirect to the same page with an error message
-            return redirect()->route('login')->withErrors(['error' => 'Access denied.']);
+            return redirect()->route('auth.login')->withErrors(['error' => 'Access denied.']);
         }
 
-        // Fetch all in database
-        $data = User::all();
+        // Fetch all operator referred by the programmer
+        $data = User::whereNull('type')->where('referral_id', $users->id)->get();
 
         // Pass the information to the view
-        return view('programmer.all_account', ['users' => $users, 'data' => $data]);
+        return view('programmer.pending_account', ['users' => $users, 'data' => $data]);
     }
 
     public function Agent()
@@ -110,13 +110,13 @@ class ProgrammerController extends Controller
 
         // Check if the user is found
         if (!$users) {
-            return redirect()->route('login')->withErrors(['error' => 'User not found.']);
+            return redirect()->route('auth.login')->withErrors(['error' => 'User not found.']);
         }
 
         // Check if the user type is 'programmer'
         if ($users->type !== 'programmer') {
             // Redirect to the same page with an error message
-            return redirect()->route('login')->withErrors(['error' => 'Access denied.']);
+            return redirect()->route('auth.login')->withErrors(['error' => 'Access denied.']);
         }
 
         // Fetch all jobs from the database
@@ -132,16 +132,16 @@ class ProgrammerController extends Controller
 
         // Check if the user is found
         if (!$users) {
-            return redirect()->route('login')->withErrors(['error' => 'User not found.']);
+            return redirect()->route('auth.login')->withErrors(['error' => 'User not found.']);
         }
 
         // Check if the user type is 'programmer'
         if ($users->type !== 'programmer') {
             // Redirect to the same page with an error message
-            return redirect()->route('login')->withErrors(['error' => 'Access denied.']);
+            return redirect()->route('auth.login')->withErrors(['error' => 'Access denied.']);
         }
 
-        // Fetch all jobs from the database
+        // Fetch all Operator from the database
         $data = User::where('type', 'operator')->get();
 
         // Pass the information to the view
@@ -154,17 +154,17 @@ class ProgrammerController extends Controller
 
         // Check if the user is found
         if (!$users) {
-            return redirect()->route('login')->withErrors(['error' => 'User not found.']);
+            return redirect()->route('auth.login')->withErrors(['error' => 'User not found.']);
         }
 
         // Check if the user type is 'programmer'
         if ($users->type !== 'programmer') {
             // Redirect to the same page with an error message
-            return redirect()->route('login')->withErrors(['error' => 'Access denied.']);
+            return redirect()->route('auth.login')->withErrors(['error' => 'Access denied.']);
         }
 
-        // Fetch all in database
-        $data = User::all();
+        // Fetch all Operator from the database
+        $data = User::where('type', 'operator')->get();
 
         // Pass the information to the view
         return view('programmer.wallet', ['users' => $users, 'data' => $data]);
@@ -229,24 +229,22 @@ class ProgrammerController extends Controller
         return redirect()->back()->with('success', 'Account deleted successfully');
     }
     //////////////////////////// Deleting Player only on Programmer Exist ///////////////////////////////////////
-    public function updateUserStatus($id)
+    public function updateUserStatus(Request $request, $id)
     {
+
+        $user = $this->getUserInfo();
+
         // Find the user by ID
         $user = User::findOrFail($id);
     
         // Toggle the status (1 to 0 or 0 to 1)
         $user->status = $user->status == '1' ? '0' : '1';
     
-        // Handle user type update logic based on the button clicked
-    $request = request();
-    if ($request->has('type')) {
-        $newType = $request->input('type');
-
-        // Ensure the newType is a valid user type
-        if (in_array($newType, ['player', 'agent', 'operator', 'programmer'])) {
-            $user->type = $newType;
+        // Set the user type to 'Operator' when the Programmer activates the account or when the user status becomes 1
+        if ($request->has('active') || $user->status == '1') {
+            $user->type = 'operator';
         }
-    }
+
         $user->save();
     
         // Redirect back with success message

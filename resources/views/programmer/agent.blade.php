@@ -30,33 +30,39 @@
       <table class="table table-hover text-nowrap">
           <thead>
               <tr>
-                  <th>ID</th>
-                  <th>Username</th>
-                  <th>Email</th>
-                  <th>Work</th>
-                  <th>Gender</th>
-                  <th>Points</th>
-                  <th>Type</th>
-                  <th>Created at</th>
-                  <th>Action</th>
+                <th>Username</th>
+                <th>Name</th>
+                <th>Work</th>
+                <th>Address</th>
+                <th>Gender</th>
+                <th>Gcash Number</th>
+                <th>Referred By</th>
+                <th>Created At</th>
+                <th>Action</th>
               </tr>
           </thead>
           <tbody>
             @if ($data)
                 @foreach ($data as $datas)
-                    <tr>
-                        <td>{{ $datas->id }}</td>
-                        <td>{{ $datas->username }}</td>
-                        <td>{{ $datas->email }}</td>
-                        <td>{{ $datas->work }}</td>
-                        <td>{{ $datas->gender }}</td>
-                        <td>{{ $datas->point }}</td>
-                        <td>{{ $datas->type }}</td>
-                        <td>{{ $datas->created_at->format('F j, Y g:ia') }}</td>
-                        <td>
-                          <a href=" {{ route('programmer.delete_account', ['id' => $datas->id]) }} " class="btn btn-danger">Delete</a>
-                        </td>                  
-                    </tr>
+                  <tr>
+                    <td>{{ $datas->username }}</td>
+                    <td>{{ $datas->name }}</td>
+                    <td>{{ $datas->work }}</td>
+                    <td>{{ $datas->address }}</td>
+                    <td>{{ $datas->gender }}</td>
+                    <td>{{ $datas->number }}</td>
+                    <td>
+                      @if ($datas->referredBy)
+                          {{ $datas->referredBy->name }}
+                      @else
+                          N/A
+                      @endif
+                    </td>
+                    <td>{{ $datas->created_at->format('F j, Y g:ia') }}</td>
+                    <td>
+                        <a href=" {{ route('programmer.delete_account', ['id' => $datas->id]) }} " class="btn btn-danger">Delete</a>
+                    </td>
+                  </tr>
                 @endforeach
             @endif
         </tbody>

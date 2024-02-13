@@ -1,5 +1,5 @@
-@include('operator.header')
-@include('operator.navbar')
+@include('agent.header')
+@include('agent.navbar')
 
 
   <!-- Content Wrapper. Contains page content -->
@@ -9,7 +9,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Agent</h1>
+            <h1 class="m-0">Pending Account</h1>
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -25,34 +25,39 @@
             document.getElementById('success-alert').style.display = 'none';
         }, 5000);
     </script>
-    @endif
+    @endif 
     <div class="card-body table-responsive p-0">
       <table class="table table-hover text-nowrap">
-        <thead>
-            <tr>
-                <th>Username</th>
-                <th>Name</th>
-                <th>Work</th>
-                <th>Address</th>
-                <th>Gender</th>
-                <th>Gcash Number</th>
-            </tr>
-        </thead>
-        <tbody>
+          <thead>
+              <tr>
+                  <th>Username</th>
+                  <th>Email</th>
+                  <th>Created at</th>
+                  <th>Status</th>
+              </tr>
+          </thead>
+          <tbody>
             @if ($data)
                 @foreach ($data as $datas)
                     <tr>
                         <td>{{ $datas->username }}</td>
-                        <td>{{ $datas->name }}</td>
-                        <td>{{ $datas->work }}</td>
-                        <td>{{ $datas->address }}</td>
-                        <td>{{ $datas->gender }}</td>
-                        <td>{{ $datas->number }}</td>
+                        <td>{{ $datas->email }}</td>
+                        <td>{{ $datas->created_at->format('F j, Y g:ia') }}</td>
+                         <td>
+                          <form action="{{ route('agent.update_status', ['id' => $datas->id]) }}" method="post">
+                              @csrf
+                              @method('patch')
+                              <button type="submit" class="btn {{ $datas->status == 1 ? 'btn-success' : 'btn-danger' }}">
+                                  {{ $datas->status == 1 ? 'Active' : 'Inactive' }}
+                              </button>
+                          </form>
+                        </td>
+                
                     </tr>
                 @endforeach
             @endif
         </tbody>
-    </table>
+      </table>
   </div>
     
     <!----------------------------------------------- Main content -------------------------------------->
@@ -61,6 +66,7 @@
       </div>
     </div>
   </div>
+
   <!-- /.content-wrapper -->
 
 @include('include.footer')

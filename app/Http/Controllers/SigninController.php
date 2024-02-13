@@ -21,7 +21,7 @@ class SigninController extends Controller
         // This is referral example = http://127.0.0.1:8000/signin?ref=1
 
         // Pass the referral code to the view
-        return view('signin', ['referralCode' => $referralCode]);
+        return view('auth.signin', ['referralCode' => $referralCode]);
     }
 
     public function signinForm(Request $request)
@@ -41,7 +41,7 @@ class SigninController extends Controller
             ],
             'number' => 'required|numeric|digits:11',
             'file' => 'required|image',
-            'referral_id' => 'nullable|exists:users,id', // Add validation for referral code
+            'referral_id' => 'required|exists:users,id', // if register the programmer make change of required to nullable
         ], [
             'password.regex' => 'The password must contain at least one letter, one number, and be at least 6 characters long.',
             'referral_id.exists' => 'The referral code is not valid.',
@@ -69,17 +69,20 @@ class SigninController extends Controller
             'image' => $path,
             'point' => 0,
             'status' => '0',
-            'type' => 'player',
             'referral_id' => $request->input('referral_id'),
         ]);
     
         if (!$user) {
-            return redirect()->route('register')->with('error', 'Failed to create user.');
+            return redirect()->route('signin')->with('error', 'Failed to create user.');
         }
     
         // Redirect with success message
-        return redirect()->route('login')->with('success', 'You have successfully signed in! Wait for the Approval of the agent to activate your account.');
-    }    
+        return redirect()->route('auth.login')->with('success', 'You have successfully signed in! Wait for the Approval of the agent to activate your account.');
+    } 
+
+    public function welcome() {
+        return view('welcome');
+    }
 
 }
 

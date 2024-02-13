@@ -9,9 +9,8 @@
   <ul class="navbar-nav ml-auto">
     <!-- Navbar Search -->
     <li class="nav-item d-sm-inline">
-      <a href="{{route('programmer.dashboard')}}" class="nav-link">{{ $users->name }}</a>
+      <a href="{{route('agent.dashboard')}}" class="nav-link">{{ $users->name }}</a>
     </li>
-</nav>
 </nav>
 <!-- /.navbar -->
 
@@ -20,7 +19,7 @@
   <!-- Brand Logo -->
   <a class="brand-link">
     <img src="{{ asset('images/captcha.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-    <span class="brand-text font-weight-light">Programmer</span>
+    <span class="brand-text font-weight-light">Agent</span>
   </a>
 
   <!-- Sidebar -->
@@ -33,7 +32,7 @@
       </div>
 <!----------------------------Image--------------------------------------------------------------------->
       <div class="info">
-        <a href="{{route('programmer.dashboard')}}" class="d-block"> {{ $users->name }} </a>
+        <a href="{{route('agent.dashboard')}}" class="d-block"> {{ $users->name }} </a>
       </div>
     </div>
 
@@ -43,10 +42,10 @@
           <!-- Add icons to the links using the .nav-icon class
               with font-awesome or any other icon font library -->
   
-          <li class="nav-header" style="font-size: 1.2em; color: yellow;">FOR ACTIVATION</li>
+          <li class="nav-header" style="font-size: 1.2em; color: yellow;">PENDING</li>
   
           <li class="nav-item menu-open" style="margin-bottom: 10px;">
-              <a href="{{ route('programmer.pending_account') }}" class="nav-link {{ Route::is('programmer.all_account') ? 'active' : '' }}">
+               <a href="{{ route('agent.pending_account') }}" class="nav-link {{ Route::is('agent.pending_account') ? 'active' : '' }}"> 
                   <i class="nav-icon fas fa-hourglass-half fa-spin"></i>
                   <p>
                       PENDING ACCOUNT
@@ -54,35 +53,13 @@
               </a>
           </li>
 
-          <li class="nav-header" style="font-size: 0.8em; color: yellow;">ALL PLAYERS REFERRED BY AGENT</li>
+        <li class="nav-header" style="font-size: 1.2em; color: yellow;">MY REFERRED PLAYER</li>
   
           <li class="nav-item menu-open" style="margin-bottom: 10px;">
-              <a href="{{ route('programmer.player') }}" class="nav-link {{ Route::is('programmer.player') ? 'active' : '' }}">
-                  <i class="nav-icon fas fa-user fa-spin"></i>
-                  <p>
-                      PLAYERS
-                  </p>
-              </a>
-          </li>
-
-          <li class="nav-header" style="font-size: 0.8em; color: yellow;">ALL AGENT REFERRED BY OPERATOR</li>
-  
-          <li class="nav-item menu-open" style="margin-bottom: 10px;">
-              <a href="{{ route('programmer.agent') }}" class="nav-link {{ Route::is('programmer.agent') ? 'active' : '' }}">
+              <a href="{{ route('agent.player') }}" class="nav-link {{ Route::is('agent.player') ? 'active' : '' }}">
                   <i class="nav-icon fas fa-user-nurse fa-spin"></i>
                   <p>
-                      AGENT
-                  </p>
-              </a>
-          </li>
-
-          <li class="nav-header" style="font-size: 1.2em; color: yellow;">MY OPERATOR</li>
-  
-          <li class="nav-item menu-open" style="margin-bottom: 10px;">
-              <a href="{{ route('programmer.operator') }}" class="nav-link {{ Route::is('programmer.operator') ? 'active' : '' }}">
-                  <i class="nav-icon fas fa-user-secret fa-spin"></i>
-                  <p>
-                      OPERATOR
+                      MY PLAYER
                   </p>
               </a>
           </li>
@@ -90,7 +67,7 @@
           <li class="nav-header" style="font-size: 1.2em; color: yellow;">MONEY</li>
   
           <li class="nav-item menu-open" style="margin-bottom: 10px;">
-              <a href="{{ route('programmer.wallet') }}" class="nav-link {{ Route::is('programmer.wallet') ? 'active' : '' }}">
+              <a href="{{ route('operator.wallet') }}" class="nav-link {{ Route::is('operator.wallet') ? 'active' : '' }}">
                   <i class="nav-icon fas fa-wallet fa-spin"></i>
                   <p>
                       WALLET

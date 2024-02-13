@@ -15,12 +15,12 @@
     <link rel="icon" href="{{ asset('captcha.ico') }}" type="image/x-icon">
     <link rel="shortcut icon" href="{{ asset('captcha.ico') }}" type="image/x-icon">
 
-    <!-- Open Graph meta tags -->
-    <meta property="og:title" content="Captcha | Earn Money" />
-    <meta property="og:image" content="{{ asset('images/captcha.jpg') }}" />
-    <meta property="og:url" content="http://princecarolwedding.free.nf/" />
-    <meta property="og:site_name" content="Captcha | Earn Money" />
-    <meta property="og:description" content="Captcha | Earn Money" />
+     <!-- Open Graph meta tags -->
+     <meta property="og:title" content="Captcha | Earn Money" />
+     <meta property="og:image" content="{{ asset('images/cap.png') }}" />
+     <meta property="og:url" content="http://captcha.free.nf/" />
+     <meta property="og:site_name" content="Captcha | Earn Money" />
+     <meta property="og:description" content="Captcha | Earn Money" />
 
     <title>Captcha | Earn Money</title>
 </head>
@@ -38,9 +38,9 @@
                         <div class="col-md-11">
                             <div class="mb-4">
                                 <h2 class="display-3 text-center">Earn Money<span style="color: #AD50A7;">!</span></h2>
-                                <p class="mb-4">You need to <strong class="text-dark">Approved</strong> to access
-                                    this website. If you don't have an account you can <a
-                                        href="{{route('signin')}}"><strong>Sign Up</strong></a>.</p>
+                                <p class="mb-4">
+                                    To access this website, you must contact an agent to get <strong class="text-dark">approved</strong>. If you don't have an account, please find an agent.
+                                </p>
                             </div>
 
                             @if(session('error'))
@@ -60,7 +60,7 @@
                             </script>
                             @endif
 
-                            <form action="{{route('login')}}" method="post">
+                            <form action="{{route('login.post')}}" method="post">
                                 @csrf
 
                                 <div class="form-group first">

@@ -6,6 +6,7 @@ use App\Http\Controllers\SigninController;
 use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\ProgrammerController;
 use App\Http\Controllers\OperatorController;
+use App\Http\Controllers\AgentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,11 +19,13 @@ use App\Http\Controllers\OperatorController;
 */
 
 
-Route::get('/', [LoginController::class, 'index'])->name('login');
-Route::post('/', [LoginController::class, 'login'])->name('login');
+Route::get('/', [SigninController::class, 'welcome'])->name('welcome');
 
-Route::get('/signin/{referral_id?}', [SigninController::class, 'index'])->name('signin');
-Route::post('/signin', [SigninController::class, 'signinForm'])->name('signin.form');
+ Route::get('/auth/login', [LoginController::class, 'index'])->name('auth.login');
+ Route::post('/auth/login', [LoginController::class, 'login'])->name('login.post');
+
+Route::get('/auth/signin/{referral_id?}', [SigninController::class, 'index'])->name('signin');
+Route::post('/auth/signin', [SigninController::class, 'signinForm'])->name('signin.form');
 
 Route::get('/logout', [PlayerController::class, 'logout'])->name('logout');
 
@@ -43,7 +46,7 @@ Route::post('/change_password', [PlayerController::class, 'changePasswordRequest
 /********************************************This Route is For Programmer!! *****************************/
 Route::get('/programmer/dashboard', [ProgrammerController::class, 'index'])->name('programmer.dashboard');
 Route::get('/programmer/player', [ProgrammerController::class, 'Player'])->name('programmer.player');
-Route::get('/programmer/all_account', [ProgrammerController::class, 'AllAccount'])->name('programmer.all_account');
+Route::get('/programmer/pending_account', [ProgrammerController::class, 'PendingAccount'])->name('programmer.pending_account');
 Route::get('/programmer/agent', [ProgrammerController::class, 'Agent'])->name('programmer.agent');
 Route::get('/programmer/operator', [ProgrammerController::class, 'Operator'])->name('programmer.operator');
 // Add the new route for deleting a player
@@ -64,4 +67,15 @@ Route::patch('/operator/update-user-status/{id}', [OperatorController::class, 'u
 Route::get('/operator/wallet', [OperatorController::class, 'Wallet'])->name('operator.wallet');
 Route::post('/operator/wallet/{id}', [OperatorController::class, 'SendPoint'])->name('operator.send_point');
 /********************************************This Route is For Operator!! *****************************/
+
+/********************************************This Route is For Agent!! *****************************/
+Route::get('/agent/dashboard', [AgentController::class, 'index'])->name('agent.dashboard');
+Route::get('/agent/pending_account', [AgentController::class, 'PendingAccount'])->name('agent.pending_account');
+Route::get('/agent/player', [AgentController::class, 'Player'])->name('agent.player');
+Route::patch('/agent/update-user-status/{id}', [AgentController::class, 'updateUserStatus'])->name('agent.update_status');
+Route::get('/agent/wallet', [AgentController::class, 'Wallet'])->name('agent.wallet');
+Route::post('/agent/wallet/{id}', [AgentController::class, 'SendPoint'])->name('agent.send_point');
+/********************************************This Route is For Agent!! *****************************/
+
 });
+

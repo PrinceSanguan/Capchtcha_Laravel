@@ -16,7 +16,7 @@ class LoginController extends Controller
         }
 
         // User is not logged in, show the login form
-        return view('login');
+        return view('auth.login');
     }
 
     public function login(Request $request)
@@ -42,15 +42,18 @@ class LoginController extends Controller
                 } elseif ($user->type == 'programmer') {
                     // Redirect programmer to their dashboard
                     return redirect()->route('programmer.dashboard');
-                } 
+                } elseif ($user->type == 'agent') {
+                    // Redirect agent to their dashboard
+                    return redirect()->route('agent.dashboard');
+                }
             } else {
                 // User is not activated, inform the user and log them out
                 Auth::logout();
-                return redirect()->route('login')->with(['error' => 'Your account is not yet activated. Please wait for activation by your agent.']);
+                return redirect()->route('auth.login')->with(['error' => 'Your account is not yet activated. Please wait for activation by your agent.']);
             }
         } else {
             // Authentication failed, redirect back with errors
-            return redirect()->route('login')->with(['error' => 'Invalid email or password']);
+            return redirect()->route('auth.login')->with(['error' => 'Invalid email or password']);
         }
     }
 }
