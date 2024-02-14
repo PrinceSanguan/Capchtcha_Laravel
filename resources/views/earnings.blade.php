@@ -48,15 +48,15 @@
   </div>
 
   <div class="small-box bg-warning">
-    <div class="inner">
-      <h3>{{ $makeValue }} Pesos</h3>
-
-      <p style="font-size: 1.5em;">Total Income</p>
+    <div class="inner text-center">
+        <div class="row">
+            <div class="col">
+                <h3 style="line-height: 3em;">{{ $makeValue }} Pesos</h3>
+                <p style="font-size: 1.5em;">Total Income</p>
+            </div>
+        </div>
     </div>
-    <div class="icon">
-      <i class="fas fa-user-plus"></i>
-    </div>
-  </div>
+</div>
   <!-------------------------------------------------------------------------------------- Main content -->
       </div>
     </div>

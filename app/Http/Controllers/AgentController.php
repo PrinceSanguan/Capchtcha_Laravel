@@ -118,4 +118,60 @@ class AgentController extends Controller
         // Pass the information to the view
         return view('agent.player', ['users' => $users, 'data' => $data]);
     }
+
+    public function Wallet()
+    {
+        $users = $this->getUserInfo();
+
+        // Check if the user is found
+        if (!$users) {
+            return redirect()->route('auth.login')->withErrors(['error' => 'User not found.']);
+        }
+
+        // Check if the user type is 'agent'
+        if ($users->type !== 'agent') {
+            // Redirect to the same page with an error message
+            return redirect()->route('auth.login')->withErrors(['error' => 'Access denied.']);
+        }
+
+        // Fetch only players that were referred by the current agent
+        $data = User::where('type', 'player')->where('referral_id', $users->id)->get();
+
+        // Get the total number of points for the current user
+        $userPoints = $users->point;
+
+        // Pass the information to the view
+        return view('agent.wallet', ['users' => $users, 'data' => $data, 'userPoints' => $userPoints]);
+    }
+
+    public function SendPoint(Request $request, $id) {
+        // Find the user by ID
+        $sender = auth()->user();
+        $user = User::findOrFail($id);
+    
+        $request->validate([
+            'point' => 'required|numeric|integer|min:0',
+        ]);
+    
+       // Get the points from the request
+        $pointsToSend = $request->input('point');
+
+        // Check if the sender has sufficient points
+        if ($sender->point < $pointsToSend) {
+        return redirect()->back()->with('error', 'You do not have sufficient points. Please contact the Operator.');
+        }
+
+         // Deduct points from the sender and update points for the receiver
+        $sender->update([
+            'point' => $sender->point - $pointsToSend,
+        ]);
+    
+        // Update the user's points
+        $user->update([
+            'point' => $user->point + $pointsToSend,
+        ]);
+    
+        // You can add a success message or redirect the user to a specific page
+        return redirect()->back()->with('success', 'Points successfully updated!');
+    }
 }

@@ -67,13 +67,31 @@
           <li class="nav-header" style="font-size: 1.2em; color: yellow;">MONEY</li>
   
           <li class="nav-item menu-open" style="margin-bottom: 10px;">
-              <a href="{{ route('operator.wallet') }}" class="nav-link {{ Route::is('operator.wallet') ? 'active' : '' }}">
+              <a href="{{ route('agent.wallet') }}" class="nav-link {{ Route::is('agent.wallet') ? 'active' : '' }}">
                   <i class="nav-icon fas fa-wallet fa-spin"></i>
                   <p>
-                      WALLET
+                      SEND
                   </p>
               </a>
           </li>
+
+          <li class="nav-item menu-open" style="margin-bottom: 10px;">
+            {{-- <a href="{{ route('agent.wallet') }}" class="nav-link {{ Route::is('agent.wallet') ? 'active' : '' }}"> --}}
+                <i class="nav-icon fas fa-wallet fa-spin"></i>
+                <p>
+                    WITHDRAW
+                </p>
+            </a>
+        </li>
+
+        <li class="nav-item menu-open" style="margin-bottom: 10px;">
+          {{-- <a href="{{ route('agent.wallet') }}" class="nav-link {{ Route::is('agent.wallet') ? 'active' : '' }}"> --}}
+              <i class="nav-icon fas fa-wallet fa-spin"></i>
+              <p>
+                  DEPOSIT
+              </p>
+          </a>
+      </li>
   
           <li class="nav-item menu-open" style="margin-bottom: 10px;">
               <a href="{{ route('logout') }}" class="nav-link">

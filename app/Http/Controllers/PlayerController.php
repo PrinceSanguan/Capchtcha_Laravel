@@ -43,34 +43,10 @@ class PlayerController extends Controller
             return redirect()->back()->withErrors(['error' => 'Access denied.']);
         }
 
+        $totalPoints = $users->point;
+
         // Pass the information to the view
-        return view('dashboard', ['users' => $users]);
-    }
-
-    public function earnings()
-    {
-        // Assuming you have a user authenticated
-        $users = auth()->user();
-    
-        // Check if the user is found
-        if (!$users) {
-            return redirect()->route('auth.login')->withErrors(['error' => 'User not found.']);
-        }
-
-        // Check if the user's type is "player"
-        if ($users->type !== 'player') {
-            // Redirect to the previous page or any specific page you want
-            return redirect()->back()->withErrors(['error' => 'Access denied.']);
-        }
-
-        // Define the conversion rate
-        $pointsToMakeRatio = 3;
-    
-        // Calculate the "make" value based on the user's points
-        $makeValue = round($users->point / $pointsToMakeRatio, 2);
-    
-        // Pass the information to the view
-        return view('earnings', ['users' => $users, 'makeValue' => $makeValue]);
+        return view('dashboard', ['users' => $users, 'totalPoints' => $totalPoints]);
     }
 
     public function topup()
@@ -107,9 +83,65 @@ class PlayerController extends Controller
             return redirect()->back()->withErrors(['error' => 'Access denied.']);
         }
 
+        $totalPoints = $users->point;
+
         // Pass the information to the view
-        return view('withdraw', ['users' => $users]);
+        return view('withdraw', ['users' => $users, 'totalPoints' => $totalPoints]);
     }
+
+    public function withdrawPoints(Request $request) 
+    {
+    // Get the user information
+    $user = $this->getUserInfo();
+
+    // Check if the user is found
+    if (!$user) {
+        return redirect()->route('auth.login')->withErrors(['error' => 'User not found.']);
+    }
+
+    // Check if the user type is 'player'
+    if ($user->type !== 'player') {
+        // Redirect to the same page with an error message
+        return redirect()->route('auth.login')->withErrors(['error' => 'Access denied.']);
+    }
+
+    $request->validate([
+        'point' => 'required|numeric|integer|',
+    ]);
+
+    // Get the points from the request
+    $withdrawalAmount = $request->input('point');
+
+    // Check if the withdrawal ammount is equal to 50
+    if ($withdrawalAmount < 50) {
+        return redirect()->back()->with('error', 'The minimum withdrawal amount is 50 points. Make a valid withdrawal.');
+    }
+
+    // Check if the deduction would result in a negative value
+    if ($user->point - $withdrawalAmount < 0) {
+        return redirect()->back()->with('error', 'The withdrawal amount exceeds your current points. Make a valid withdrawal.');
+    }
+
+    // Deduct points from the player
+    $user->update([
+        'point' => $user->point - $withdrawalAmount,
+    ]);
+
+    // Check if there's a referral and update the agent's points
+    if ($user->referral_id) {
+        $agent = User::where('type', 'agent')->where('id', $user->referral_id)->first();
+
+        // Check if the agent is found
+        if ($agent) {
+            $agent->update([
+                'point' => $agent->point + $withdrawalAmount,
+            ]);
+        }
+    }
+
+    // Redirect with success message
+    return redirect()->back()->with('success', 'Points withdrawn successfully.');
+}
 
     public function solveCaptcha()
     {
@@ -203,7 +235,7 @@ class PlayerController extends Controller
             $user->point = max(0, $user->point - 3.00); // Ensure points don't go below zero
             $user->save();
     
-            $error = "You have entered an invalid Captcha. 3 points have been deducted.";
+            $error = "You have entered an invalid Captcha. 3.00 Pesos have been deducted.";
             Session::put('last_captcha_attempt', time()); // Update last attempt time
             return redirect()->route('error')->with('error', $error);
         }
@@ -212,7 +244,7 @@ class PlayerController extends Controller
         $user->point += 1.00;
         $user->save();
     
-        $success = "You have entered the correct Captcha. You earned 1 point.";
+        $success = "You have entered the correct Captcha. You earned 1.00 Peso.";
         Session::put('last_captcha_attempt', time()); // Update last attempt time
     
         // Add a 20 seconds countdown before redirecting back to the dashboard

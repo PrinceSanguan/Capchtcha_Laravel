@@ -63,6 +63,12 @@
         </ul>
       </div>
     </div>
+
+    <div class="small-box bg-warning inner text-center">
+      <p style="font-size: 1.5em;">Total Income</p>
+      <h3 style="">&#8369;{{ $totalPoints }}.00</h3>
+    </div>
+
     <!-------------------------------------------------------------------------------------- Main content -->
           </div>
         </div>

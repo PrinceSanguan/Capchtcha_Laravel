@@ -27,6 +27,7 @@
                 <th>Address</th>
                 <th>Gender</th>
                 <th>Gcash Number</th>
+                <th>Earnings</th>
                 <th>Referred By</th>
                 <th>Created At</th>
                 <th>Action</th>
@@ -43,6 +44,7 @@
                     <td>{{ $datas->address }}</td>
                     <td>{{ $datas->gender }}</td>
                     <td>{{ $datas->number }}</td>
+                    <td>&#8369;{{ $datas->point }}.00</td>
                     <td>
                       @if ($datas->referredBy)
                           {{ $datas->referredBy->name }}

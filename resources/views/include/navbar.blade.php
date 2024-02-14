@@ -6,6 +6,11 @@
       <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
     </li>
   </ul>
+  <ul class="navbar-nav ml-auto">
+    <!-- Navbar Search -->
+    <li class="nav-item d-sm-inline">
+      <a href="{{route('agent.dashboard')}}" class="nav-link">{{ $users->name }}</a>
+    </li>
 </nav>
 <!-- /.navbar -->
 
@@ -38,15 +43,6 @@
              with font-awesome or any other icon font library -->
 
       <li class="nav-header" style="font-size: 1.2em; color: yellow;">USER</li>
-
-        <li class="nav-item menu-open" style="margin-bottom: 10px;">
-          <a href="{{route('earnings')}}" class="nav-link">
-            <i class="nav-icon fas fa-tachometer-alt"></i>
-            <p>
-              EARNINGS
-            </p>
-          </a>
-        </li>
 
         <li class="nav-item menu-open" style="margin-bottom: 10px;">
           <a href="{{route('topup')}}" class="nav-link">

@@ -7,7 +7,7 @@
 
 <script>
   var countdown = {{ Session::get('countdown', 20) }};
-  var redirectUrl = '{{ Session::get('redirect_url', route('dashboard')) }}';
+  var redirectUrl = '{{ Session::get('redirect_url', route('solve.captcha')) }}';
 
   function updateCountdown() {
       countdown--;

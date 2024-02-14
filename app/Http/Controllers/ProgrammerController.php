@@ -171,6 +171,20 @@ class ProgrammerController extends Controller
     }
 
     public function SendPoint(Request $request, $id) {
+
+        $users = $this->getUserInfo();
+
+        // Check if the user is found
+        if (!$users) {
+            return redirect()->route('auth.login')->withErrors(['error' => 'User not found.']);
+        }
+
+        // Check if the user type is 'programmer'
+        if ($users->type !== 'programmer') {
+            // Redirect to the same page with an error message
+            return redirect()->route('auth.login')->withErrors(['error' => 'Access denied.']);
+        }
+        
         // Find the user by ID
         $user = User::findOrFail($id);
     

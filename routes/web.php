@@ -32,9 +32,9 @@ Route::get('/logout', [PlayerController::class, 'logout'])->name('logout');
 Route::middleware(['auth'])->group(function () {
 /********************************************This Route is For Player!! *****************************/
 Route::get('/User', [PlayerController::class, 'index'])->name('dashboard');
-Route::get('/earnings', [PlayerController::class, 'earnings'])->name('earnings');
 Route::get('/topup', [PlayerController::class, 'topup'])->name('topup');
 Route::get('/withdraw', [PlayerController::class, 'withdraw'])->name('withdraw');
+Route::post('/withdraw', [PlayerController::class, 'withdrawPoints'])->name('withdraw.points');
 Route::get('/solve_captcha', [PlayerController::class, 'solveCaptcha'])->name('solve.captcha');
 Route::get('/error', [PlayerController::class, 'error'])->name('error');
 Route::get('/success', [PlayerController::class, 'success'])->name('success');
