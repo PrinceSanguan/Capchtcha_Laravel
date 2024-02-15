@@ -76,7 +76,7 @@
           </li>
 
           <li class="nav-item menu-open" style="margin-bottom: 10px;">
-            {{-- <a href="{{ route('agent.wallet') }}" class="nav-link {{ Route::is('agent.wallet') ? 'active' : '' }}"> --}}
+             <a href="{{ route('agent.withdraw') }}" class="nav-link {{ Route::is('agent.withdraw') ? 'active' : '' }}">
                 <i class="nav-icon fas fa-wallet fa-spin"></i>
                 <p>
                     WITHDRAW

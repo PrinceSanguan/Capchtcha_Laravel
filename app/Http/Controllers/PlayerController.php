@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
 
 
 class PlayerController extends Controller
@@ -133,14 +134,20 @@ class PlayerController extends Controller
 
         // Check if the agent is found
         if ($agent) {
+            
+            // Get the name of the agent
+            $agentName = $agent->name;
+            $formattedDate = Carbon::now()->format('F j, Y g:ia');
+
             $agent->update([
                 'point' => $agent->point + $withdrawalAmount,
             ]);
         }
     }
-
     // Redirect with success message
-    return redirect()->back()->with('success', 'Points withdrawn successfully.');
+    return redirect()->route('success')->with('success', "Success! You withdrew {$withdrawalAmount} 
+    points. Screen shot this and submit it to your agent {$agentName} on {$formattedDate}. Thank you!");
+
 }
 
     public function solveCaptcha()

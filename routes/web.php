@@ -70,6 +70,8 @@ Route::post('/operator/wallet/{id}', [OperatorController::class, 'SendPoint'])->
 
 /********************************************This Route is For Agent!! *****************************/
 Route::get('/agent/dashboard', [AgentController::class, 'index'])->name('agent.dashboard');
+Route::get('/agent/withdraw', [AgentController::class, 'withdraw'])->name('agent.withdraw');
+Route::post('/agent/withdraw', [AgentController::class, 'withdrawPoints'])->name('withdraw.points');
 Route::get('/agent/pending_account', [AgentController::class, 'PendingAccount'])->name('agent.pending_account');
 Route::get('/agent/player', [AgentController::class, 'Player'])->name('agent.player');
 Route::patch('/agent/update-user-status/{id}', [AgentController::class, 'updateUserStatus'])->name('agent.update_status');

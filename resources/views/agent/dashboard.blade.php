@@ -54,7 +54,7 @@
               <div class="card bg-success">
                   <div class="card-body">
                       <h2 class="card-title">My Total Earnings</h2>
-                      <h3 class="card-text">{{ $currentEarnings }}</h3>  
+                      <h3 class="card-text">&#8369;{{ $currentEarnings }}.00</h3>  
                   </div>
                   <div class="card-footer">
                       <a href="{{route('operator.player')}}" class="btn btn-primary">More info <i class="fas fa-arrow-circle-right"></i></a>

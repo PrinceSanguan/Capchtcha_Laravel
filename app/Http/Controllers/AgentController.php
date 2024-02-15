@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Carbon\Carbon;
 
 class AgentController extends Controller
 {
@@ -40,11 +41,9 @@ class AgentController extends Controller
         // Get the total number of players
         $totalPlayers = User::where('type', 'player')->where('referral_id', $users->id)->count();
 
-        // Define the conversion rate
-        $pointsToMakeRatio = 3;
     
         // Calculate the Total earnings of the agent
-        $currentEarnings = round($users->point / $pointsToMakeRatio, 2);
+        $currentEarnings = $users->point;
 
         // Build the referral link
         $referralLink = 'http://captcha.free.nf/auth/signin?ref=' . $users->id;
@@ -143,6 +142,87 @@ class AgentController extends Controller
         // Pass the information to the view
         return view('agent.wallet', ['users' => $users, 'data' => $data, 'userPoints' => $userPoints]);
     }
+
+    public function withdraw()
+    {
+        $users = $this->getUserInfo();
+
+        // Check if the user is found
+        if (!$users) {
+            return redirect()->route('auth.login')->withErrors(['error' => 'User not found.']);
+        }
+
+        // Check if the user's type is "agent"
+        if ($users->type !== 'agent') {
+            // Redirect to the previous page or any specific page you want
+            return redirect()->back()->withErrors(['error' => 'Access denied.']);
+        }
+
+        $totalPoints = $users->point;
+
+        // Pass the information to the view
+        return view('agent.withdraw', ['users' => $users, 'totalPoints' => $totalPoints]);
+    }
+
+    public function withdrawPoints(Request $request) 
+    {
+    // Get the user information
+    $user = $this->getUserInfo();
+
+    // Check if the user is found
+    if (!$user) {
+        return redirect()->route('auth.login')->withErrors(['error' => 'User not found.']);
+    }
+
+    // Check if the user type is 'agent'
+    if ($user->type !== 'agent') {
+        // Redirect to the same page with an error message
+        return redirect()->route('auth.login')->withErrors(['error' => 'Access denied.']);
+    }
+
+    $request->validate([
+        'point' => 'required|numeric|integer|',
+    ]);
+
+    // Get the points from the request
+    $withdrawalAmount = $request->input('point');
+
+    // Check if the withdrawal ammount is equal to 50
+    if ($withdrawalAmount < 50) {
+        return redirect()->back()->with('error', 'The minimum withdrawal amount is 50 points. Make a valid withdrawal.');
+    }
+
+    // Check if the deduction would result in a negative value
+    if ($user->point - $withdrawalAmount < 0) {
+        return redirect()->back()->with('error', 'The withdrawal amount exceeds your current points. Make a valid withdrawal.');
+    }
+
+    // Deduct points from the agent
+    $user->update([
+        'point' => $user->point - $withdrawalAmount,
+    ]);
+
+    // Check if there's a referral and update the operator's points
+    if ($user->referral_id) {
+        $agent = User::where('type', 'operator')->where('id', $user->referral_id)->first();
+
+        // Check if the agent is found
+        if ($agent) {
+            
+            // Get the name of the agent
+            $agentName = $agent->name;
+            $formattedDate = Carbon::now()->format('F j, Y g:ia');
+
+            $agent->update([
+                'point' => $agent->point + $withdrawalAmount,
+            ]);
+        }
+    }
+    // Redirect with success message
+    return redirect()->route('success')->with('success', "Success! You withdrew {$withdrawalAmount} 
+    points. Screen shot this and submit it to your agent {$agentName} on {$formattedDate}. Thank you!");
+
+}
 
     public function SendPoint(Request $request, $id) {
         // Find the user by ID

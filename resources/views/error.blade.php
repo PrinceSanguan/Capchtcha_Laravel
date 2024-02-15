@@ -49,8 +49,8 @@
   <div class="small-box bg-danger">
     <div class="inner">
         @if(session('error'))
-            <p style="color: aliceblue; font-size: 3rem; text-align: center;">{{ session('error') }}</p>
-            <p style="font-size: 1.5rem;">Redirecting back to the dashboard in <span id="countdown">20</span> seconds...</p>
+            <p style="color: aliceblue; font-size: 1.6rem; text-align: center;">{{ session('error') }}</p>
+            <p style="font-size: 1.5rem; text-align: center;">Redirecting back to the dashboard in <span id="countdown">20</span> seconds...</p>
         @endif 
     </div>
   </div>
