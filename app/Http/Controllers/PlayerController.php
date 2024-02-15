@@ -47,7 +47,7 @@ class PlayerController extends Controller
         $totalPoints = $users->point;
 
         // Pass the information to the view
-        return view('dashboard', ['users' => $users, 'totalPoints' => $totalPoints]);
+        return view('player.dashboard', ['users' => $users, 'totalPoints' => $totalPoints]);
     }
 
     public function topup()
@@ -66,7 +66,7 @@ class PlayerController extends Controller
         }
 
         // Pass the information to the view
-        return view('topup', ['users' => $users]);
+        return view('player.topup', ['users' => $users]);
     }
 
     public function withdraw()
@@ -87,7 +87,7 @@ class PlayerController extends Controller
         $totalPoints = $users->point;
 
         // Pass the information to the view
-        return view('withdraw', ['users' => $users, 'totalPoints' => $totalPoints]);
+        return view('player.withdraw', ['users' => $users, 'totalPoints' => $totalPoints]);
     }
 
     public function withdrawPoints(Request $request) 
@@ -166,7 +166,7 @@ class PlayerController extends Controller
         }
 
         // Pass the information to the view
-        return view('solve_captcha', ['users' => $users]);
+        return view('player.solve_captcha', ['users' => $users]);
     }
 
     public function error()
@@ -179,7 +179,7 @@ class PlayerController extends Controller
         }
 
         // Pass the information to the view
-        return view('error', ['users' => $users]);
+        return view('player.error', ['users' => $users]);
     }
 
     public function success()
@@ -192,7 +192,7 @@ class PlayerController extends Controller
         }
 
         // Pass the information to the view
-        return view('success', ['users' => $users]);
+        return view('player.success', ['users' => $users]);
     }
 
     public function changePassword() {
@@ -211,7 +211,7 @@ class PlayerController extends Controller
         }
 
         // Pass the information to the view
-        return view('change_password', ['users' => $users]);
+        return view('player.change_password', ['users' => $users]);
     }
 
     public function updateUserPoints(Request $request)
