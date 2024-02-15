@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Hash;
 
 class OperatorController extends Controller
 {
@@ -46,14 +48,14 @@ class OperatorController extends Controller
         // Get the total number of pending account
         $pendingAccount = User::whereNull('type')->where('referral_id', $users->id)->count();
 
-        // Get the current user's points
-        $currentPoints = $users->point;
+        // Calculate the Total earnings of the operator
+        $currentEarnings = $users->point;
 
         // Build the referral link
         $referralLink = 'http://captcha.free.nf/auth/signin?ref=' . $users->id;
 
         // Pass the information to the view
-        return view('operator.dashboard', compact('users', 'totalPlayers', 'totalAgents', 'currentPoints', 'referralLink', 'pendingAccount'));
+        return view('operator.dashboard', compact('users', 'totalPlayers', 'totalAgents', 'currentEarnings', 'referralLink', 'pendingAccount'));
     }
 
     public function PendingAccount()
@@ -223,6 +225,66 @@ class OperatorController extends Controller
     
         // Redirect back with success message
         return redirect()->back()->with('success', 'User status updated successfully');
+    }
+
+    public function topup()
+    {
+        $users = $this->getUserInfo();
+
+        // Check if the user is found
+        if (!$users) {
+            return redirect()->route('auth.login')->withErrors(['error' => 'User not found.']);
+        }
+
+        // Check if the user's type is "operator"
+        if ($users->type !== 'operator') {
+            // Redirect to the previous page or any specific page you want
+            return redirect()->back()->withErrors(['error' => 'Access denied.']);
+        }
+
+        // Pass the information to the view
+        return view('operator.topup', ['users' => $users]);
+    }
+
+    public function changePassword() {
+        
+        $users = $this->getUserInfo();
+
+        // Check if the user is found
+        if (!$users) {
+            return redirect()->route('auth.login')->withErrors(['error' => 'User not found.']);
+        }
+
+        // Check if the user's type is "operator"
+        if ($users->type !== 'operator') {
+            // Redirect to the previous page or any specific page you want
+            return redirect()->back()->withErrors(['error' => 'Access denied.']);
+        }
+
+        // Pass the information to the view
+        return view('operator.change_password', ['users' => $users]);
+    }
+
+    public function changePasswordRequest(Request $request)
+    {
+        $request->validate([
+            'current_password' => 'required',
+            'new_password' => [
+                'required',
+                'regex:/^(?=.*[a-zA-Z])(?=.*\d).{6,}$/',
+            ],
+            'confirm_password' => 'required|same:new_password',
+        ]);
+    
+        $user = auth()->user();
+    
+        if (!Hash::check($request->current_password, $user->password)) {
+            throw ValidationException::withMessages(['current_password' => 'Incorrect current password']);
+        }
+    
+        $user->update(['password' => Hash::make($request->new_password)]);
+    
+        return redirect()->route('operator.change.password')->with('success', 'Password changed successfully');
     }
 
 }

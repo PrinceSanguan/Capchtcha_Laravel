@@ -79,11 +79,31 @@
               <a href="{{ route('operator.wallet') }}" class="nav-link {{ Route::is('operator.wallet') ? 'active' : '' }}">
                   <i class="nav-icon fas fa-wallet fa-spin"></i>
                   <p>
-                      WALLET
+                      SEND
                   </p>
               </a>
           </li>
-  
+
+          <li class="nav-item menu-open" style="margin-bottom: 10px;">
+            <a href="{{ route('operator.topup') }}" class="nav-link {{ Route::is('operator.topup') ? 'active' : '' }}">
+                <i class="nav-icon fas fa-money-check fa-spin"></i>
+                <p>
+                    TOP UP
+                </p>
+            </a>
+        </li>
+
+        <li class="nav-header" style="font-size: 1.2em; color: yellow;">SETTINGS</li>
+
+          <li class="nav-item menu-open" style="margin-bottom: 10px;">
+            <a href="{{ route('operator.change.password') }}" class="nav-link {{ Route::is('operator.change_password') ? 'active' : '' }}">
+                <i class="nav-icon fas fa-key fa-spin"></i>
+                <p>
+                    CHANGE PASSWORD
+                </p>
+            </a>
+          </li>
+    
           <li class="nav-item menu-open" style="margin-bottom: 10px;">
               <a href="{{ route('logout') }}" class="nav-link">
                   <i class="nav-icon fas fa-sign-out-alt fa-spin"></i>

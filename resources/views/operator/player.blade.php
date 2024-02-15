@@ -34,8 +34,8 @@
                 <th>Work</th>
                 <th>Address</th>
                 <th>Gender</th>
-                <th>Gcash Number</th>
                 <th>Referred By</th>
+                <th>Earnings</th>
             </tr>
         </thead>
         <tbody>
@@ -46,7 +46,6 @@
                         <td>{{ $datas->work }}</td>
                         <td>{{ $datas->address }}</td>
                         <td>{{ $datas->gender }}</td>
-                        <td>{{ $datas->number }}</td>
                         <td>
                           @if ($datas->referredBy)
                               {{ $datas->referredBy->name }}
@@ -54,6 +53,7 @@
                               N/A
                           @endif
                       </td>
+                      <td>&#8369;{{ $datas->point }}.00</td>
                     </tr>
                 @endforeach
             @endif

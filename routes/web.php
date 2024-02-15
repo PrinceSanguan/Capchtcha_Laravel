@@ -62,16 +62,21 @@ Route::post('/programmer/wallet/deduct/{id}', [ProgrammerController::class, 'Ded
 Route::get('/operator/dashboard', [OperatorController::class, 'index'])->name('operator.dashboard');
 Route::get('/operator/pending_account', [OperatorController::class, 'PendingAccount'])->name('operator.pending_account');
 Route::get('/operator/player', [OperatorController::class, 'Player'])->name('operator.player');
+Route::get('/operator/topup', [OperatorController::class, 'topup'])->name('operator.topup');
 Route::get('/operator/my_agent', [OperatorController::class, 'Agent'])->name('operator.agent');
 Route::patch('/operator/update-user-status/{id}', [OperatorController::class, 'updateUserStatus'])->name('operator.update_status');
 Route::get('/operator/wallet', [OperatorController::class, 'Wallet'])->name('operator.wallet');
 Route::post('/operator/wallet/{id}', [OperatorController::class, 'SendPoint'])->name('operator.send_point');
+Route::get('/operator/change_password', [OperatorController::class, 'changePassword'])->name('operator.change.password');
+Route::post('/operator/change_password', [OperatorController::class, 'changePasswordRequest'])->name('operator.change.passwordrequest');
 /********************************************This Route is For Operator!! *****************************/
 
 /********************************************This Route is For Agent!! *****************************/
 Route::get('/agent/dashboard', [AgentController::class, 'index'])->name('agent.dashboard');
 Route::get('/agent/withdraw', [AgentController::class, 'withdraw'])->name('agent.withdraw');
-Route::post('/agent/withdraw', [AgentController::class, 'withdrawPoints'])->name('withdraw.points');
+Route::get('/agent/success', [AgentController::class, 'success'])->name('agent.success');
+Route::get('/agent/topup', [AgentController::class, 'topup'])->name('agent.topup');
+Route::post('/agent/withdraw', [AgentController::class, 'withdrawPoints'])->name('agent.withdraw.points');
 Route::get('/agent/pending_account', [AgentController::class, 'PendingAccount'])->name('agent.pending_account');
 Route::get('/agent/player', [AgentController::class, 'Player'])->name('agent.player');
 Route::patch('/agent/update-user-status/{id}', [AgentController::class, 'updateUserStatus'])->name('agent.update_status');

@@ -77,7 +77,7 @@
 
           <li class="nav-item menu-open" style="margin-bottom: 10px;">
              <a href="{{ route('agent.withdraw') }}" class="nav-link {{ Route::is('agent.withdraw') ? 'active' : '' }}">
-                <i class="nav-icon fas fa-wallet fa-spin"></i>
+                <i class="nav-icon far fa-money-bill-alt fa-spin"></i>
                 <p>
                     WITHDRAW
                 </p>
@@ -85,13 +85,15 @@
         </li>
 
         <li class="nav-item menu-open" style="margin-bottom: 10px;">
-          {{-- <a href="{{ route('agent.wallet') }}" class="nav-link {{ Route::is('agent.wallet') ? 'active' : '' }}"> --}}
-              <i class="nav-icon fas fa-wallet fa-spin"></i>
+           <a href="{{ route('agent.topup') }}" class="nav-link {{ Route::is('agent.topup') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-money-check fa-spin"></i>
               <p>
-                  DEPOSIT
+                  TOPUP
               </p>
           </a>
       </li>
+
+      <li class="nav-header" style="font-size: 1.2em; color: yellow;">SETTINGS</li>
   
           <li class="nav-item menu-open" style="margin-bottom: 10px;">
               <a href="{{ route('logout') }}" class="nav-link">

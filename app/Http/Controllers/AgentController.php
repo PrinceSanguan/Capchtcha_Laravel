@@ -204,23 +204,23 @@ class AgentController extends Controller
 
     // Check if there's a referral and update the operator's points
     if ($user->referral_id) {
-        $agent = User::where('type', 'operator')->where('id', $user->referral_id)->first();
+        $operator = User::where('type', 'operator')->where('id', $user->referral_id)->first();
 
-        // Check if the agent is found
-        if ($agent) {
+        // Check if the operator is found
+        if ($operator) {
             
-            // Get the name of the agent
-            $agentName = $agent->name;
+            // Get the name of the operator
+            $operatorName = $operator->name;
             $formattedDate = Carbon::now()->format('F j, Y g:ia');
 
-            $agent->update([
-                'point' => $agent->point + $withdrawalAmount,
+            $operator->update([
+                'point' => $operator->point + $withdrawalAmount,
             ]);
         }
     }
     // Redirect with success message
-    return redirect()->route('success')->with('success', "Success! You withdrew {$withdrawalAmount} 
-    points. Screen shot this and submit it to your agent {$agentName} on {$formattedDate}. Thank you!");
+    return redirect()->route('agent.success')->with('success', "Success! You withdrew {$withdrawalAmount} 
+    points. Screen shot this and submit it to your operator {$operatorName} on {$formattedDate}. Thank you!");
 
 }
 
@@ -253,5 +253,37 @@ class AgentController extends Controller
     
         // You can add a success message or redirect the user to a specific page
         return redirect()->back()->with('success', 'Points successfully updated!');
+    }
+
+    public function success()
+    {
+        $users = $this->getUserInfo();
+
+        // Check if the user is found
+        if (!$users) {
+            return redirect()->route('auth.login')->withErrors(['error' => 'User not found.']);
+        }
+
+        // Pass the information to the view
+        return view('agent.success', ['users' => $users]);
+    }
+
+    public function topup()
+    {
+        $users = $this->getUserInfo();
+
+        // Check if the user is found
+        if (!$users) {
+            return redirect()->route('auth.login')->withErrors(['error' => 'User not found.']);
+        }
+
+        // Check if the user's type is "AGENT"
+        if ($users->type !== 'agent') {
+            // Redirect to the previous page or any specific page you want
+            return redirect()->back()->withErrors(['error' => 'Access denied.']);
+        }
+
+        // Pass the information to the view
+        return view('agent.topup', ['users' => $users]);
     }
 }

@@ -1,5 +1,5 @@
-@include('include.header')
-@include('include.navbar')
+@include('operator.header')
+@include('operator.navbar')
 
  <!-- Content Wrapper. Contains page content -->
  <div class="content-wrapper">
@@ -8,7 +8,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0">Withdraw</h1>
+          <h1 class="m-0">Top Up</h1>
         </div><!-- /.col -->
       </div><!-- /.row -->
     </div><!-- /.container-fluid -->
@@ -47,58 +47,11 @@
     </div>
   </div>
 
-  @if(session('success'))
-    <div id="success-alert" class="alert alert-success" style="font-size: 18px; padding: 20px;">
-        {{ session('success') }}
+  <div class="small-box bg-warning">
+    <div class="inner">
+      <p style="font-size: 1.5em;">JUST CONTACT THE PROGRAMMER TO TOP UP MONEY</p>
     </div>
-    <script>
-        setTimeout(function() {
-            document.getElementById('success-alert').style.display = 'none';
-        }, 5000);
-    </script>
-  @endif
-
-  @if(session('error'))
-    <div id="error-alert" class="alert alert-danger" style="font-size: 18px; padding: 20px;">
-        {{ session('error') }}
-    </div>
-    <script>
-        setTimeout(function() {
-            document.getElementById('error-alert').style.display = 'none';
-        }, 5000);
-    </script>
-  @endif
-
-  <div class="small-box bg-warning inner text-center">
-    <p style="font-size: 1.5em;">Total Income</p>
-    <h3 style="">&#8369;{{ $totalPoints }}.00</h3>
   </div>
-
-  <!-- Withdraw -->
-  <div class="card card-primary">
-    <div class="card-header center" style="text-align: center;">
-        <h3 class="card-title" style="display: inline-block; font-size: 1em;">Minimum withdrawal of 50.00 Pesos</h3>
-    </div>
-</div>
-  <!-- Withdraw -->
-    <!-- form start -->
-    <div class="card">
-      <form method="post" action="{{route('agent.withdraw.points')}}">
-        @csrf
-          <div class="card-body">
-              <div class="form-group">
-                  <label>Amount</label>
-                  <input type="text" class="form-control" name="point" placeholder="amount">
-              </div>
-          </div>
-  
-          <div class="card-footer text-center">
-              <button type="submit" class="btn btn-primary">Submit</button>
-          </div>
-      </form>
-    </div>
-
-  <!-- form start -->
   <!-------------------------------------------------------------------------------------- Main content -->
       </div>
     </div>

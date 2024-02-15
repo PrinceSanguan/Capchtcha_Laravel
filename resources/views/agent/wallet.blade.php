@@ -37,14 +37,14 @@
 
     <div class="small-box bg-success">
       <div class="inner">
-        <h3>{{ $userPoints }}</h3>
-        <p>Current Points</p>
+        <h3>&#8369;{{ $userPoints }}.00</h3>
+        <p>Current Money</p>
       </div>
       <div class="icon">
         <i class="fas fa-wallet"></i>
       </div>
-      <a href="#" class="small-box-footer">
-        Add points? <i class="fas fa-arrow-circle-right"></i>
+      <a href="{{route('agent.topup')}}" class="small-box-footer">
+        Add money? <i class="fas fa-arrow-circle-right"></i>
       </a>
     </div>
 
@@ -55,7 +55,7 @@
         <tr>
           <th>Username</th>
           <th>Type</th>
-          <th>Points</th>
+          <th>Earnings</th>
           <th>Send Money</th>
         </tr>
       </thead>
@@ -65,7 +65,7 @@
             <tr>
               <td>{{ $datas->username }}</td>
               <td>{{ $datas->type }}</td>
-              <td>{{ $datas->point }}</td>
+              <td>&#8369;{{ $datas->point }}.00</td>
               <td>
                 <div class="card card-primary">
                   <div class="card-header text-center">
