@@ -1,4 +1,4 @@
-@include('include.header')
+@include('agent.header')
 
  <!-- Content Wrapper. Contains page content -->
  <div class="content-wrapper">

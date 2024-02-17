@@ -1,4 +1,4 @@
-@include('include.header')
+@include('player.header')
 
  <!-- Content Wrapper. Contains page content -->
  <div class="content-wrapper">
@@ -61,4 +61,4 @@
 </div>
     <!-- /.content-wrapper -->
 
-@include('include.footer')
+@include('player.footer')

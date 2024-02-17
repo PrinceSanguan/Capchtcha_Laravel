@@ -1,5 +1,5 @@
-@include('include.header')
-@include('include.navbar')
+@include('player.header')
+@include('player.navbar')
 
  <!-- Content Wrapper. Contains page content -->
  <div class="content-wrapper">
@@ -105,4 +105,4 @@
 </div>
     <!-- /.content-wrapper -->
 
-    @include('include.footer')
+    @include('player.footer')

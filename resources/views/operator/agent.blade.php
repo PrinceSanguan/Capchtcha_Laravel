@@ -63,4 +63,4 @@
   </div>
   <!-- /.content-wrapper -->
 
-@include('include.footer')
+@include('operator.footer')

@@ -65,4 +65,4 @@
 </div>
 </div>
 
-@include('include.footer')
+@include('agent.footer')

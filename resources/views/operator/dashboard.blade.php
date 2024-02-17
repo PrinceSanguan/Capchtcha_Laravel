@@ -94,4 +94,4 @@
 </div>
 </div>
 
-@include('include.footer')
+@include('operator.footer')

@@ -7,6 +7,7 @@ use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\ProgrammerController;
 use App\Http\Controllers\OperatorController;
 use App\Http\Controllers\AgentController;
+use App\Http\Controllers\IndexController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,7 +20,8 @@ use App\Http\Controllers\AgentController;
 */
 
 
-Route::get('/', [SigninController::class, 'welcome'])->name('welcome');
+Route::get('/', [IndexController::class, 'index'])->name('welcome');
+Route::get('/practice', [IndexController::class, 'practice'])->name('practice');
 
  Route::get('/auth/login', [LoginController::class, 'index'])->name('auth.login');
  Route::post('/auth/login', [LoginController::class, 'login'])->name('login.post');

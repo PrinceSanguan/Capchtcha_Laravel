@@ -78,10 +78,6 @@ class SigninController extends Controller
     
         // Redirect with success message
         return redirect()->route('auth.login')->with('success', 'You have successfully signed in! Wait for the Approval of the agent to activate your account.');
-    } 
-
-    public function welcome() {
-        return view('welcome');
     }
 
 }

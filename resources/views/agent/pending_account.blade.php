@@ -69,4 +69,4 @@
 
   <!-- /.content-wrapper -->
 
-@include('include.footer')
+@include('agent.footer')

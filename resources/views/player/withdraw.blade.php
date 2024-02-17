@@ -1,5 +1,5 @@
-@include('include.header')
-@include('include.navbar')
+@include('player.header')
+@include('player.navbar')
 
  <!-- Content Wrapper. Contains page content -->
  <div class="content-wrapper">
@@ -83,7 +83,7 @@
   <!-- Withdraw -->
     <!-- form start -->
     <div class="card">
-      <form method="post" action="{{route('agent.withdraw.points')}}">
+      <form method="post" action="{{route('withdraw.points')}}">
         @csrf
           <div class="card-body">
               <div class="form-group">
@@ -106,4 +106,4 @@
 </div>
     <!-- /.content-wrapper -->
 
-    @include('include.footer')
+    @include('player.footer')

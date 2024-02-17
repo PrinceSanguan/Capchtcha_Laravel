@@ -48,5 +48,18 @@ return [
         'blur' => 0,
         'invert' => true,
         'contrast' => -15,
+    ],
+    'inverseIndex' => [
+        'length' => 5,
+        'width' => 300,
+        'height' => 90,
+        'quality' => 100,
+        'sensitive' => true,
+        'angle' =>  0, //70,
+        'lines' => 0,
+        'sharpen' => 0,
+        'blur' => 0,
+        'invert' => true,
+        'contrast' => 20,
     ]
 ];
