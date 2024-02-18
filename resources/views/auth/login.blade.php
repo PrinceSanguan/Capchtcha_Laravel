@@ -12,7 +12,7 @@
                     <div class="row">
                         <div class="col-md-11">
                             <div class="mb-4">
-                                <h2 class="display-3 text-center">Earn Money<span style="color: #AD50A7;">!</span></h2>
+                                <h2 class="display-3 text-center">CRYPTO CAPTCHA<span style="color: #AD50A7;"></span></h2>
                                 <p class="mb-4">
                                     To access this website, you must contact an agent to get <strong class="text-dark">approved</strong>. If you don't have an account, please find an agent.
                                 </p>

@@ -21,7 +21,11 @@ use App\Http\Controllers\IndexController;
 
 
 Route::get('/', [IndexController::class, 'index'])->name('welcome');
+Route::get('/about', [IndexController::class, 'about'])->name('about');
+Route::get('/services', [IndexController::class, 'services'])->name('services');
+Route::get('/why_us', [IndexController::class, 'whyUs'])->name('why.us');
 Route::get('/practice', [IndexController::class, 'practice'])->name('practice');
+Route::post('/practice', [IndexController::class, 'practiceSolve'])->name('practice.solve');
 
  Route::get('/auth/login', [LoginController::class, 'index'])->name('auth.login');
  Route::post('/auth/login', [LoginController::class, 'login'])->name('login.post');

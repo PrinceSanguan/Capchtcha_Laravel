@@ -54,7 +54,7 @@ return [
         'width' => 300,
         'height' => 90,
         'quality' => 100,
-        'sensitive' => true,
+        'sensitive' => false,
         'angle' =>  0, //70,
         'lines' => 0,
         'sharpen' => 0,
