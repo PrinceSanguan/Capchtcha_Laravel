@@ -97,6 +97,15 @@
                   </p>
               </a>
           </li>
+
+          <li class="nav-item menu-open" style="margin-bottom: 10px;">
+            <a href="{{ route('programmer.level') }}" class="nav-link {{ Route::is('programmer.level') ? 'active' : '' }}">
+                <i class="nav-icon fas fa-layer-group fa-spin"></i>
+                <p>
+                    PLAYER LEVEL
+                </p>
+            </a>
+        </li>
   
           <li class="nav-item menu-open" style="margin-bottom: 10px;">
               <a href="{{ route('logout') }}" class="nav-link">

@@ -82,6 +82,28 @@ class ProgrammerController extends Controller
         return view('programmer.player', ['users' => $users, 'data' => $data]);
     }
 
+    public function Level()
+    {
+        $users = $this->getUserInfo();
+
+        // Check if the user is found
+        if (!$users) {
+            return redirect()->route('auth.login')->withErrors(['error' => 'User not found.']);
+        }
+
+        // Check if the user type is 'programmer'
+        if ($users->type !== 'programmer') {
+            // Redirect to the same page with an error message
+            return redirect()->route('auth.login')->withErrors(['error' => 'Access denied.']);
+        }
+
+        // Fetch all Players from the database
+        $data = User::where('type', 'player')->get();
+
+        // Pass the information to the view
+        return view('programmer.level', ['users' => $users, 'data' => $data]);
+    }
+
     public function PendingAccount()
     {
         $users = $this->getUserInfo();
@@ -202,6 +224,27 @@ class ProgrammerController extends Controller
     
         // You can add a success message or redirect the user to a specific page
         return redirect()->back()->with('success', 'Points successfully updated!');
+    }
+
+    public function UpdateLevel(Request $request, $id)
+    {
+        // Find the user by ID
+        $user = User::findOrFail($id);
+    
+        $request->validate([
+            'level' => 'required|numeric|integer|min:0',
+        ]);
+
+        // Get the points from the request
+        $requestedLevel = $request->input('level');
+
+         // Update the user's level
+        $user->level = $requestedLevel;
+        $user->save();
+
+        // Redirect back or to a specific page after updating the level
+        return redirect()->back()->with('success', 'User level updated successfully');
+
     }
 
     public function DeductPoint(Request $request, $id) {

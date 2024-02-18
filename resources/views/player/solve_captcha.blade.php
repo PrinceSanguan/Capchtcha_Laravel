@@ -56,8 +56,21 @@
     <form method="post" action="{{route('update.points')}}">
         @csrf
         <div class="card-body d-flex flex-column align-items-center">
-            <span style="display: inline-block;">{!! captcha_img('inverse') !!}</span>
-        </div>
+          @if($users->level >= 0 && $users->level <= 10)
+              <span style="display: inline-block;">{!! captcha_img('inverse') !!}</span>
+          @elseif($users->level >= 11 && $users->level <= 20)
+              <span style="display: inline-block;">{!! captcha_img('inverse2') !!}</span>
+          @elseif($users->level >= 21 && $users->level <= 30)
+              <span style="display: inline-block;">{!! captcha_img('inverse3') !!}</span>
+          @elseif($users->level >= 31 && $users->level <= 40)
+              <span style="display: inline-block;">{!! captcha_img('inverse4') !!}</span>
+          @elseif($users->level >= 41 && $users->level <= 100)
+              <span style="display: inline-block;">{!! captcha_img('inverse5') !!}</span>
+          @else
+              <!-- Handle other level ranges or provide a default captcha image -->
+              <span style="display: inline-block;">{!! captcha_img('default') !!}</span>
+          @endif
+      </div>
 
         <div class="input-wrapper" style="display: flex; flex-direction: column; align-items: center; margin-top: 10px;">
           <input type="text" class="form-input" placeholder="Enter Captcha" name="captcha" required>

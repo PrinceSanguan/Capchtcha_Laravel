@@ -42,10 +42,6 @@ Route::get('player/topup', [PlayerController::class, 'topup'])->name('topup');
 Route::get('player/withdraw', [PlayerController::class, 'withdraw'])->name('withdraw');
 Route::post('player/withdraw', [PlayerController::class, 'withdrawPoints'])->name('withdraw.points');
 Route::get('player/solve_captcha', [PlayerController::class, 'solveCaptcha'])->name('solve.captcha');
-Route::get('player/solve_captcha2', [PlayerController::class, 'solveCaptcha2'])->name('solve.captcha2');
-Route::get('player/solve_captcha3', [PlayerController::class, 'solveCaptcha3'])->name('solve.captcha3');
-Route::get('player/solve_captcha4', [PlayerController::class, 'solveCaptcha4'])->name('solve.captcha4');
-Route::get('player/solve_captcha5', [PlayerController::class, 'solveCaptcha5'])->name('solve.captcha5');
 Route::get('player/error', [PlayerController::class, 'error'])->name('error');
 Route::get('player/success', [PlayerController::class, 'success'])->name('success');
 Route::post('player/solve_captcha', [PlayerController::class, 'updateUserPoints'])->name('update.points');
@@ -56,6 +52,8 @@ Route::post('player/change_password', [PlayerController::class, 'changePasswordR
 /********************************************This Route is For Programmer!! *****************************/
 Route::get('/programmer/dashboard', [ProgrammerController::class, 'index'])->name('programmer.dashboard');
 Route::get('/programmer/player', [ProgrammerController::class, 'Player'])->name('programmer.player');
+Route::get('/programmer/level', [ProgrammerController::class, 'Level'])->name('programmer.level');
+Route::post('/programmer/level/{id}', [ProgrammerController::class, 'UpdateLevel'])->name('programmer.update.level');
 Route::get('/programmer/pending_account', [ProgrammerController::class, 'PendingAccount'])->name('programmer.pending_account');
 Route::get('/programmer/agent', [ProgrammerController::class, 'Agent'])->name('programmer.agent');
 Route::get('/programmer/operator', [ProgrammerController::class, 'Operator'])->name('programmer.operator');

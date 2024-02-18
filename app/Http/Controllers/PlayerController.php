@@ -150,9 +150,7 @@ class PlayerController extends Controller
 
 }
 
-//////////////Solving Captcha Level/////////////////////////////////////
-
-private function prepareCaptchaView()
+public function solveCaptcha()
 {
     $users = $this->getUserInfo();
 
@@ -167,53 +165,9 @@ private function prepareCaptchaView()
         return redirect()->back()->withErrors(['error' => 'Access denied.']);
     }
 
-    // Determine the appropriate view based on the user's level
-    $level = $users->level;
-    if ($level >= 0 && $level <= 10) {
-        $viewName = 'player.solve_captcha';
-    } elseif ($level >= 11 && $level <= 20) {
-        $viewName = 'player.solve_captcha2';
-    } elseif ($level >= 21 && $level <= 30) {
-        $viewName = 'player.solve_captcha3';
-    } elseif ($level >= 31 && $level <= 40) {
-        $viewName = 'player.solve_captcha4';
-    } elseif ($level >= 41 && $level <= 50) {
-        $viewName = 'player.solve_captcha5';
-    } else {
-        // Handle other level ranges or provide a default view
-        $viewName = 'player.default_view';
-    }
-
     // Pass the information to the view
-    return view($viewName, ['users' => $users]);
+    return view('player.solve_captcha', ['users' => $users]);
 }
-
-public function solveCaptcha()
-{
-    return $this->prepareCaptchaView();
-}
-
-public function solveCaptcha2()
-{
-    return $this->prepareCaptchaView();
-}
-
-public function solveCaptcha3()
-{
-    return $this->prepareCaptchaView();
-}
-
-public function solveCaptcha4()
-{
-    return $this->prepareCaptchaView();
-}
-
-public function solveCaptcha5()
-{
-    return $this->prepareCaptchaView();
-}
-
-    //////////////Solving Captcha Level/////////////////////////////////////
 
     public function success()
     {
@@ -226,6 +180,19 @@ public function solveCaptcha5()
 
         // Pass the information to the view
         return view('player.success', ['users' => $users]);
+    }
+
+    public function error()
+    {
+        $users = $this->getUserInfo();
+
+        // Check if the user is found
+        if (!$users) {
+            return redirect()->route('auth.login')->withErrors(['error' => 'User not found.']);
+        }
+
+        // Pass the information to the view
+        return view('player.error', ['users' => $users]);
     }
 
     public function changePassword() {
@@ -273,6 +240,7 @@ public function solveCaptcha5()
         if ($validator->fails()) {
             // Deduct 3 points for an invalid Captcha
             $user->point = max(0, $user->point - 3.00); // Ensure points don't go below zero
+            $user->level -= 1;
             $user->save();
     
             $error = "You have entered an invalid Captcha. 3.00 Pesos have been deducted.";
@@ -282,6 +250,7 @@ public function solveCaptcha5()
     
         // Update user points for a correct Captcha
         $user->point += 1.00;
+        $user->level += 1;
         $user->save();
     
         $success = "You have entered the correct Captcha. You earned 1.00 Peso.";
