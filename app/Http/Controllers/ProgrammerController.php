@@ -54,7 +54,7 @@ class ProgrammerController extends Controller
         $totalPoints = User::sum('point');
 
         // Build the referral link
-        $referralLink = 'http://captcha.free.nf/auth/signin?ref=' . $users->id;
+        $referralLink = 'www.captcha.free.nf/auth/signin?ref=' . $users->id;
 
         // Pass the information to the view
         return view('programmer.dashboard', compact('users', 'totalAccounts', 'totalPlayers', 'totalAgents', 'totalOperators', 'totalPoints', 'referralLink'));
