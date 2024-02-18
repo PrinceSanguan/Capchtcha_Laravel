@@ -3,7 +3,7 @@
   <section class="footer_section">
     <div class="container">
       <p>
-        &copy; All Rights Reserved By 2024
+        <strong>Copyright &copy; 2023-2024</strong> All rights reserved.
       </p>
     </div>
   </section>
