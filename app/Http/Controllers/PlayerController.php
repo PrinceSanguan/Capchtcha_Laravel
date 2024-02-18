@@ -150,37 +150,70 @@ class PlayerController extends Controller
 
 }
 
-    public function solveCaptcha()
-    {
-        $users = $this->getUserInfo();
+//////////////Solving Captcha Level/////////////////////////////////////
 
-        // Check if the user is found
-        if (!$users) {
-            return redirect()->route('auth.login')->withErrors(['error' => 'User not found.']);
-        }
+private function prepareCaptchaView()
+{
+    $users = $this->getUserInfo();
 
-        // Check if the user's type is "player"
-        if ($users->type !== 'player') {
-            // Redirect to the previous page or any specific page you want
-            return redirect()->back()->withErrors(['error' => 'Access denied.']);
-        }
-
-        // Pass the information to the view
-        return view('player.solve_captcha', ['users' => $users]);
+    // Check if the user is found
+    if (!$users) {
+        return redirect()->route('auth.login')->withErrors(['error' => 'User not found.']);
     }
 
-    public function error()
-    {
-        $users = $this->getUserInfo();
-
-        // Check if the user is found
-        if (!$users) {
-            return redirect()->route('auth.login')->withErrors(['error' => 'User not found.']);
-        }
-
-        // Pass the information to the view
-        return view('player.error', ['users' => $users]);
+    // Check if the user's type is "player"
+    if ($users->type !== 'player') {
+        // Redirect to the previous page or any specific page you want
+        return redirect()->back()->withErrors(['error' => 'Access denied.']);
     }
+
+    // Determine the appropriate view based on the user's level
+    $level = $users->level;
+    if ($level >= 0 && $level <= 10) {
+        $viewName = 'player.solve_captcha';
+    } elseif ($level >= 11 && $level <= 20) {
+        $viewName = 'player.solve_captcha2';
+    } elseif ($level >= 21 && $level <= 30) {
+        $viewName = 'player.solve_captcha3';
+    } elseif ($level >= 31 && $level <= 40) {
+        $viewName = 'player.solve_captcha4';
+    } elseif ($level >= 41 && $level <= 50) {
+        $viewName = 'player.solve_captcha5';
+    } else {
+        // Handle other level ranges or provide a default view
+        $viewName = 'player.default_view';
+    }
+
+    // Pass the information to the view
+    return view($viewName, ['users' => $users]);
+}
+
+public function solveCaptcha()
+{
+    return $this->prepareCaptchaView();
+}
+
+public function solveCaptcha2()
+{
+    return $this->prepareCaptchaView();
+}
+
+public function solveCaptcha3()
+{
+    return $this->prepareCaptchaView();
+}
+
+public function solveCaptcha4()
+{
+    return $this->prepareCaptchaView();
+}
+
+public function solveCaptcha5()
+{
+    return $this->prepareCaptchaView();
+}
+
+    //////////////Solving Captcha Level/////////////////////////////////////
 
     public function success()
     {
