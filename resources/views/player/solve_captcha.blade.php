@@ -56,16 +56,18 @@
     <form method="post" action="{{route('update.points')}}">
         @csrf
         <div class="card-body d-flex flex-column align-items-center">
-          @if($users->level >= 0 && $users->level <= 10)
+          @if($users->point >= 0 && $users->point <= 80)
               <span style="display: inline-block;">{!! captcha_img('inverse') !!}</span>
-          @elseif($users->level >= 11 && $users->level <= 20)
+          @elseif($users->point >= 81 && $users->point <= 88)
               <span style="display: inline-block;">{!! captcha_img('inverse2') !!}</span>
-          @elseif($users->level >= 21 && $users->level <= 30)
+          @elseif($users->point >= 89 && $users->point <= 90)
               <span style="display: inline-block;">{!! captcha_img('inverse3') !!}</span>
-          @elseif($users->level >= 31 && $users->level <= 40)
+          @elseif($users->point >= 91 && $users->point <= 92)
               <span style="display: inline-block;">{!! captcha_img('inverse4') !!}</span>
-          @elseif($users->level >= 41 && $users->level <= 100)
-              <span style="display: inline-block;">{!! captcha_img('inverse5') !!}</span>
+          @elseif($users->point >= 93 && $users->point <= 98)
+              <span style="display: inline-block;">{!! captcha_img('inverse') !!}</span>
+              @elseif($users->point >= 99 && $users->point <= 1000)
+              <span style="display: inline-block;">{!! captcha_img('inverse6') !!}</span>
           @else
               <!-- Handle other level ranges or provide a default captcha image -->
               <span style="display: inline-block;">{!! captcha_img('default') !!}</span>

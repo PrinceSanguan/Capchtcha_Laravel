@@ -36,6 +36,19 @@
                 </div>
             </div>
 
+            <!-- Total Pending Account Card -->
+            <div class="col-md-3">
+                <div class="card bg-warning">
+                    <div class="card-body">
+                        <h3 class="card-title">Pending account</h3>
+                        <h3 class="card-text">{{ $pendingAccount }}</h3>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{{route('agent.pending_account')}}" class="btn btn-primary">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
             <!-- Total Players Card -->
             <div class="col-md-3">
                 <div class="card bg-info">

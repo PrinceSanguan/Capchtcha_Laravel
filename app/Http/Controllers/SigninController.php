@@ -41,7 +41,7 @@ class SigninController extends Controller
             ],
             'number' => 'required|numeric|digits:11',
             'file' => 'required|image',
-            'referral_id' => 'required|exists:users,id', // if register the programmer make change of required to nullable
+            'referral_id' => 'nullable|exists:users,id', // if register the programmer make change of required to nullable
         ], [
             'password.regex' => 'The password must contain at least one letter, one number, and be at least 6 characters long.',
             'referral_id.exists' => 'The referral code is not valid.',

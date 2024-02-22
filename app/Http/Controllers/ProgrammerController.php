@@ -232,18 +232,18 @@ class ProgrammerController extends Controller
         $user = User::findOrFail($id);
     
         $request->validate([
-            'level' => 'required|numeric|integer|min:0',
+            'account' => 'required',
         ]);
 
-        // Get the points from the request
-        $requestedLevel = $request->input('level');
+        // Get the account type from the request
+        $requestedAccount = $request->input('account');
 
-         // Update the user's level
-        $user->level = $requestedLevel;
+         // Update the user's account
+        $user->account = $requestedAccount;
         $user->save();
 
         // Redirect back or to a specific page after updating the level
-        return redirect()->back()->with('success', 'User level updated successfully');
+        return redirect()->back()->with('success', 'User account is updated');
 
     }
 

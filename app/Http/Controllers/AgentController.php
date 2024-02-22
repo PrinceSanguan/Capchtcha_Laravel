@@ -48,8 +48,11 @@ class AgentController extends Controller
         // Build the referral link
         $referralLink = 'www.captcha.free.nf/auth/signin?ref=' . $users->id;
 
+        // Get the total number of pending account
+        $pendingAccount = User::whereNull('type')->where('referral_id', $users->id)->count();
+
         // Pass the information to the view
-        return view('agent.dashboard', compact('users', 'totalPlayers', 'currentEarnings', 'referralLink'));
+        return view('agent.dashboard', compact('users', 'totalPlayers', 'currentEarnings', 'referralLink', 'pendingAccount'));
     }
 
     public function PendingAccount()

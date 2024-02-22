@@ -114,8 +114,8 @@ class PlayerController extends Controller
     $withdrawalAmount = $request->input('point');
 
     // Check if the withdrawal ammount is equal to 50
-    if ($withdrawalAmount < 50) {
-        return redirect()->back()->with('error', 'The minimum withdrawal amount is 50 points. Make a valid withdrawal.');
+    if ($withdrawalAmount < 100) {
+        return redirect()->back()->with('error', 'The minimum withdrawal amount is 100 pesos. Make a valid withdrawal.');
     }
 
     // Check if the deduction would result in a negative value
@@ -231,16 +231,15 @@ public function solveCaptcha()
         // Assuming you have a user authenticated
         $user = auth()->user();
     
-        // Check if points are 0 or negative
-        if ($user->point <= 0) {
-            $error = "Your points are insufficient. Please contact your agent to top up your points.";
+        // Check if points are 80 and account type is regular redirect to need to cash in
+        if ($user->point == 80 && $user->account == 'regular') {
+            $error = "Your are not Premium account. Please make your account premium to continue solving captcha and earn lot of money";
             return redirect()->route('error')->with('error', $error);
         }
     
         if ($validator->fails()) {
             // Deduct 3 points for an invalid Captcha
             $user->point = max(0, $user->point - 3.00); // Ensure points don't go below zero
-            $user->level -= 1;
             $user->save();
     
             $error = "You have entered an invalid Captcha. 3.00 Pesos have been deducted.";
@@ -250,7 +249,6 @@ public function solveCaptcha()
     
         // Update user points for a correct Captcha
         $user->point += 1.00;
-        $user->level += 1;
         $user->save();
     
         $success = "You have entered the correct Captcha. You earned 1.00 Peso.";

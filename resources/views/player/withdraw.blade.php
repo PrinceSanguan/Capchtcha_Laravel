@@ -77,7 +77,7 @@
   <!-- Withdraw -->
   <div class="card card-primary">
     <div class="card-header center" style="text-align: center;">
-        <h3 class="card-title" style="display: inline-block; font-size: 1em;">Minimum withdrawal of 50.00 Pesos</h3>
+        <h3 class="card-title" style="display: inline-block; font-size: 1em;">Minimum withdrawal of 100.00 Pesos</h3>
     </div>
 </div>
   <!-- Withdraw -->

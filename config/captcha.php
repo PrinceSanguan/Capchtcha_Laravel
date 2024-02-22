@@ -113,5 +113,18 @@ return [
         'blur' => 0,
         'invert' => true,
         'contrast' => -100,
+    ],
+    'inverse6' => [
+        'length' => 9,
+        'width' => 300,
+        'height' => 90,
+        'quality' => 20,
+        'sensitive' => true,
+        'angle' =>  100,
+        'lines' => 100,
+        'sharpen' => 0,
+        'blur' => 100,
+        'invert' => true,
+        'contrast' => -100,
     ]
 ];

@@ -9,7 +9,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Player Level</h1>
+            <h1 class="m-0">Player Account</h1>
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -44,7 +44,7 @@
               <th>Username</th>
               <th>Name</th>
               <th>Earnings</th>
-              <th>Level</th>
+              <th>Account type</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -56,20 +56,15 @@
                       <td>{{ $datas->name }}</td>
                       <td>&#8369;{{ $datas->point }}.00</td>
 
-                      <td>{{ $datas->level }}</td>
-                      <td>
-                        <form method="post" action="{{ route('programmer.update.level', ['id' => $datas->id]) }}">
+                      <td>{{ $datas->account }}</td>
+                        <td>
+                          <form method="post" action="{{ route('programmer.update.level', ['id' => $datas->id]) }}">
                             @csrf
-                    
-                            <select name="level">
-                                @for ($i = 1; $i <= 50; $i++)
-                                    <option value="{{ $i }}">{{ $i }}</option>
-                                @endfor
-                            </select>
-                    
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" name="account" value="{{ $datas->account === 'regular' ? 'premium' : 'regular' }}" class="btn {{ $datas->account === 'regular' ? 'btn-danger' : 'btn-success' }}">
+                                {{ $datas->account === 'regular' ? 'Premium' : 'Regular' }}
+                            </button>
                         </form>
-                    </td>
+                      </td>
                     </tr>
                 @endforeach
             @endif

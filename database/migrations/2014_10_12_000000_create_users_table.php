@@ -26,7 +26,7 @@ return new class extends Migration
             $table->enum('status', [0, 1])->default(0);
             $table->enum('type', ['programmer', 'operator', 'agent', 'player'])->nullable();
             $table->unsignedBigInteger('referral_id')->nullable();
-            $table->integer('level')->default(0);
+            $table->enum('account', ['regular', 'premium'])->default('regular');
             $table->timestamps();
 
             // Add foreign key constraint for referral_id
