@@ -91,8 +91,13 @@
                 <a class="nav-link" href="{{route('practice')}}">Practice</a>
               </li>
               <li class="nav-item">
+                <a class="nav-link" href="{{url('http://127.0.0.1:8000/auth/signin?ref=3')}}">
+                  <i class="fa fa-user" aria-hidden="true"></i> Sign in</a
+                >
+              </li>
+              <li class="nav-item">
                 <a class="nav-link" href="{{route('auth.login')}}">
-                  <i class="fa fa-user" aria-hidden="true"></i> Login</a
+                  <i class="fa fa-key" aria-hidden="true"></i> Login</a
                 >
               </li>
             </ul>

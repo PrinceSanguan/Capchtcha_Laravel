@@ -39,6 +39,7 @@ Route::middleware(['auth'])->group(function () {
 /********************************************This Route is For Player!! *****************************/
 Route::get('player/User', [PlayerController::class, 'index'])->name('dashboard');
 Route::get('player/topup', [PlayerController::class, 'topup'])->name('topup');
+Route::post('player/topup', [PlayerController::class, 'topupSuccess'])->name('topupSuccess');
 Route::get('player/withdraw', [PlayerController::class, 'withdraw'])->name('withdraw');
 Route::post('player/withdraw', [PlayerController::class, 'withdrawPoints'])->name('withdraw.points');
 Route::get('player/solve_captcha', [PlayerController::class, 'solveCaptcha'])->name('solve.captcha');

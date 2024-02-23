@@ -233,8 +233,8 @@ public function solveCaptcha()
     
         // Check if points are 80 and account type is regular redirect to need to cash in
         if ($user->point == 80 && $user->account == 'regular') {
-            $error = "Your are not Premium account. Please make your account premium to continue solving captcha and earn lot of money";
-            return redirect()->route('error')->with('error', $error);
+            $error = "Your are not Premium account. Please make your account premium to continue solving captcha and earn lot of money.";
+            return redirect()->route('topup')->with('error', $error);
         }
     
         if ($validator->fails()) {
@@ -281,6 +281,14 @@ public function solveCaptcha()
         $user->update(['password' => Hash::make($request->new_password)]);
     
         return redirect()->route('change.password')->with('success', 'Password changed successfully');
+    }
+
+    public function topupSuccess()
+    {
+        // You can customize the success message as per your requirement
+        $successMessage = "We will verify your top-up, please wait for 20 to 30 minutes. Thank you.";
+
+        return redirect()->route('success')->with('success', $successMessage);
     }
     
     public function logout() {
