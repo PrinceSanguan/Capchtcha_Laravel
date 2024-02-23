@@ -14,6 +14,10 @@ This platform includes a secure authentication system for sign-in and login, ens
 
 ![Screenshot](public/readme/login.png)
 
+## Landing Page
+
+![Landing Page](public/readme/landing_page.png)
+
 Explore distinct dashboards tailored for various roles:
 
 -   **Player Dashboard**
