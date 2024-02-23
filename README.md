@@ -3,16 +3,16 @@
 Crypto Captcha, a Laravel-based web application, introduces a dynamic approach to cryptographic captchas. Explore distinct dashboards tailored for various roles:
 
 -   **Player Dashboard**
-    ![Player Dashboard] (public/readme/player.png)
+    ![Screenshot](public/readme/player.png)
 
 -   **Agent Dashboard**
-    ![Agent Dashboard] (public/readme/agent.png)
+    ![Screenshot](public/readme/agent.png)
 
 -   **Operator Dashboard**
-    ![Operator Dashboard] (public/readme/operator.png)
+    ![Screenshot](public/readme/operator.png)
 
 -   **Programmer Dashboard**
-    ![Programmer Dashboard] (public/readme/dashboard.png)
+    ![Screenshot](public/readme/dashboard.png)
 
 Dive into the captivating world of cryptographic challenges and seamless user experiences. The platform boasts a referral system, enhancing engagement and interaction among users.
 
