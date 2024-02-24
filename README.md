@@ -34,4 +34,4 @@ Explore distinct dashboards tailored for various roles:
 
 Dive into the captivating world of cryptographic challenges and seamless user experiences. The platform boasts a referral system, enhancing engagement and interaction among users.
 
-Check it out at my website here! [Crypto Captcha](https://www.captcha.free.nf).
+Check it out at my live website [here]!(https://www.captcha.free.nf).
