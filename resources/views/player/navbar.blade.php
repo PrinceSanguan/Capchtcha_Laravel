@@ -9,7 +9,7 @@
   <ul class="navbar-nav ml-auto">
     <!-- Navbar Search -->
     <li class="nav-item d-sm-inline">
-      <a href="{{route('agent.dashboard')}}" class="nav-link">{{ $users->name }}</a>
+      <a href="{{route('dashboard')}}" class="nav-link">{{ $users->name }}</a>
     </li>
 </nav>
 <!-- /.navbar -->
@@ -62,6 +62,34 @@
             </p>
           </a>
         </li>
+
+        <li class="nav-item menu-open" style="margin-bottom: 10px;">
+          <a href="{{route('solve.math')}}" class="nav-link">
+            <i class="nav-icon fas fa-not-equal"></i>
+            <p>
+              SOLVE MATH
+            </p>
+          </a>
+        </li>
+
+        <li class="nav-item menu-open" style="margin-bottom: 10px;">
+          <a href="{{route('transactions')}}" class="nav-link">
+            <i class="nav-icon fas fa-money-bill-alt"></i>
+            <p>
+              TRANSACTIONS
+            </p>
+          </a>
+        </li>
+
+        <li class="nav-item menu-open" style="margin-bottom: 10px;">
+          <a href="{{route('promo')}}" class="nav-link">
+            <i class="nav-icon fas fa-money-bill-alt"></i>
+            <p>
+              PROMO
+            </p>
+          </a>
+        </li>
+
 
         <li class="nav-header" style="font-size: 1.2em; color: yellow;">SETTINGS</li>
 

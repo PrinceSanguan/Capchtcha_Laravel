@@ -23,10 +23,18 @@ return new class extends Migration
             $table->string('number');
             $table->string('image');
             $table->integer('point')->default(0);
+            $table->integer('trial')->default(5);
+            $table->integer('trialLevel')->nullable();
             $table->enum('status', [0, 1])->default(0);
-            $table->enum('type', ['programmer', 'operator', 'agent', 'player'])->nullable();
+            $table->enum('type', ['programmer', 'player'])->nullable();
+            $table->enum('promo1', ['activate', 'deactivate', 'pending'])->default('deactivate');
+            $table->enum('promo2', ['activate', 'deactivate', 'pending'])->default('deactivate');
+            $table->enum('promo3', ['activate', 'deactivate', 'pending'])->default('deactivate');
+            $table->enum('promo4', ['activate', 'deactivate', 'pending'])->default('deactivate');
+            $table->enum('promo5', ['activate', 'deactivate', 'pending'])->default('deactivate');
+            $table->enum('promo6', ['activate', 'deactivate', 'pending'])->default('deactivate');
+            $table->enum('level', ['easy', 'hard'])->default('easy');
             $table->unsignedBigInteger('referral_id')->nullable();
-            $table->enum('account', ['regular', 'premium'])->default('regular');
             $table->timestamps();
 
             // Add foreign key constraint for referral_id

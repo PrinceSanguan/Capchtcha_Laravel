@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Account;
 
 class SigninController extends Controller
 {
@@ -67,7 +68,6 @@ class SigninController extends Controller
             'number' => $request->input('number'),
             'password' => bcrypt($request->input('password')),
             'image' => $path,
-            'point' => 0,
             'status' => '0',
             'referral_id' => $request->input('referral_id'),
         ]);
@@ -77,7 +77,7 @@ class SigninController extends Controller
         }
     
         // Redirect with success message
-        return redirect()->route('auth.login')->with('success', 'You have successfully signed in! Wait for the Approval of the agent to activate your account.');
+        return redirect()->route('auth.login')->with('success', 'You have successfully signed in! Wait for the Approval of the HR/CEO to activate your account.');
     }
 
 }

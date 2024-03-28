@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\URL;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
+use App\Models\Transaction;
 
 
 class PlayerController extends Controller
@@ -113,9 +114,9 @@ class PlayerController extends Controller
     // Get the points from the request
     $withdrawalAmount = $request->input('point');
 
-    // Check if the withdrawal ammount is equal to 50
-    if ($withdrawalAmount < 100) {
-        return redirect()->back()->with('error', 'The minimum withdrawal amount is 100 pesos. Make a valid withdrawal.');
+    // Check if the withdrawal ammount is equal to 15
+    if ($withdrawalAmount < 15) {
+        return redirect()->back()->with('error', 'The minimum withdrawal amount is 15 pesos. Make a valid withdrawal.');
     }
 
     // Check if the deduction would result in a negative value
@@ -128,26 +129,230 @@ class PlayerController extends Controller
         'point' => $user->point - $withdrawalAmount,
     ]);
 
-    // Check if there's a referral and update the agent's points
-    if ($user->referral_id) {
-        $agent = User::where('type', 'agent')->where('id', $user->referral_id)->first();
+     $formattedDate = Carbon::now()->format('F j, Y g:ia');
 
-        // Check if the agent is found
-        if ($agent) {
-            
-            // Get the name of the agent
-            $agentName = $agent->name;
-            $formattedDate = Carbon::now()->format('F j, Y g:ia');
+    // Create a transaction record
+    Transaction::create([
+        'user_id' => $user->id,
+        'amount' => $withdrawalAmount,
+        'type' => 'withdrawal',
+    ]);
 
-            $agent->update([
-                'point' => $agent->point + $withdrawalAmount,
-            ]);
-        }
-    }
     // Redirect with success message
-    return redirect()->route('success')->with('success', "Success! You withdrew {$withdrawalAmount} 
-    points. Screen shot this and submit it to your agent {$agentName} on {$formattedDate}. Thank you!");
+    return redirect()->route('transactions')->with('success', "Success! You withdrew {$withdrawalAmount} 
+    Pesos on {$formattedDate}. Thank you!");
+}
 
+public function UpdatePromo1(Request $request) 
+    {
+    // Get the user information
+    $user = $this->getUserInfo();
+
+    // Check if the user is found
+    if (!$user) {
+        return redirect()->route('auth.login')->withErrors(['error' => 'User not found.']);
+    }
+
+    // Check if the user type is 'player'
+    if ($user->type !== 'player') {
+        // Redirect to the same page with an error message
+        return redirect()->route('auth.login')->withErrors(['error' => 'Access denied.']);
+    }
+
+    $request->validate([
+        'promo1' => 'required',
+    ]);
+
+    // Save in database
+    $user->promo1 = $request->promo1;
+    $user->save();
+
+    // Create a transaction record
+    Transaction::create([
+        'user_id' => $user->id,
+        'amount' => 10,
+        'type' => 'deposit',
+    ]);
+    
+
+    // Redirect with success message
+    return redirect()->route('promo')->with('success', "Success! your request is pending make sure your gcash have a balance");
+}
+
+ public function UpdatePromo2(Request $request) 
+    {
+    // Get the user information
+    $user = $this->getUserInfo();
+
+    // Check if the user is found
+    if (!$user) {
+        return redirect()->route('auth.login')->withErrors(['error' => 'User not found.']);
+    }
+
+    // Check if the user type is 'player'
+    if ($user->type !== 'player') {
+        // Redirect to the same page with an error message
+        return redirect()->route('auth.login')->withErrors(['error' => 'Access denied.']);
+    }
+
+    $request->validate([
+        'promo2' => 'required',
+    ]);
+
+    // Save in database
+    $user->promo2 = $request->promo2;
+    $user->save();
+
+    // Create a transaction record
+    Transaction::create([
+        'user_id' => $user->id,
+        'amount' => 50,
+        'type' => 'deposit',
+    ]);
+
+    // Redirect with success message
+    return redirect()->route('promo')->with('success', "Success! your request is pending make sure your gcash have a balance");
+}
+
+public function UpdatePromo3(Request $request) 
+{
+// Get the user information
+$user = $this->getUserInfo();
+
+// Check if the user is found
+if (!$user) {
+    return redirect()->route('auth.login')->withErrors(['error' => 'User not found.']);
+}
+
+// Check if the user type is 'player'
+if ($user->type !== 'player') {
+    // Redirect to the same page with an error message
+    return redirect()->route('auth.login')->withErrors(['error' => 'Access denied.']);
+}
+
+$request->validate([
+    'promo3' => 'required',
+]);
+
+// Save in database
+$user->promo3 = $request->promo3;
+$user->save();
+
+// Create a transaction record
+Transaction::create([
+    'user_id' => $user->id,
+    'amount' => 200,
+    'type' => 'deposit',
+]);
+
+
+// Redirect with success message
+return redirect()->route('promo')->with('success', "Success! your request is pending make sure your gcash have a balance");
+}
+
+public function UpdatePromo4(Request $request) 
+{
+// Get the user information
+$user = $this->getUserInfo();
+
+// Check if the user is found
+if (!$user) {
+    return redirect()->route('auth.login')->withErrors(['error' => 'User not found.']);
+}
+
+// Check if the user type is 'player'
+if ($user->type !== 'player') {
+    // Redirect to the same page with an error message
+    return redirect()->route('auth.login')->withErrors(['error' => 'Access denied.']);
+}
+
+$request->validate([
+    'promo4' => 'required',
+]);
+
+// Save in database
+$user->promo4 = $request->promo4;
+$user->save();
+
+// Create a transaction record
+Transaction::create([
+    'user_id' => $user->id,
+    'amount' => 500,
+    'type' => 'deposit',
+]);
+
+// Redirect with success message
+return redirect()->route('promo')->with('success', "Success! your request is pending make sure your gcash have a balance");
+}
+
+public function UpdatePromo5(Request $request) 
+{
+// Get the user information
+$user = $this->getUserInfo();
+
+// Check if the user is found
+if (!$user) {
+    return redirect()->route('auth.login')->withErrors(['error' => 'User not found.']);
+}
+
+// Check if the user type is 'player'
+if ($user->type !== 'player') {
+    // Redirect to the same page with an error message
+    return redirect()->route('auth.login')->withErrors(['error' => 'Access denied.']);
+}
+
+$request->validate([
+    'promo5' => 'required',
+]);
+
+// Save in database
+$user->promo5 = $request->promo5;
+$user->save();
+
+// Create a transaction record
+Transaction::create([
+    'user_id' => $user->id,
+    'amount' => 1000,
+    'type' => 'deposit',
+]);
+
+// Redirect with success message
+return redirect()->route('promo')->with('success', "Success! your request is pending make sure your gcash have a balance");
+}
+
+public function UpdatePromo6(Request $request) 
+{
+// Get the user information
+$user = $this->getUserInfo();
+
+// Check if the user is found
+if (!$user) {
+    return redirect()->route('auth.login')->withErrors(['error' => 'User not found.']);
+}
+
+// Check if the user type is 'player'
+if ($user->type !== 'player') {
+    // Redirect to the same page with an error message
+    return redirect()->route('auth.login')->withErrors(['error' => 'Access denied.']);
+}
+
+$request->validate([
+    'promo6' => 'required',
+]);
+
+// Save in database
+$user->promo6 = $request->promo6;
+$user->save();
+
+// Create a transaction record
+Transaction::create([
+    'user_id' => $user->id,
+    'amount' => 5000,
+    'type' => 'deposit',
+]);
+
+// Redirect with success message
+return redirect()->route('promo')->with('success', "Success! your request is pending make sure your gcash have a balance");
 }
 
 public function solveCaptcha()
@@ -167,6 +372,66 @@ public function solveCaptcha()
 
     // Pass the information to the view
     return view('player.solve_captcha', ['users' => $users]);
+}
+
+public function SolveMath()
+{
+    $users = $this->getUserInfo();
+
+    // Check if the user is found
+    if (!$users) {
+        return redirect()->route('auth.login')->withErrors(['error' => 'User not found.']);
+    }
+
+    // Check if the user's type is "player"
+    if ($users->type !== 'player') {
+        // Redirect to the previous page or any specific page you want
+        return redirect()->back()->withErrors(['error' => 'Access denied.']);
+    }
+
+    // Pass the information to the view
+    return view('player.solve_math', ['users' => $users]);
+}
+
+public function transactions()
+{
+    $users = $this->getUserInfo();
+
+    // Check if the user is found
+    if (!$users) {
+        return redirect()->route('auth.login')->withErrors(['error' => 'User not found.']);
+    }
+
+    // Check if the user's type is "player"
+    if ($users->type !== 'player') {
+        // Redirect to the previous page or any specific page you want
+        return redirect()->back()->withErrors(['error' => 'Access denied.']);
+    }
+
+    // Fetch all User transactions from the database
+    $transaction = Transaction::where('user_id', $users->id)->get();
+
+    // Pass the information to the view
+    return view('player.transactions', ['users' => $users, 'transaction' => $transaction]);
+}
+
+public function Promo()
+{
+    $users = $this->getUserInfo();
+
+    // Check if the user is found
+    if (!$users) {
+        return redirect()->route('auth.login')->withErrors(['error' => 'User not found.']);
+    }
+
+    // Check if the user's type is "player"
+    if ($users->type !== 'player') {
+        // Redirect to the previous page or any specific page you want
+        return redirect()->back()->withErrors(['error' => 'Access denied.']);
+    }
+
+    // Pass the information to the view
+    return view('player.promo', ['users' => $users]);
 }
 
     public function success()
@@ -217,6 +482,7 @@ public function solveCaptcha()
     public function updateUserPoints(Request $request)
     {
         $lastAttemptTime = Session::get('last_captcha_attempt', 0);
+        $remainingTrials = auth()->user()->trial;
     
         // Check if the user is trying to bypass the waiting period
         if (time() - $lastAttemptTime < 20) {
@@ -227,28 +493,30 @@ public function solveCaptcha()
         $validator = Validator::make($request->all(), [
             'captcha' => 'required|captcha',
         ]);
+
+        // Check if the user has remaining trials
+        if ($remainingTrials <= 0) {
+            $error = "You have exhausted your captcha trials. Please buy in order to earn money.";
+            return redirect()->route('error')->with('error', $error);
+        }
     
         // Assuming you have a user authenticated
         $user = auth()->user();
     
-        // Check if points are 80 and account type is regular redirect to need to cash in
-        if ($user->point == 80 && $user->account == 'regular') {
-            $error = "Your are not Premium account. Please make your account premium to continue solving captcha and earn lot of money.";
-            return redirect()->route('topup')->with('error', $error);
-        }
-    
         if ($validator->fails()) {
-            // Deduct 3 points for an invalid Captcha
-            $user->point = max(0, $user->point - 3.00); // Ensure points don't go below zero
+            // Deduct 1 points for an invalid Captcha and decrement the remaining trial
+            $user->point = max(0, $user->point - 1.00); 
+            $user->trial = max(0, $user->trial - 1);
             $user->save();
     
-            $error = "You have entered an invalid Captcha. 3.00 Pesos have been deducted.";
+            $error = "You have entered an invalid Captcha. 1.00 Pesos have been deducted.";
             Session::put('last_captcha_attempt', time()); // Update last attempt time
             return redirect()->route('error')->with('error', $error);
         }
     
-        // Update user points for a correct Captcha
+        // Update user points for a correct Captcha and decrement the remaining trial
         $user->point += 1.00;
+        $user->trial = max(0, $user->trial - 1);
         $user->save();
     
         $success = "You have entered the correct Captcha. You earned 1.00 Peso.";
@@ -260,6 +528,7 @@ public function solveCaptcha()
     
         return redirect()->route('success')->with('success', $success);
     }
+    
 
     public function changePasswordRequest(Request $request)
     {

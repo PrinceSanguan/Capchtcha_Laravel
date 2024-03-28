@@ -48,6 +48,11 @@
   </div>
 
   <div class="card card-primary">
+
+    <div class="small-box bg-orange">
+        <h3>{{$users->trial}} Total Trial</h3>
+    </div>
+
     <div class="card-header text-center">
         <h3 class="card-title">Captcha</h3>
     </div>
@@ -56,17 +61,9 @@
     <form method="post" action="{{route('update.points')}}">
         @csrf
         <div class="card-body d-flex flex-column align-items-center">
-          @if($users->point >= 0 && $users->point <= 80)
+          @if($users->level == 'easy')
               <span style="display: inline-block;">{!! captcha_img('inverse') !!}</span>
-          @elseif($users->point >= 81 && $users->point <= 88)
-              <span style="display: inline-block;">{!! captcha_img('inverse2') !!}</span>
-          @elseif($users->point >= 89 && $users->point <= 90)
-              <span style="display: inline-block;">{!! captcha_img('inverse3') !!}</span>
-          @elseif($users->point >= 91 && $users->point <= 92)
-              <span style="display: inline-block;">{!! captcha_img('inverse4') !!}</span>
-          @elseif($users->point >= 93 && $users->point <= 98)
-              <span style="display: inline-block;">{!! captcha_img('inverse') !!}</span>
-              @elseif($users->point >= 99 && $users->point <= 1000)
+          @elseif($users->level == 'hard')
               <span style="display: inline-block;">{!! captcha_img('inverse6') !!}</span>
           @else
               <!-- Handle other level ranges or provide a default captcha image -->

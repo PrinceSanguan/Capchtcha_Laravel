@@ -9,7 +9,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Player Level</h1>
+            <h1 class="m-0">All Player Transactions</h1>
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -37,34 +37,49 @@
         }, 5000);
     </script>
   @endif
+
     <div class="card-body table-responsive p-0">
       <table class="table table-hover text-nowrap">
           <thead>
-            <tr>
-              <th>Name</th>
-              <th>Number of Trials</th>
-              <th>Money</th>
-              <th>Level</th>
-            </tr>
+              <tr>
+                  <th>Name</th>
+                  <th>Amount</th>
+                  <th>Type</th>
+                  <th>Date</th>
+                  <th>Status</th>
+                  <th>Action</th>
+
+              </tr>
           </thead>
           <tbody>
             @if ($data)
                 @foreach ($data as $datas)
                     <tr>
-                      <td>{{ $datas->name }}</td>
-                      <td>{{ $datas->trial }}</td>
-
-                      <td>&#8369;{{ $datas->point }}.00</td>
-
+                        <td>{{ $datas->user->name }}</td>
+                        <td>&#8369;{{ $datas->amount }}.00</td>
+                        <td>{{ $datas->type }}</td>
+                        <td>{{ $datas->created_at->format('F j, Y g:ia') }}</td>
+                        <td>{{ $datas->status }}</td>
                         <td>
-                          <form method="post" action="{{ route('programmer.update.level', ['id' => $datas->id]) }}">
+                          <form method="post" action="{{ route('programmer.transaction_status', ['id' => $datas->id]) }}">
                               @csrf
-                              <button type="submit" name="level" value="{{ $datas->level === 'easy' ? 'hard' : 'easy' }}" class="btn {{ $datas->level === 'easy' ? 'btn-success' : 'btn-danger' }}">
-                                  {{ $datas->level === 'easy' ? 'easy' : 'hard' }}
+                              <input type="hidden" name="status" value="approved">
+                              <button type="submit" class="btn btn-success" {{ $datas->status === 'approved' ? 'disabled' : '' }}>
+                                  Approve
+                              </button>
+                              
+                          </form>
+                        </td>
+                        <td>
+                          <form method="post" action="{{ route('programmer.transaction_status', ['id' => $datas->id]) }}">
+                              @csrf
+                              <input type="hidden" name="status" value="disapproved">
+                              <button type="submit" class="btn btn-danger" {{ $datas->status === 'disapproved' ? 'disabled' : '' }}>
+                                  Disapprove
                               </button>
                           </form>
                         </td>
-
+                      
                     </tr>
                 @endforeach
             @endif
@@ -78,6 +93,7 @@
       </div>
     </div>
   </div>
+
   <!-- /.content-wrapper -->
 
 @include('programmer.footer')

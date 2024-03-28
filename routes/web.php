@@ -5,8 +5,6 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SigninController;
 use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\ProgrammerController;
-use App\Http\Controllers\OperatorController;
-use App\Http\Controllers\AgentController;
 use App\Http\Controllers\IndexController;
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +41,18 @@ Route::post('player/topup', [PlayerController::class, 'topupSuccess'])->name('to
 Route::get('player/withdraw', [PlayerController::class, 'withdraw'])->name('withdraw');
 Route::post('player/withdraw', [PlayerController::class, 'withdrawPoints'])->name('withdraw.points');
 Route::get('player/solve_captcha', [PlayerController::class, 'solveCaptcha'])->name('solve.captcha');
+Route::get('player/solve_math', [PlayerController::class, 'SolveMath'])->name('solve.math');
+Route::get('player/transactions', [PlayerController::class, 'transactions'])->name('transactions');
+
+// Route for Trial Promo
+Route::get('player/promo', [PlayerController::class, 'Promo'])->name('promo');
+Route::post('player/promo/update1', [PlayerController::class, 'UpdatePromo1'])->name('player.update_promo1');
+Route::post('player/promo/update2', [PlayerController::class, 'UpdatePromo2'])->name('player.update_promo2');
+Route::post('player/promo/update3', [PlayerController::class, 'UpdatePromo3'])->name('player.update_promo3');
+Route::post('player/promo/update4', [PlayerController::class, 'UpdatePromo4'])->name('player.update_promo4');
+Route::post('player/promo/update5', [PlayerController::class, 'UpdatePromo5'])->name('player.update_promo5');
+Route::post('player/promo/update6', [PlayerController::class, 'UpdatePromo6'])->name('player.update_promo6');
+
 Route::get('player/error', [PlayerController::class, 'error'])->name('error');
 Route::get('player/success', [PlayerController::class, 'success'])->name('success');
 Route::post('player/solve_captcha', [PlayerController::class, 'updateUserPoints'])->name('update.points');
@@ -53,45 +63,23 @@ Route::post('player/change_password', [PlayerController::class, 'changePasswordR
 /********************************************This Route is For Programmer!! *****************************/
 Route::get('/programmer/dashboard', [ProgrammerController::class, 'index'])->name('programmer.dashboard');
 Route::get('/programmer/player', [ProgrammerController::class, 'Player'])->name('programmer.player');
-Route::get('/programmer/level', [ProgrammerController::class, 'Level'])->name('programmer.level');
-Route::post('/programmer/level/{id}', [ProgrammerController::class, 'UpdateLevel'])->name('programmer.update.level');
 Route::get('/programmer/pending_account', [ProgrammerController::class, 'PendingAccount'])->name('programmer.pending_account');
 Route::get('/programmer/agent', [ProgrammerController::class, 'Agent'])->name('programmer.agent');
 Route::get('/programmer/operator', [ProgrammerController::class, 'Operator'])->name('programmer.operator');
+// Route for Updating the level
+Route::get('/programmer/level', [ProgrammerController::class, 'Level'])->name('programmer.level');
+Route::post('/programmer/level/{id}', [ProgrammerController::class, 'UpdateLevel'])->name('programmer.update.level');
+// Transaction Routing
+Route::get('/programmer/transaction', [ProgrammerController::class, 'Transaction'])->name('programmer.transaction');
+Route::post('/programmer/transaction/{id}', [ProgrammerController::class, 'TransactionStatus'])->name('programmer.transaction_status');
 // Add the new route for deleting a player
 Route::get('/programmer/delete_account/{id}', [ProgrammerController::class, 'DeleteAccount'])->name('programmer.delete_account');
 //Route for activate and deactivate User
 Route::patch('/programmer/update-user-status/{id}', [ProgrammerController::class, 'updateUserStatus'])->name('programmer.update_status');
 Route::get('/programmer/wallet', [ProgrammerController::class, 'wallet'])->name('programmer.wallet');
-Route::post('/programmer/wallet/{id}', [ProgrammerController::class, 'SendPoint'])->name('programmer.send_point');
-Route::post('/programmer/wallet/deduct/{id}', [ProgrammerController::class, 'DeductPoint'])->name('programmer.deduct_point');
+Route::post('/programmer/wallet/{id}', [ProgrammerController::class, 'SendTrial'])->name('programmer.send_trial');
 /********************************************This Route is For Programmer!! *****************************/
 
-/********************************************This Route is For Operator!! *****************************/
-Route::get('/operator/dashboard', [OperatorController::class, 'index'])->name('operator.dashboard');
-Route::get('/operator/pending_account', [OperatorController::class, 'PendingAccount'])->name('operator.pending_account');
-Route::get('/operator/player', [OperatorController::class, 'Player'])->name('operator.player');
-Route::get('/operator/topup', [OperatorController::class, 'topup'])->name('operator.topup');
-Route::get('/operator/my_agent', [OperatorController::class, 'Agent'])->name('operator.agent');
-Route::patch('/operator/update-user-status/{id}', [OperatorController::class, 'updateUserStatus'])->name('operator.update_status');
-Route::get('/operator/wallet', [OperatorController::class, 'Wallet'])->name('operator.wallet');
-Route::post('/operator/wallet/{id}', [OperatorController::class, 'SendPoint'])->name('operator.send_point');
-Route::get('/operator/change_password', [OperatorController::class, 'changePassword'])->name('operator.change.password');
-Route::post('/operator/change_password', [OperatorController::class, 'changePasswordRequest'])->name('operator.change.passwordrequest');
-/********************************************This Route is For Operator!! *****************************/
-
-/********************************************This Route is For Agent!! *****************************/
-Route::get('/agent/dashboard', [AgentController::class, 'index'])->name('agent.dashboard');
-Route::get('/agent/withdraw', [AgentController::class, 'withdraw'])->name('agent.withdraw');
-Route::get('/agent/success', [AgentController::class, 'success'])->name('agent.success');
-Route::get('/agent/topup', [AgentController::class, 'topup'])->name('agent.topup');
-Route::post('/agent/withdraw', [AgentController::class, 'withdrawPoints'])->name('agent.withdraw.points');
-Route::get('/agent/pending_account', [AgentController::class, 'PendingAccount'])->name('agent.pending_account');
-Route::get('/agent/player', [AgentController::class, 'Player'])->name('agent.player');
-Route::patch('/agent/update-user-status/{id}', [AgentController::class, 'updateUserStatus'])->name('agent.update_status');
-Route::get('/agent/wallet', [AgentController::class, 'Wallet'])->name('agent.wallet');
-Route::post('/agent/wallet/{id}', [AgentController::class, 'SendPoint'])->name('agent.send_point');
-/********************************************This Route is For Agent!! *****************************/
 
 });
 

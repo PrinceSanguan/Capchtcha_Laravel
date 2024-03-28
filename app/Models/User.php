@@ -28,10 +28,18 @@ class User extends Authenticatable
         'number',
         'image',
         'point',
+        'trial',
+        'trialLevel',
         'status',
         'type',
+        'promo1',
+        'promo2',
+        'promo3',
+        'promo4',
+        'promo5',
+        'promo6',
+        'level',
         'referral_id',
-        'account',
     ];
 
     /**

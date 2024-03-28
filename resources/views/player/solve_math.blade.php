@@ -1,5 +1,5 @@
-@include('operator.header')
-@include('operator.navbar')
+@include('player.header')
+@include('player.navbar')
 
  <!-- Content Wrapper. Contains page content -->
  <div class="content-wrapper">
@@ -8,7 +8,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0">Top Up</h1>
+          <h1 class="m-0">Solve Captcha</h1>
         </div><!-- /.col -->
       </div><!-- /.row -->
     </div><!-- /.container-fluid -->
@@ -47,9 +47,49 @@
     </div>
   </div>
 
+  <div class="card card-primary">
+
+    <div class="small-box bg-orange">
+        <h3>{{$users->trial}} Total Trial</h3>
+    </div>
+
+    <div class="card-header text-center">
+        <h3 class="card-title">Solve Math</h3>
+    </div>
+    <!-- /.card-header -->
+    <!-- form start -->
+    <form method="post" action="{{route('update.points')}}">
+        @csrf
+        <div class="card-body d-flex flex-column align-items-center">
+          @if($users->level == 'easy')
+              <span style="display: inline-block;">{!! captcha_img('math') !!}</span>
+          @elseif($users->level == 'hard')
+              <span style="display: inline-block;">{!! captcha_img('inverse6') !!}</span>
+          @else
+              <!-- Handle other level ranges or provide a default captcha image -->
+              <span style="display: inline-block;">{!! captcha_img('default') !!}</span>
+          @endif
+      </div>
+
+        <div class="input-wrapper" style="display: flex; flex-direction: column; align-items: center; margin-top: 10px;">
+          <input type="text" class="form-input" placeholder="Enter Captcha" name="captcha" required>
+        </div>
+        <!-- /.card-body -->
+
+        <div class="card-footer d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>
+
   <div class="small-box bg-warning">
     <div class="inner">
-      <p style="font-size: 1.5em;">JUST CONTACT THE PROGRAMMER TO TOP UP MONEY</p>
+      <h3>&#8369;{{$users->point}}.00</h3>
+
+      <p style="font-size: 1.5em;">Total Money</p>
+    </div>
+    <div class="icon">
+      <i class="fas fa-user-plus"></i>
     </div>
   </div>
   <!-------------------------------------------------------------------------------------- Main content -->
@@ -59,4 +99,4 @@
 </div>
     <!-- /.content-wrapper -->
 
-    @include('operator.footer')
+    @include('player.footer')

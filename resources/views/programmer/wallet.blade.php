@@ -9,7 +9,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Send Money</h1>
+            <h1 class="m-0">Trial</h1>
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -42,12 +42,10 @@
       <table class="table table-hover text-nowrap">
           <thead>
               <tr>
-                  <th>ID</th>
-                  <th>Username</th>
-                  <th>Type</th>
-                  <th>Points</th>
-                  <th>Send Money</th>
-                  <th>Deduct points</th>
+                  <th>Name</th>
+                  <th>Remaining Trial</th>
+                  <th>Trial Level</th>
+                  <th>Action</th>
 
               </tr>
           </thead>
@@ -55,42 +53,25 @@
             @if ($data)
                 @foreach ($data as $datas)
                     <tr>
-                        <td>{{ $datas->id }}</td>
-                        <td>{{ $datas->username }}</td>
-                        <td>{{ $datas->type }}</td>
-                        <td>{{ $datas->point }}</td>
+                        <td>{{ $datas->name }}</td>
+                        <td>{{ $datas->trial }}</td>
+                        <td>{{ $datas->trialLevel ? $datas->trialLevel : "Not available" }}</td>
                         <td>
-                          <div class="card card-primary">
-                            <div class="card-header text-center">
-                                <h3 class="card-title">Send Points</h3><br>
+
+                          <form method="post" action="{{ route('programmer.send_trial', ['id' => $datas->id]) }}">
+                            @csrf
+                            <div class="form-group text-center">
+                                <br>
+                                <button type="submit" name="trialLevel" value="1" class="btn {{ $datas->trialLevel === 1 ? 'btn-danger' : 'btn-primary' }}">Level 1</button>
+                                <button type="submit" name="trialLevel" value="2" class="btn {{ $datas->trialLevel === 2 ? 'btn-danger' : 'btn-primary' }}">Level 2</button>
+                                <button type="submit" name="trialLevel" value="3" class="btn {{ $datas->trialLevel === 3 ? 'btn-danger' : 'btn-primary' }}">Level 3</button>
+                                <button type="submit" name="trialLevel" value="4" class="btn {{ $datas->trialLevel === 4 ? 'btn-danger' : 'btn-primary' }}">Level 4</button>
+                                <button type="submit" name="trialLevel" value="5" class="btn {{ $datas->trialLevel === 5 ? 'btn-danger' : 'btn-primary' }}">Level 5</button>
+                                <button type="submit" name="trialLevel" value="6" class="btn {{ $datas->trialLevel === 6 ? 'btn-danger' : 'btn-primary' }}">Level 6</button>
                             </div>
-                            <!-- /.card-header -->
-                            <!-- form start -->
-                            <form method="post" action="{{ route('programmer.send_point', ['id' => $datas->id]) }}">
-                              @csrf
-                              <div class="form-group text-center"><br>
-                                <input type="text" name="point" class="form-control" placeholder="Enter Points">
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </div>
-                            </form>
-                        </div>
-                        </td>
-                        <td>
-                          <div class="card card-danger">
-                            <div class="card-header text-center">
-                                <h3 class="card-title">Deduct Points</h3><br>
-                            </div>
-                            <!-- /.card-header -->
-                            <!-- form start -->
-                            <form method="post" action="{{ route('programmer.deduct_point', ['id' => $datas->id]) }}">
-                              @csrf
-                              <div class="form-group text-center"><br>
-                                <input type="text" name="point" class="form-control" placeholder="Enter Points">
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </div>
-                            </form>
-                        </div>
-                        </td>
+                        </form>
+
+                      </td>
                     </tr>
                 @endforeach
             @endif

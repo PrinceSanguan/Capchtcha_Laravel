@@ -7,14 +7,14 @@
 
 <script>
   var countdown = {{ Session::get('countdown', 20) }};
-  var redirectUrl = '{{ Session::get('redirect_url', route('solve.captcha')) }}';
+  var originalUrl = '{{ url()->previous() }}'; // Store the original URL
 
   function updateCountdown() {
       countdown--;
       document.getElementById('countdown').innerText = countdown;
 
       if (countdown <= 0) {
-          window.location.href = redirectUrl;
+          window.location.href = originalUrl; // Redirect to the original URL
       } else {
           setTimeout(updateCountdown, 1000);
       }

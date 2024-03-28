@@ -46,7 +46,7 @@
           <li class="nav-header" style="font-size: 1.2em; color: yellow;">FOR ACTIVATION</li>
   
           <li class="nav-item menu-open" style="margin-bottom: 10px;">
-              <a href="{{ route('programmer.pending_account') }}" class="nav-link {{ Route::is('programmer.all_account') ? 'active' : '' }}">
+              <a href="{{ route('programmer.pending_account') }}" class="nav-link {{ Route::is('programmer.pending_account') ? 'active' : '' }}">
                   <i class="nav-icon fas fa-hourglass-half fa-spin"></i>
                   <p>
                       PENDING ACCOUNT
@@ -54,7 +54,7 @@
               </a>
           </li>
 
-          <li class="nav-header" style="font-size: 0.8em; color: yellow;">ALL PLAYERS REFERRED BY AGENT</li>
+          <li class="nav-header" style="font-size: 0.8em; color: yellow;">ALL PLAYERS</li>
   
           <li class="nav-item menu-open" style="margin-bottom: 10px;">
               <a href="{{ route('programmer.player') }}" class="nav-link {{ Route::is('programmer.player') ? 'active' : '' }}">
@@ -64,39 +64,17 @@
                   </p>
               </a>
           </li>
-
-          <li class="nav-header" style="font-size: 0.8em; color: yellow;">ALL AGENT REFERRED BY OPERATOR</li>
-  
-          <li class="nav-item menu-open" style="margin-bottom: 10px;">
-              <a href="{{ route('programmer.agent') }}" class="nav-link {{ Route::is('programmer.agent') ? 'active' : '' }}">
-                  <i class="nav-icon fas fa-user-nurse fa-spin"></i>
-                  <p>
-                      AGENT
-                  </p>
-              </a>
-          </li>
-
-          <li class="nav-header" style="font-size: 1.2em; color: yellow;">MY OPERATOR</li>
-  
-          <li class="nav-item menu-open" style="margin-bottom: 10px;">
-              <a href="{{ route('programmer.operator') }}" class="nav-link {{ Route::is('programmer.operator') ? 'active' : '' }}">
-                  <i class="nav-icon fas fa-user-secret fa-spin"></i>
-                  <p>
-                      OPERATOR
-                  </p>
-              </a>
-          </li>
   
           <li class="nav-header" style="font-size: 1.2em; color: yellow;">MONEY</li>
-  
+
           <li class="nav-item menu-open" style="margin-bottom: 10px;">
-              <a href="{{ route('programmer.wallet') }}" class="nav-link {{ Route::is('programmer.wallet') ? 'active' : '' }}">
-                  <i class="nav-icon fas fa-wallet fa-spin"></i>
-                  <p>
-                      WALLET
-                  </p>
-              </a>
-          </li>
+            <a href="{{ route('programmer.transaction') }}" class="nav-link {{ Route::is('programmer.transaction') ? 'active' : '' }}">
+                <i class="nav-icon fas fa-wallet fa-spin"></i>
+                <p>
+                    TRANSACTIONS
+                </p>
+            </a>
+        </li>
 
           <li class="nav-item menu-open" style="margin-bottom: 10px;">
             <a href="{{ route('programmer.level') }}" class="nav-link {{ Route::is('programmer.level') ? 'active' : '' }}">
@@ -105,6 +83,15 @@
                     PLAYER LEVEL
                 </p>
             </a>
+        </li>
+
+        <li class="nav-item menu-open" style="margin-bottom: 10px;">
+          <a href="{{ route('programmer.wallet') }}" class="nav-link {{ Route::is('programmer.wallet') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-wallet fa-spin"></i>
+              <p>
+                  TRIAL PROMO
+              </p>
+          </a>
         </li>
   
           <li class="nav-item menu-open" style="margin-bottom: 10px;">

@@ -13,10 +13,10 @@ return [
         'encrypt' => false,
     ],
     'math' => [
-        'length' => 280,
-        'width' => 90,
-        'height' => 100,
-        'quality' => 70,
+        'length' => 10,
+        'width' => 300,
+        'height' => 90,
+        'quality' => 100,
         'math' => true,
     ],
 

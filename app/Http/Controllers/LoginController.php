@@ -36,15 +36,10 @@ class LoginController extends Controller
                 if ($user->type == 'player') {
                     // Redirect player to their dashboard
                     return redirect()->route('dashboard');
-                } elseif ($user->type == 'operator') {
-                    // Redirect operator to their dashboard
-                    return redirect()->route('operator.dashboard');
-                } elseif ($user->type == 'programmer') {
+                    
+                }  elseif ($user->type == 'programmer') {
                     // Redirect programmer to their dashboard
                     return redirect()->route('programmer.dashboard');
-                } elseif ($user->type == 'agent') {
-                    // Redirect agent to their dashboard
-                    return redirect()->route('agent.dashboard');
                 }
             } else {
                 // User is not activated, inform the user and log them out

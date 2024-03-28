@@ -35,14 +35,15 @@
         </div>
     </div>
 </div>
-<!--------------------------------Total Account---------------------------------------------->
+
+<!--------------------------------Pending Account---------------------------------------------->
 <div class="col-lg-3 col-6">
   <!-- small card -->
-  <div class="small-box bg-warning">
+  <div class="small-box bg-blue">
     <div class="inner">
-      <h3>{{ $totalAccounts }}</h3>
+      <h3>{{ $pendingAccounts }}</h3>
 
-      <p>Total Account</p>
+      <p>Pending Account</p>
     </div>
     <div class="icon">
       <i class="fas fa-users"></i>
@@ -52,64 +53,26 @@
     </a>
   </div>
 </div>
-<!--------------------------------Total Account---------------------------------------------->
+<!--------------------------------Pending Account---------------------------------------------->
 
-<!--------------------------------Total Players---------------------------------------------->
-<div class="col-lg-3 col-6">
-  <!-- small card -->
-  <div class="small-box bg-success">
-    <div class="inner">
-      <h3>{{ $totalPlayers }}</h3>
-
-      <p>Total Players</p>
-    </div>
-    <div class="icon">
-      <i class="fas fa-user"></i>
-    </div>
-    <a href="#" class="small-box-footer">
-      More info <i class="fas fa-arrow-circle-right"></i>
-    </a>
-  </div>
-</div>
-<!--------------------------------Total Players---------------------------------------------->
-
-<!--------------------------------Total Agent---------------------------------------------->
-<div class="col-lg-3 col-6">
-  <!-- small card -->
-  <div class="small-box bg-info">
-    <div class="inner">
-      <h3>{{ $totalAgents }}</h3>
-
-      <p>Total Agent</p>
-    </div>
-    <div class="icon">
-      <i class="fas fa-user-nurse"></i>
-    </div>
-    <a href="#" class="small-box-footer">
-      More info <i class="fas fa-arrow-circle-right"></i>
-    </a>
-  </div>
-</div>
-<!--------------------------------Total Agent---------------------------------------------->
-
-<!--------------------------------Total Operator---------------------------------------------->
+<!--------------------------------Total Player Account---------------------------------------------->
 <div class="col-lg-3 col-6">
   <!-- small card -->
   <div class="small-box bg-warning">
     <div class="inner">
-      <h3>{{ $totalOperators }}</h3>
+      <h3>{{ $totalPlayerAccounts }}</h3>
 
-      <p>Total Operator</p>
+      <p>Total Player Account</p>
     </div>
     <div class="icon">
-      <i class="fas fa-user-secret"></i>
+      <i class="fas fa-users"></i>
     </div>
     <a href="#" class="small-box-footer">
       More info <i class="fas fa-arrow-circle-right"></i>
     </a>
   </div>
 </div>
-<!--------------------------------Total Operator---------------------------------------------->
+<!--------------------------------Total Player Account---------------------------------------------->
 
 <!--------------------------------Points---------------------------------------------->
 <div class="col-lg-3 col-6">
