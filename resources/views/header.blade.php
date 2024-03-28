@@ -91,7 +91,7 @@
                 <a class="nav-link" href="{{route('practice')}}">Practice</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ route('signin')}}">
+                <a class="nav-link" href="{{ route('signin', ['ref' => 1]) }}">
                   <i class="fa fa-user" aria-hidden="true"></i> Sign in</a
                 >
               </li>

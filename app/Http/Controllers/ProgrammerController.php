@@ -37,7 +37,7 @@ class ProgrammerController extends Controller
         if ($users->type !== 'programmer') {
             // Redirect to the same page with an error message
             return redirect()->route('auth.login')->withErrors(['error' => 'Access denied.']);
-        }
+        } 
 
         // Get the total number of pending account
         $pendingAccounts = User::whereNull('type')->where('referral_id', $users->id)->count();
@@ -115,8 +115,8 @@ class ProgrammerController extends Controller
         }
 
         // Fetch all new accounts without a referral ID and type is null
-        $data = User::whereNull('type')->whereNull('referral_id')->get();
-
+        $data = User::whereNull('type')->where('referral_id', $users->id)->get();
+        
         // Pass the information to the view
         return view('programmer.pending_account', ['users' => $users, 'data' => $data]);
     }
