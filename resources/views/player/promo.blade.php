@@ -86,8 +86,8 @@
         <h4 style="font-weight: bold">Promo Not Available</h4>
         <h5>X</h5>
       @else
-        <h4 style="font-weight: bold">50 Trial Promo</h4>
-        <h5>&#8369;70.00</h5>
+        <h4 style="font-weight: bold">70 Trial Promo</h4>
+        <h5>&#8369;50.00</h5>
       @endif
     </div>
     <div class="icon">
@@ -216,7 +216,7 @@
 <!--------------------------------5000 pesos = 10000 trial--------------------------------------------->
 <div class="col-lg-3 col-6">
   <!-- small card -->
-  <div class="small-box {{ $users->promo6 === 'activate' ? 'bg-red' : 'bg-blue' }}">
+  <div class="small-box {{ $users->promo6 === 'activate' ? 'bg-red' : 'bg-red' }}">
     <div class="inner">
       @if($users->promo6 === 'activate')
         <h4 style="font-weight: bold">Promo Not Available</h4>
