@@ -114,55 +114,11 @@ class ProgrammerController extends Controller
             return redirect()->route('auth.login')->withErrors(['error' => 'Access denied.']);
         }
 
-        // Fetch all operator referred by the programmer
-        $data = User::whereNull('type')->where('referral_id', $users->id)->get();
+        // Fetch all new accounts without a referral ID and type is null
+        $data = User::whereNull('type')->whereNull('referral_id')->get();
 
         // Pass the information to the view
         return view('programmer.pending_account', ['users' => $users, 'data' => $data]);
-    }
-
-    public function Agent()
-    {
-        $users = $this->getUserInfo();
-
-        // Check if the user is found
-        if (!$users) {
-            return redirect()->route('auth.login')->withErrors(['error' => 'User not found.']);
-        }
-
-        // Check if the user type is 'programmer'
-        if ($users->type !== 'programmer') {
-            // Redirect to the same page with an error message
-            return redirect()->route('auth.login')->withErrors(['error' => 'Access denied.']);
-        }
-
-        // Fetch all jobs from the database
-        $data = User::where('type', 'agent')->get();
-
-        // Pass the information to the view
-        return view('programmer.agent', ['users' => $users, 'data' => $data]);
-    }
-
-    public function Operator()
-    {
-        $users = $this->getUserInfo();
-
-        // Check if the user is found
-        if (!$users) {
-            return redirect()->route('auth.login')->withErrors(['error' => 'User not found.']);
-        }
-
-        // Check if the user type is 'programmer'
-        if ($users->type !== 'programmer') {
-            // Redirect to the same page with an error message
-            return redirect()->route('auth.login')->withErrors(['error' => 'Access denied.']);
-        }
-
-        // Fetch all Operator from the database
-        $data = User::where('type', 'operator')->get();
-
-        // Pass the information to the view
-        return view('programmer.operator', ['users' => $users, 'data' => $data]);
     }
 
     public function Wallet()
