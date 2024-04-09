@@ -504,12 +504,11 @@ public function Promo()
         $user = auth()->user();
     
         if ($validator->fails()) {
-            // Deduct 1 points for an invalid Captcha and decrement the remaining trial
-            $user->point = max(0, $user->point - 1.00); 
+            /* // Deduct 1 points for an invalid Captcha and decrement the remaining trial
             $user->trial = max(0, $user->trial - 1);
-            $user->save();
+            $user->save(); */
     
-            $error = "You have entered an invalid Captcha. 1.00 Pesos have been deducted.";
+            $error = "You have entered an invalid Captcha";
             Session::put('last_captcha_attempt', time()); // Update last attempt time
             return redirect()->route('error')->with('error', $error);
         }
